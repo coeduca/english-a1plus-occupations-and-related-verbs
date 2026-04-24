@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="es" translate="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="google" content="notranslate">
+<meta http-equiv="Content-Language" content="es">
+<title>Worksheet: Occupations & Past Verbs</title>
+<style>
+  :root {
+    --bg: #f4f4f0;
+    --primary: #FF3366;
+    --secondary: #4ECDC4;
+    --yellow: #FFE66D;
+    --purple: #9D4EDD;
+    --black: #1a1a1a;
+    --border: 3px solid var(--black);
+    --shadow: 4px 4px 0 var(--black);
+  }
+  
+  * { box-sizing: border-box; font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; }
+  
+  body {
+    margin: 0; padding: 0; background: var(--bg); color: var(--black);
+    user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
+    overflow-x: hidden;
+  }
+  
+  h1, h2, h3 { text-transform: uppercase; letter-spacing: 1px; text-shadow: 2px 2px 0 #fff, 3px 3px 0 var(--black); }
+  
+  .container { max-width: 800px; margin: 0 auto; padding: 20px; padding-bottom: 120px; display: none; }
+  
+  .pop-box {
+    background: #fff; border: var(--border); box-shadow: var(--shadow);
+    padding: 20px; margin-bottom: 30px; border-radius: 12px; position: relative;
+  }
+  .pop-box::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background-image: radial-gradient(#ccc 15%, transparent 16%);
+    background-size: 8px 8px; opacity: 0.2; pointer-events: none; border-radius: 10px;
+  }
+  
+  .badge {
+    position: absolute; top: -15px; right: 10px; background: var(--yellow);
+    border: var(--border); padding: 5px 15px; font-weight: bold;
+    transform: rotate(3deg); box-shadow: 2px 2px 0 var(--black);
+  }
+
+  /* Modal Login */
+  #login-modal {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: repeating-linear-gradient(45deg, var(--yellow), var(--yellow) 20px, #f4d03f 20px, #f4d03f 40px);
+    display: flex; justify-content: center; align-items: center; z-index: 1000;
+  }
+  .login-card { background: #fff; border: var(--border); box-shadow: 8px 8px 0 var(--black); padding: 30px; width: 90%; max-width: 400px; text-align: center; border-radius: 15px; }
+  input[type="text"] {
+    width: 100%; padding: 12px; margin: 10px 0; border: var(--border);
+    font-size: 16px; font-weight: bold; border-radius: 8px; outline: none;
+  }
+  input[type="text"]:focus { box-shadow: inset 2px 2px 0 rgba(0,0,0,0.1); background: #f0f8ff; }
+  
+  .btn {
+    background: var(--primary); color: #fff; border: var(--border); padding: 12px 20px;
+    font-size: 18px; font-weight: bold; cursor: pointer; text-transform: uppercase;
+    box-shadow: 3px 3px 0 var(--black); border-radius: 8px; transition: transform 0.1s;
+    width: 100%; margin-top: 10px;
+  }
+  .btn:active { transform: translate(3px, 3px); box-shadow: none; }
+  .btn-alt { background: var(--secondary); }
+  
+  /* Ex 1: Sopa Letras */
+  .grid-container { display: inline-grid; gap: 2px; border: var(--border); padding: 5px; background: var(--black); border-radius: 8px; touch-action: none; }
+  .grid-cell {
+    width: 35px; height: 35px; background: #fff; display: flex; justify-content: center; align-items: center;
+    font-weight: bold; font-size: 18px; cursor: pointer; border-radius: 4px;
+  }
+  .grid-cell.selected { background: var(--yellow); }
+  .grid-cell.found { background: var(--secondary); color: #fff; animation: pop 0.3s ease; }
+  .word-list { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px; }
+  .word-item { padding: 5px 10px; border: 2px solid var(--black); border-radius: 20px; background: #eee; font-weight: bold; }
+  .word-item.found { background: var(--primary); color: #fff; text-decoration: line-through; }
+
+  /* Ex Drag & Drop */
+  .drag-container { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+  .draggable {
+    padding: 10px 15px; background: var(--purple); color: #fff; border: var(--border);
+    border-radius: 8px; font-weight: bold; cursor: grab; box-shadow: 2px 2px 0 var(--black); touch-action: none; z-index: 10;
+  }
+  .dropzone-container { display: flex; flex-direction: column; gap: 10px; }
+  .drop-row { display: flex; align-items: center; gap: 10px; }
+  .dropzone {
+    width: 120px; height: 45px; border: 2px dashed var(--black); border-radius: 8px;
+    background: #e9ecef; display: flex; justify-content: center; align-items: center; font-weight: bold;
+  }
+  .dropzone.filled { border: var(--border); background: var(--yellow); }
+
+  /* Ex Select / Inputs */
+  select, .blank-input {
+    padding: 8px; border: 2px solid var(--black); border-radius: 6px; font-size: 16px; font-weight: bold; margin: 5px;
+  }
+  .reorder-zone { display: flex; gap: 5px; min-height: 50px; border: 2px dashed var(--black); padding: 10px; background: #fafafa; border-radius: 8px; flex-wrap: wrap; }
+  
+  /* Tic Tac Toe */
+  .tictactoe { display: grid; grid-template-columns: repeat(3, 80px); gap: 5px; margin: 0 auto; width: max-content; }
+  .xo-cell {
+    width: 80px; height: 80px; background: #fff; border: var(--border); display: flex;
+    justify-content: center; align-items: center; font-size: 40px; font-weight: bold; cursor: pointer; box-shadow: 2px 2px 0 var(--black);
+  }
+  
+  @keyframes pop { 50% { transform: scale(1.2); } }
+  .error-msg { color: var(--primary); font-weight: bold; margin-top: 10px; display: none; }
+  .score-display { text-align: right; font-size: 24px; font-weight: bold; color: var(--primary); text-shadow: 1px 1px 0 var(--black); margin-bottom: 20px;}
+</style>
+</head>
+<body>
+
+<div id="login-modal">
+  <div class="login-card">
+    <h2 style="color: var(--primary);">Welcome to English Class!</h2>
+    <p><strong>Topic:</strong> Occupations & Past Verbs</p>
+    <input type="text" id="nie1" placeholder="Tu NIE" autocomplete="off">
+    <input type="text" id="nie2" placeholder="NIE Compañero (Opcional)" autocomplete="off" style="display:none;">
+    <button class="btn btn-alt" id="btn-add-partner" style="font-size:14px; padding:8px; margin-bottom:10px;">+ Agregar compañero</button>
+    <button class="btn" id="btn-login">Ingresar</button>
+    <div id="login-error" class="error-msg">NIE no encontrado.</div>
+  </div>
+</div>
+
+<div class="container" id="main-app">
+  <div class="score-display">Puntaje acumulado: <span id="total-score">0</span>/20</div>
+  <div id="exercises-container"></div>
+  
+  <div class="pop-box" id="game-section">
+    <div class="badge">BONUS GAME</div>
+    <h2>Play with Teacher XO</h2>
+    <p>Gana para 1 pt extra. Empata para 0.5 pts.</p>
+    <div class="tictactoe" id="xo-board"></div>
+    <div id="xo-result" style="text-align:center; font-weight:bold; margin-top:15px; font-size:20px;"></div>
+  </div>
+
+  <button class="btn btn-alt" id="btn-pdf" style="margin-bottom: 40px;">Descargar PDF para Classroom</button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="students.js"></script>
+<script src="rigo.js"></script>
+<rigo-mascot></rigo-mascot>
+
+<script>
+// --- SEGURIDAD ---
+document.addEventListener('contextmenu', e => e.preventDefault());
+['copy', 'cut', 'paste', 'selectstart'].forEach(evt => document.addEventListener(evt, e => {
+  if(!e.target.tagName.match(/INPUT|TEXTAREA|SELECT/)) e.preventDefault();
+}));
+
+// --- DATOS Y ESTADO ---
+const POOLS = {
+  A: {
+    words: [{w:'DOCTOR', r1:0, c1:1, r2:0, c2:6}, {w:'TEACHER', r1:0, c1:0, r2:6, c2:0}, {w:'PILOT', r1:0, c1:7, r2:4, c2:7}, {w:'NURSE', r1:2, c1:1, r2:2, c2:5}],
+    grid: [
+      ['T','D','O','C','T','O','R','P'],
+      ['E','A','B','C','D','E','F','I'],
+      ['A','N','U','R','S','E','G','L'],
+      ['C','H','I','J','K','L','M','O'],
+      ['H','N','O','P','Q','R','S','T'],
+      ['E','U','V','W','X','Y','Z','A'],
+      ['R','B','C','D','E','F','G','H'],
+      ['I','J','K','L','M','N','O','P']
+    ],
+    emojiMatch: [ {em: '👩‍🏫', ans: 'teacher'}, {em: '👨‍🍳', ans: 'chef'}, {em: '👮‍♂️', ans: 'police'}, {em: '👩‍⚕️', ans: 'doctor'} ],
+    emojiOpts: ['chef', 'police', 'teacher', 'doctor', 'farmer'],
+    verbs: [ {p:'work', pst:'worked'}, {p:'teach', pst:'taught'}, {p:'cook', pst:'cooked'}, {p:'drive', pst:'drove'} ],
+    fill: [
+      {q: "The teacher ___ the class yesterday.", ans: "taught", opts: ["teach", "taught", "teached"]},
+      {q: "The chef ___ a delicious meal.", ans: "cooked", opts: ["cooks", "cooked", "cook"]}
+    ],
+    reorder: [
+      {w: ["The", "doctor", "worked", "late"], ans: "The doctor worked late"},
+      {w: ["The", "pilot", "flew", "high"], ans: "The pilot flew high"}
+    ],
+    duties: [
+      {occ: "Teacher", ans: "taught a lesson", opts: ["taught a lesson", "cooked food", "drove a car"]},
+      {occ: "Chef", ans: "cooked food", opts: ["taught a lesson", "cooked food", "drove a car"]}
+    ],
+    mcq: [
+      {q: "What did the pilot do?", ans: "flew", opts: ["fly", "flew", "flied"]},
+      {q: "What did the police officer do?", ans: "helped", opts: ["help", "helped", "holp"]}
+    ]
+  },
+  B: {
+    words: [{w:'ACTOR', r1:0, c1:0, r2:0, c2:4}, {w:'BAKER', r1:1, c1:0, r2:1, c2:4}, {w:'JUDGE', r1:3, c1:2, r2:3, c2:6}, {w:'SINGER', r1:0, c1:7, r2:5, c2:7}],
+    grid: [
+      ['A','C','T','O','R','B','C','S'],
+      ['B','A','K','E','R','D','E','I'],
+      ['F','G','H','I','J','K','L','N'],
+      ['M','N','J','U','D','G','E','G'],
+      ['O','P','Q','R','S','T','U','E'],
+      ['V','W','X','Y','Z','A','B','R'],
+      ['C','D','E','F','G','H','I','J'],
+      ['K','L','M','N','O','P','Q','R']
+    ],
+    emojiMatch: [ {em: '👨‍🚒', ans: 'firefighter'}, {em: '👨‍🚀', ans: 'astronaut'}, {em: '👩‍⚖️', ans: 'judge'}, {em: '👨‍🎨', ans: 'artist'} ],
+    emojiOpts: ['astronaut', 'artist', 'firefighter', 'judge', 'pilot'],
+    verbs: [ {p:'help', pst:'helped'}, {p:'fly', pst:'flew'}, {p:'bake', pst:'baked'}, {p:'sing', pst:'sang'} ],
+    fill: [
+      {q: "The singer ___ a beautiful song.", ans: "sang", opts: ["sing", "sang", "singed"]},
+      {q: "The baker ___ fresh bread.", ans: "baked", opts: ["bake", "bakes", "baked"]}
+    ],
+    reorder: [
+      {w: ["The", "actor", "played", "well"], ans: "The actor played well"},
+      {w: ["The", "judge", "listened", "carefully"], ans: "The judge listened carefully"}
+    ],
+    duties: [
+      {occ: "Singer", ans: "sang a song", opts: ["sang a song", "baked bread", "painted art"]},
+      {occ: "Baker", ans: "baked bread", opts: ["sang a song", "baked bread", "painted art"]}
+    ],
+    mcq: [
+      {q: "What did the artist do?", ans: "painted", opts: ["paint", "painted", "paynted"]},
+      {q: "What did the astronaut do?", ans: "flew", opts: ["fly", "flew", "flowed"]}
+    ]
+  }
+};
+
+let state = {
+  s1: null, s2: null, poolKey: 'A', pool: null,
+  scores: { ex1:0, ex2:0, ex3:0, ex4:0, ex5:0, ex6:0, ex7:0 },
+  gamePoints: 0, gameStatus: 'pending',
+  answers: { ex1:[], ex2:{}, ex3:{}, ex4:{}, ex5:{}, ex6:{}, ex7:{} },
+  xo: ['','','','','','','','','']
+};
+
+function saveState() { localStorage.setItem('occ_ws_state', JSON.stringify(state)); updateTotal(); }
+function loadState() {
+  const s = localStorage.getItem('occ_ws_state');
+  if(s) { state = JSON.parse(s); return true; }
+  return false;
+}
+
+// --- INITIALIZATION ---
+window.addEventListener('DOMContentLoaded', () => {
+  if (loadState() && state.s1) { showApp(); } 
+  else { setTimeout(() => window.rigo.welcome(), 500); }
+
+  document.getElementById('btn-add-partner').addEventListener('click', (e) => {
+    e.target.style.display = 'none';
+    document.getElementById('nie2').style.display = 'block';
+  });
+
+  document.getElementById('btn-login').addEventListener('click', () => {
+    const n1 = document.getElementById('nie1').value.trim();
+    const n2 = document.getElementById('nie2').value.trim();
+    const err = document.getElementById('login-error');
+    if(!STUDENTS[n1]) { err.style.display = 'block'; return; }
+    
+    state.s1 = Object.assign({nie: n1}, STUDENTS[n1]);
+    if(n2 && STUDENTS[n2]) state.s2 = Object.assign({nie: n2}, STUDENTS[n2]);
+    
+    state.poolKey = Math.random() > 0.5 ? 'A' : 'B';
+    saveState();
+    
+    window.rigo.setGrade(state.s1.grade);
+    window.rigo.loginSuccess(state.s1.name);
+    setTimeout(showApp, 2000);
+  });
+  
+  document.getElementById('btn-pdf').addEventListener('click', generatePDF);
+});
+
+function showApp() {
+  document.getElementById('login-modal').style.display = 'none';
+  document.getElementById('main-app').style.display = 'block';
+  state.pool = POOLS[state.poolKey];
+  window.rigo.setGrade(state.s1.grade);
+  renderExercises();
+  renderXO();
+  updateTotal();
+  if(state.gameStatus === 'pending') window.rigo.inviteGame();
+}
+
+function evaluate(ex, val, max, correct) {
+  if(correct) {
+    if(state.scores[ex] < max) state.scores[ex]++;
+    window.rigo.cheer();
+  } else {
+    window.rigo.comfort();
+  }
+  saveState();
+}
+
+// --- RENDER EXERCISES ---
+function renderExercises() {
+  const container = document.getElementById('exercises-container');
+  container.innerHTML = '';
+  
+  // Ex 1: Sopa de Letras
+  let html = `<div class="pop-box"><div class="badge">EX 1</div><h3>1. Word Search (Occupations)</h3>
+    <div class="grid-container" id="ws-grid">`;
+  for(let r=0; r<8; r++) {
+    for(let c=0; c<8; c++) {
+      html += `<div class="grid-cell" data-r="${r}" data-c="${c}">${state.pool.grid[r][c]}</div>`;
+    }
+  }
+  html += `</div><div class="word-list" id="ws-words">`;
+  state.pool.words.forEach(w => {
+    const found = state.answers.ex1.includes(w.w) ? 'found' : '';
+    html += `<div class="word-item ${found}" id="word-${w.w}">${w.w}</div>`;
+  });
+  html += `</div></div>`;
+
+  // Ex 2: Match Emoji
+  html += `<div class="pop-box"><div class="badge">EX 2</div><h3>2. Match Emoji to Occupation</h3><div style="display:flex; flex-direction:column; gap:10px;">`;
+  state.pool.emojiMatch.forEach((em, i) => {
+    let sel = `<select data-ex="ex2" data-idx="${i}"><option value="">Select...</option>`;
+    state.pool.emojiOpts.forEach(o => {
+      let selected = state.answers.ex2[i] === o ? 'selected' : '';
+      sel += `<option value="${o}" ${selected}>${o}</option>`;
+    });
+    sel += `</select>`;
+    html += `<div style="font-size:24px;">${em.em} &rarr; ${sel}</div>`;
+  });
+  html += `</div></div>`;
+
+  // Ex 3: Drag & Drop (Verbs)
+  html += `<div class="pop-box"><div class="badge">EX 3</div><h3>3. Drag present verb to past form</h3>
+    <div class="drag-container" id="dnd-src">`;
+  let shuffledVerbs = [...state.pool.verbs].sort(()=>Math.random()-0.5);
+  shuffledVerbs.forEach((v, i) => {
+    if(Object.values(state.answers.ex3).includes(v.p)) return; // already dropped
+    html += `<div class="draggable" data-val="${v.p}">${v.p}</div>`;
+  });
+  html += `</div><div class="dropzone-container">`;
+  state.pool.verbs.forEach((v, i) => {
+    let ans = state.answers.ex3[i] || '';
+    let cls = ans ? 'filled' : '';
+    html += `<div class="drop-row"><span style="width:80px; font-weight:bold; font-size:18px;">${v.pst}</span> 
+             &larr; <div class="dropzone ${cls}" data-idx="${i}" data-ans="${v.p}">${ans || 'Drop here'}</div></div>`;
+  });
+  html += `</div></div>`;
+
+  // Ex 4: Fill in blanks
+  html += `<div class="pop-box"><div class="badge">EX 4</div><h3>4. Choose the correct past verb</h3><ul>`;
+  state.pool.fill.forEach((f, i) => {
+    let sel = `<select data-ex="ex4" data-idx="${i}"><option value="">...</option>`;
+    f.opts.forEach(o => sel += `<option value="${o}" ${state.answers.ex4[i]===o?'selected':''}>${o}</option>`);
+    sel += `</select>`;
+    html += `<li style="margin-bottom:10px;">${f.q.replace('___', sel)}</li>`;
+  });
+  html += `</ul></div>`;
+
+  // Ex 5: Reorder
+  html += `<div class="pop-box"><div class="badge">EX 5</div><h3>5. Reorder the words</h3>`;
+  state.pool.reorder.forEach((r, i) => {
+    html += `<div style="margin-bottom:15px;">`;
+    let words = [...r.w].sort(()=>Math.random()-0.5);
+    html += `<div class="drag-container reorder-src" data-idx="${i}">`;
+    words.forEach(w => {
+      if(state.answers.ex5[i] && state.answers.ex5[i].includes(w)) return;
+      html += `<div class="draggable reorder-drag" data-val="${w}">${w}</div>`;
+    });
+    html += `</div><div class="reorder-zone" data-idx="${i}">`;
+    if(state.answers.ex5[i]) {
+      state.answers.ex5[i].forEach(w => html += `<div class="draggable reorder-drag" data-val="${w}">${w}</div>`);
+    }
+    html += `</div></div>`;
+  });
+  html += `</div>`;
+
+  // Ex 6: Match Duty
+  html += `<div class="pop-box"><div class="badge">EX 6</div><h3>6. What did they do?</h3><ul>`;
+  state.pool.duties.forEach((d, i) => {
+    let sel = `<select data-ex="ex6" data-idx="${i}"><option value="">...</option>`;
+    d.opts.forEach(o => sel += `<option value="${o}" ${state.answers.ex6[i]===o?'selected':''}>${o}</option>`);
+    sel += `</select>`;
+    html += `<li style="margin-bottom:10px;">The <strong>${d.occ}</strong> ${sel}</li>`;
+  });
+  html += `</ul></div>`;
+
+  // Ex 7: MCQ
+  html += `<div class="pop-box"><div class="badge">EX 7</div><h3>7. Select the correct form</h3><ul>`;
+  state.pool.mcq.forEach((m, i) => {
+    let sel = `<select data-ex="ex7" data-idx="${i}"><option value="">...</option>`;
+    m.opts.forEach(o => sel += `<option value="${o}" ${state.answers.ex7[i]===o?'selected':''}>${o}</option>`);
+    sel += `</select>`;
+    html += `<li style="margin-bottom:10px;">${m.q} &rarr; ${sel}</li>`;
+  });
+  html += `</ul></div>`;
+
+  container.innerHTML = html;
+  
+  setupWordSearch();
+  setupDragAndDrop();
+  setupSelects();
+}
+
+function setupSelects() {
+  document.querySelectorAll('select').forEach(s => {
+    s.addEventListener('change', (e) => {
+      const ex = e.target.getAttribute('data-ex');
+      const idx = e.target.getAttribute('data-idx');
+      const val = e.target.value;
+      state.answers[ex][idx] = val;
+      
+      let correct = false;
+      if(ex === 'ex2') correct = val === state.pool.emojiMatch[idx].ans;
+      if(ex === 'ex4') correct = val === state.pool.fill[idx].ans;
+      if(ex === 'ex6') correct = val === state.pool.duties[idx].ans;
+      if(ex === 'ex7') correct = val === state.pool.mcq[idx].ans;
+      
+      evaluate(ex, val, ex==='ex2'?4:2, correct);
+    });
+  });
+}
+
+// --- WORD SEARCH LOGIC ---
+function setupWordSearch() {
+  const grid = document.getElementById('ws-grid');
+  let startCell = null;
+  
+  // Colorear ya encontradas
+  state.answers.ex1.forEach(wStr => {
+    const wObj = state.pool.words.find(w => w.w === wStr);
+    if(wObj) markCells(wObj.r1, wObj.c1, wObj.r2, wObj.c2);
+  });
+
+  function getCell(e) {
+    if(e.touches) {
+      const el = document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY);
+      return el?.classList.contains('grid-cell') ? el : null;
+    }
+    return e.target.classList.contains('grid-cell') ? e.target : null;
+  }
+
+  function onStart(e) {
+    e.preventDefault();
+    const c = getCell(e);
+    if(!c) return;
+    startCell = {r: parseInt(c.dataset.r), c: parseInt(c.dataset.c)};
+    c.classList.add('selected');
+  }
+
+  function onEnd(e) {
+    e.preventDefault();
+    document.querySelectorAll('.grid-cell.selected').forEach(el => el.classList.remove('selected'));
+    const c = getCell(e);
+    if(!c || !startCell) { startCell = null; return; }
+    
+    let r1 = startCell.r, c1 = startCell.c;
+    let r2 = parseInt(c.dataset.r), c2 = parseInt(c.dataset.c);
+    startCell = null;
+
+    // Check valid
+    let foundW = state.pool.words.find(w => 
+      (w.r1===r1 && w.c1===c1 && w.r2===r2 && w.c2===c2) ||
+      (w.r1===r2 && w.c1===c2 && w.r2===r1 && w.c2===c1)
+    );
+
+    if(foundW && !state.answers.ex1.includes(foundW.w)) {
+      state.answers.ex1.push(foundW.w);
+      markCells(foundW.r1, foundW.c1, foundW.r2, foundW.c2);
+      document.getElementById(`word-${foundW.w}`).classList.add('found');
+      evaluate('ex1', foundW.w, 4, true);
+    }
+  }
+
+  grid.addEventListener('mousedown', onStart);
+  grid.addEventListener('touchstart', onStart, {passive:false});
+  window.addEventListener('mouseup', onEnd);
+  window.addEventListener('touchend', onEnd);
+
+  function markCells(r1, c1, r2, c2) {
+    let dr = Math.sign(r2 - r1), dc = Math.sign(c2 - c1);
+    let dist = Math.max(Math.abs(r2-r1), Math.abs(c2-c1));
+    for(let i=0; i<=dist; i++) {
+      let r = r1 + dr*i, c = c1 + dc*i;
+      let cell = document.querySelector(`.grid-cell[data-r="${r}"][data-c="${c}"]`);
+      if(cell) cell.classList.add('found');
+    }
+  }
+}
+
+// --- DRAG & DROP LOGIC ---
+function setupDragAndDrop() {
+  let draggedEl = null;
+  let offsetX = 0, offsetY = 0;
+  let clone = null;
+  let isReorder = false;
+
+  function onStart(e) {
+    if(!e.target.classList.contains('draggable')) return;
+    e.preventDefault();
+    draggedEl = e.target;
+    isReorder = draggedEl.classList.contains('reorder-drag');
+    const rect = draggedEl.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    offsetX = clientX - rect.left;
+    offsetY = clientY - rect.top;
+
+    clone = draggedEl.cloneNode(true);
+    clone.style.position = 'fixed';
+    clone.style.left = rect.left + 'px';
+    clone.style.top = rect.top + 'px';
+    clone.style.pointerEvents = 'none';
+    clone.style.opacity = '0.8';
+    clone.style.transform = 'scale(1.1) rotate(-2deg)';
+    document.body.appendChild(clone);
+    draggedEl.style.opacity = '0';
+  }
+
+  function onMove(e) {
+    if(!clone) return;
+    e.preventDefault();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    clone.style.left = (clientX - offsetX) + 'px';
+    clone.style.top = (clientY - offsetY) + 'px';
+
+    // Auto-scroll
+    if(clientY < 70) window.scrollBy(0, -10);
+    else if(window.innerHeight - clientY < 70) window.scrollBy(0, 10);
+  }
+
+  function onEnd(e) {
+    if(!clone) return;
+    const clientX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+    const clientY = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
+    clone.remove();
+    clone = null;
+    draggedEl.style.opacity = '1';
+
+    // Ocultar element temporalmente para usar elementFromPoint
+    draggedEl.style.display = 'none';
+    let dropTarget = document.elementFromPoint(clientX, clientY);
+    draggedEl.style.display = '';
+
+    if(isReorder) {
+      let zone = dropTarget?.closest('.reorder-zone');
+      let src = dropTarget?.closest('.reorder-src');
+      let idx = draggedEl.closest('[data-idx]').getAttribute('data-idx');
+      
+      if(zone && zone.getAttribute('data-idx') === idx) {
+        zone.appendChild(draggedEl);
+      } else if(src && src.getAttribute('data-idx') === idx) {
+        src.appendChild(draggedEl);
+      } else {
+        // Return to src
+        document.querySelector(`.reorder-src[data-idx="${idx}"]`).appendChild(draggedEl);
+      }
+      
+      // Update state & evaluate
+      let currentWords = Array.from(document.querySelector(`.reorder-zone[data-idx="${idx}"]`).children).map(c => c.getAttribute('data-val'));
+      state.answers.ex5[idx] = currentWords;
+      let ansStr = currentWords.join(' ');
+      if(ansStr === state.pool.reorder[idx].ans) evaluate('ex5', ansStr, 2, true);
+      else saveState();
+
+    } else {
+      let zone = dropTarget?.closest('.dropzone');
+      if(zone && !zone.classList.contains('filled')) {
+        let val = draggedEl.getAttribute('data-val');
+        let idx = zone.getAttribute('data-idx');
+        let correctAns = zone.getAttribute('data-ans');
+        
+        zone.textContent = val;
+        zone.classList.add('filled');
+        draggedEl.remove();
+        
+        state.answers.ex3[idx] = val;
+        evaluate('ex3', val, 4, val === correctAns);
+      }
+    }
+    draggedEl = null;
+  }
+
+  document.addEventListener('mousedown', onStart);
+  document.addEventListener('mousemove', onMove);
+  document.addEventListener('mouseup', onEnd);
+  document.addEventListener('touchstart', onStart, {passive:false});
+  document.addEventListener('touchmove', onMove, {passive:false});
+  document.addEventListener('touchend', onEnd);
+}
+
+// --- XO GAME LOGIC ---
+function renderXO() {
+  const board = document.getElementById('xo-board');
+  board.innerHTML = '';
+  state.xo.forEach((c, i) => {
+    let cell = document.createElement('div');
+    cell.className = 'xo-cell';
+    cell.textContent = c;
+    cell.addEventListener('click', () => playXO(i));
+    board.appendChild(cell);
+  });
+  updateXOResult();
+}
+
+function playXO(idx) {
+  if(state.gameStatus !== 'pending' || state.xo[idx] !== '') return;
+  state.xo[idx] = 'X';
+  if(!checkXO()) botXO();
+  renderXO();
+  saveState();
+}
+
+function botXO() {
+  let empty = state.xo.map((c,i)=>c===''?i:null).filter(i=>i!==null);
+  if(empty.length > 0) {
+    let pick = empty[Math.floor(Math.random()*empty.length)];
+    state.xo[pick] = 'O';
+    checkXO();
+  }
+}
+
+function checkXO() {
+  const lines = [ [0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6] ];
+  for(let l of lines) {
+    if(state.xo[l[0]] && state.xo[l[0]] === state.xo[l[1]] && state.xo[l[0]] === state.xo[l[2]]) {
+      if(state.xo[l[0]] === 'X') {
+        state.gameStatus = 'won'; state.gamePoints = 1;
+        window.rigo.setEmotion('excited'); window.rigo.say("Felicidades, eres bueno en este juego, ten 1 punto extra", 5000);
+      } else {
+        state.gameStatus = 'lost'; state.gamePoints = 0;
+        window.rigo.setEmotion('sad'); window.rigo.say("Oops, más suerte para la próxima.", 5000);
+      }
+      return true;
+    }
+  }
+  if(!state.xo.includes('')) {
+    state.gameStatus = 'draw'; state.gamePoints = 0.5;
+    window.rigo.setEmotion('neutral'); window.rigo.say("Estamos a mano, ten 0.5 extra para tu nota", 5000);
+    return true;
+  }
+  return false;
+}
+
+function updateXOResult() {
+  const res = document.getElementById('xo-result');
+  if(state.gameStatus === 'won') res.innerHTML = "¡Ganaste! +1 pt";
+  else if(state.gameStatus === 'lost') res.innerHTML = "Perdiste. 0 pts";
+  else if(state.gameStatus === 'draw') res.innerHTML = "Empate. +0.5 pts";
+}
+
+function updateTotal() {
+  const sum = Object.values(state.scores).reduce((a,b)=>a+b, 0);
+  document.getElementById('total-score').textContent = sum;
+}
+
+// --- PDF GENERATION ---
+function sanitize(str) {
+  if(!str) return '';
+  str = str.replace(/<[^>]*>?/gm, '');
+  const map = { '→':'->', '←':'<-', '↑':'^', '↓':'v', '“':'"', '”':'"', '‘':"'", '’':"'", '–':'-', '—':'-', '…':'...' };
+  str = str.replace(/[→←↑↓“”‘’–—…]/g, m => map[m]);
+  return str.replace(/[^\x00-\xFF]/g, ''); // Solo Latin-1
+}
+
+function generatePDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  
+  let y = 20;
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(16);
+  doc.text("Worksheet Results", 105, y, {align: "center"});
+  
+  y += 10;
+  doc.setFontSize(10);
+  doc.setFont("helvetica", "normal");
+  
+  const header = [
+    `Profesor: Jose Eliseo Martinez | Escuela: COEDUCA | Seccion: A`,
+    `Nivel: Ingles A1+ | Grado: ${sanitize(state.s1.grade)}`,
+    `Nombre/NIE: ${sanitize(state.s1.name)} / ${state.s1.nie}`
+  ];
+  if(state.s2) header.push(`Companero/NIE: ${sanitize(state.s2.name)} / ${state.s2.nie}`);
+  header.push(`Tema: Occupations and Occupations Related Verbs in past`);
+  header.push(`Fecha: ${new Date().toLocaleDateString()}`);
+  
+  header.forEach(line => { doc.text(line, 20, y); y += 6; });
+  
+  const totalItems = 20;
+  const correct = Object.values(state.scores).reduce((a,b)=>a+b, 0);
+  const note = ((correct / totalItems) * 10) + state.gamePoints;
+  
+  doc.setFont("helvetica", "bold");
+  doc.text(`Nota Final: ${note.toFixed(2)} / 10.00`, 150, 30);
+  doc.text(`Puntos Extra Juego: +${state.gamePoints}`, 150, 36);
+  doc.text(`Aciertos: ${correct} / ${totalItems}`, 150, 42);
+  
+  y += 10;
+  doc.text("Detalle de Respuestas:", 20, y); y+=8;
+  doc.setFont("helvetica", "normal");
+  
+  const details = [
+    `1. Word Search: ${state.scores.ex1}/4`,
+    `2. Match Emoji: ${state.scores.ex2}/4`,
+    `3. Drag & Drop (Verbs): ${state.scores.ex3}/4`,
+    `4. Fill in blanks: ${state.scores.ex4}/2`,
+    `5. Reorder: ${state.scores.ex5}/2`,
+    `6. Match Duty: ${state.scores.ex6}/2`,
+    `7. Multiple Choice: ${state.scores.ex7}/2`
+  ];
+  
+  details.forEach(d => { doc.text(d, 20, y); y+=6; });
+  
+  // iOS Fix
+  const blob = doc.output('blob');
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `Worksheet_${state.s1.nie}.pdf`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 100);
+}
+</script>
+</body>
+</html>
