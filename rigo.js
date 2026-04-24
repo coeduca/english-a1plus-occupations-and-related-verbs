@@ -65,7 +65,7 @@
     { text: "Ya ni le muevas, no sé inglés", grade: null, emotion: 'sad' },
     { text: "Esto es culpa de Darwin", grade: ["Noveno"], emotion: 'angry' },
     { text: "¿Todavía no has terminado?", grade: null, emotion: 'confused' },
-    { text: "Yo ya hubiera terminado", grade: null, emotion: 'sneaky' },
+    { text: "Yo ya hubiera terminado", grade: null, emotion: 'thinking' },
     { text: "¿Ya viste el nuevo capítulo de la Rosa de Guadalupe?", grade: null, emotion: 'excited' },
     { text: "¿Ya viste las frutinovelas?", grade: null, emotion: 'excited' },
     { text: "Google Translate está llorando", grade: null, emotion: 'sneaky' },
