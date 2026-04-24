@@ -34,16 +34,16 @@
   //              Si no se define, usa la emoción por defecto del contexto.
   const RANDOM_MESSAGES = [
     { text: "You can do it!", grade: null, emotion: 'happy' },
-    { text: "¡Tú puedes!", grade: null, emotion: 'excited' },
+    { text: "¡Podemos o no podemos!", grade: null, emotion: 'thinking' },
     { text: "English is fun!", grade: null, emotion: 'love' },
-    { text: "Keep going, friend!", grade: null, emotion: 'happy' },
+    { text: "Vamos!", grade: null, emotion: 'happy' },
     { text: "¡No te rindas!", grade: null, emotion: 'excited' },
     { text: "I believe in you!", grade: null, emotion: 'love' },
     { text: "Practice makes perfect", grade: null, emotion: 'thinking' },
     { text: "Learning is cool", grade: null, emotion: 'happy' },
     { text: "You're doing great!", grade: null, emotion: 'excited' },
     { text: "Respira y continúa", grade: null, emotion: 'neutral' },
-    { text: "One step at a time", grade: null, emotion: 'thinking' }
+    { text: "Que calor", grade: null, emotion: 'thinking' }
   ];
 
   // HINTS: si grade es null aparecen para todos los grados.
