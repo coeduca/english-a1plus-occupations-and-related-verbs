@@ -24,6 +24,8 @@
     margin: 0; padding: 0; background: var(--bg); color: var(--black);
     user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
     overflow-x: hidden;
+    min-height: 100vh;
+    background-image: radial-gradient(circle at 15% 20%, rgba(255, 230, 109, 0.28), transparent 40%), radial-gradient(circle at 85% 10%, rgba(157, 78, 221, 0.15), transparent 40%);
   }
   
   h1, h2, h3 { text-transform: uppercase; letter-spacing: 1px; text-shadow: 2px 2px 0 #fff, 3px 3px 0 var(--black); margin-top: 0; }
@@ -35,14 +37,15 @@
   .app-header h1 { margin: 0; font-size: 36px; text-shadow: 3px 3px 0 var(--black); letter-spacing: 2px; }
   .app-header p { margin: 8px 0 0 0; font-weight: bold; font-size: 18px; opacity: 0.9; }
 
-  .container { max-width: 1000px; margin: 0 auto; padding: 20px; padding-bottom: 120px; display: none; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 20px; padding-bottom: 120px; display: none; }
   
   .pop-box {
     border: var(--border); box-shadow: var(--shadow);
     padding: 35px 25px 25px 25px; margin-bottom: 45px; border-radius: 12px; position: relative;
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    backdrop-filter: blur(2px);
   }
-  .pop-box:hover { transform: translateY(-3px); }
+  .pop-box:hover { transform: translateY(-3px); box-shadow: 8px 8px 0 var(--black); }
   .pop-box::before {
     content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
     background-image: radial-gradient(#1a1a1a 10%, transparent 11%);
@@ -75,6 +78,7 @@
     box-shadow: 4px 4px 0 var(--black); border-radius: 8px; transition: all 0.1s;
     width: 100%; margin-top: 15px; display: inline-block; text-align: center;
   }
+  .btn:hover { filter: brightness(1.05); transform: translateY(-1px); }
   .btn:active { transform: translate(4px, 4px); box-shadow: none; }
   .btn-alt { background: var(--secondary); color: var(--black); }
   
@@ -130,12 +134,19 @@
   }
 
   /* Tic Tac Toe */
-  .tictactoe { display: grid; grid-template-columns: repeat(3, 90px); gap: 8px; margin: 0 auto; width: max-content; background: var(--black); padding: 8px; border-radius: 12px; box-shadow: var(--shadow); }
+  .tictactoe {
+    display: grid; grid-template-columns: repeat(3, minmax(78px, 1fr)); gap: 8px; margin: 0 auto; width: min(92vw, 320px);
+    background: var(--black); padding: 8px; border-radius: 12px; box-shadow: var(--shadow);
+  }
   .xo-cell {
-    width: 90px; height: 90px; background: #fff; display: flex; border-radius: 8px;
-    justify-content: center; align-items: center; font-size: 50px; font-weight: bold; cursor: pointer; box-shadow: inset 2px 2px 0 rgba(0,0,0,0.1); transition: background 0.2s;
+    width: 100%; aspect-ratio: 1/1; background: #fff; display: flex; border-radius: 8px;
+    justify-content: center; align-items: center; font-size: clamp(34px, 9vw, 50px); font-weight: bold; cursor: pointer; box-shadow: inset 2px 2px 0 rgba(0,0,0,0.1); transition: background 0.2s;
+    touch-action: manipulation;
   }
   .xo-cell:active { background: #f0f0f0; }
+  .xo-controls { display: flex; gap: 12px; margin: 15px auto 0; width: min(92vw, 320px); align-items: center; }
+  .xo-controls select, .xo-controls .btn { margin: 0; }
+  .xo-status { text-align:center; font-weight:bold; margin-top:20px; font-size:24px; min-height: 32px; }
   
   @keyframes pop { 50% { transform: scale(1.15); } }
   .error-msg { color: var(--primary); font-weight: bold; margin-top: 10px; display: none; }
@@ -148,6 +159,10 @@
     .grid-cell { width: 30px; height: 30px; font-size: 16px; }
     .grid-container { grid-template-columns: repeat(10, 30px); }
     .app-header h1 { font-size: 26px; }
+    .score-display { left: 10px; right: 10px; bottom: 10px; font-size: 16px; text-align: center; }
+    .badge { font-size: 15px; }
+    .pop-box { padding: 30px 14px 18px 14px; }
+    .xo-controls { flex-direction: column; width: 100%; }
   }
 </style>
 </head>
@@ -176,15 +191,22 @@
   <div class="pop-box" id="game-section" style="background: #E0FFFF;">
     <div class="badge">BONUS GAME</div>
     <h2 style="text-align: center;">Play with Teacher XO</h2>
-    <p style="text-align: center; font-weight: bold;">Gana para 1 pt extra. Empata para 0.5 pts.</p>
+    <p style="text-align: center; font-weight: bold;">Gana para 1 pt extra. Empata para 0.5 pts. ¡Ahora el teacher juega en modo PRO!</p>
     <div class="tictactoe" id="xo-board"></div>
-    <div id="xo-result" style="text-align:center; font-weight:bold; margin-top:20px; font-size:24px;"></div>
+    <div class="xo-controls">
+      <select id="xo-difficulty" aria-label="Dificultad XO">
+        <option value="hard">Difícil (Pro)</option>
+        <option value="medium">Medio</option>
+      </select>
+      <button class="btn btn-alt" id="btn-reset-xo" style="padding: 10px 12px; font-size:14px;">Reiniciar XO</button>
+    </div>
+    <div id="xo-result" class="xo-status"></div>
   </div>
 
   <button class="btn btn-alt" id="btn-pdf" style="margin-bottom: 60px; font-size: 20px; padding: 18px; width: 100%;">Descargar PDF para Classroom</button>
 </div>
 
-<div class="score-display">Puntos: <span id="total-score">0</span> / 52</div>
+<div class="score-display">Puntos: <span id="total-score">0</span> / 52 <span id="bonus-score" style="color:var(--purple);"></span></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
@@ -354,7 +376,9 @@ let state = {
   scores: { ex1:0, ex2:0, ex3:0, ex4:0, ex5:0, ex6:0, ex7:0, ex8:0, ex9:0 },
   gamePoints: 0, gameStatus: 'pending',
   answers: { ex1:[], ex2:{}, ex3:{}, ex4:{}, ex5:{}, ex6:{}, ex7:{}, ex8:{}, ex9:{} },
-  xo: ['','','','','','','','','']
+  xo: ['','','','','','','','',''],
+  xoDifficulty: 'hard',
+  xoLocked: false
 };
 
 const bgColors = ['#FFD1DC', '#FFFACD', '#E6E6FA', '#F0FFF0', '#FFE4E1', '#E8F7FA', '#FFDEAD', '#D4F0F0', '#FDE2E4'];
@@ -374,6 +398,9 @@ function loadState() {
       state.answers.ex8 = {}; state.answers.ex9 = {};
       state.scores.ex8 = 0; state.scores.ex9 = 0;
     }
+    if(!state.answers.ex9) state.answers.ex9 = {};
+    if(!state.xoDifficulty) state.xoDifficulty = 'hard';
+    state.xoLocked = false;
     return true; 
   }
   return false;
@@ -408,7 +435,7 @@ function calculateScores() {
     if(state.answers.ex8[k] === state.pool.tf[k].ans) sc.ex8++;
   });
   Object.keys(state.answers.ex9).forEach(k => {
-    if(state.answers.ex9[k].toUpperCase() === state.pool.scramble[k].ans) sc.ex9++;
+    if((state.answers.ex9[k] || '').toUpperCase() === state.pool.scramble[k].ans) sc.ex9++;
   });
 
   state.scores = sc;
@@ -442,6 +469,11 @@ window.addEventListener('DOMContentLoaded', () => {
   });
   
   document.getElementById('btn-pdf').addEventListener('click', generatePDF);
+  document.getElementById('btn-reset-xo').addEventListener('click', resetXO);
+  document.getElementById('xo-difficulty').addEventListener('change', (e) => {
+    state.xoDifficulty = e.target.value;
+    resetXO();
+  });
 });
 
 function showApp() {
@@ -450,6 +482,7 @@ function showApp() {
   state.pool = POOLS[state.poolKey];
   window.rigo.setGrade(state.s1.grade);
   renderExercises();
+  document.getElementById('xo-difficulty').value = state.xoDifficulty || 'hard';
   renderXO();
   updateTotal();
   if(state.gameStatus === 'pending') window.rigo.inviteGame();
@@ -808,39 +841,121 @@ function renderXO() {
 }
 
 function playXO(idx) {
-  if(state.gameStatus !== 'pending' || state.xo[idx] !== '') return;
+  if(state.gameStatus !== 'pending' || state.xo[idx] !== '' || state.xoLocked) return;
+  state.xoLocked = true;
   state.xo[idx] = 'X';
-  if(!checkXO()) setTimeout(botXO, 500);
+  if(!checkXO()) setTimeout(botXO, 350);
   renderXO();
   saveState();
 }
 
 function botXO() {
   let empty = state.xo.map((c,i)=>c===''?i:null).filter(i=>i!==null);
-  if(empty.length > 0) {
-    let pick = empty[Math.floor(Math.random()*empty.length)];
-    state.xo[pick] = 'O';
-    checkXO();
-    renderXO();
-    saveState();
+  if(empty.length === 0 || state.gameStatus !== 'pending') {
+    state.xoLocked = false;
+    return;
   }
+
+  const pick = chooseBestMove(state.xo, state.xoDifficulty || 'hard');
+  if(pick !== null) state.xo[pick] = 'O';
+  checkXO();
+  state.xoLocked = false;
+  renderXO();
+  saveState();
+}
+
+function chooseBestMove(board, difficulty = 'hard') {
+  const empties = board.map((c, i) => c === '' ? i : null).filter(i => i !== null);
+  if(!empties.length) return null;
+
+  // En medio, a veces juega óptimo y a veces "humano" para variar.
+  if(difficulty === 'medium' && Math.random() < 0.35) {
+    const center = 4;
+    if(board[center] === '') return center;
+    const corners = [0,2,6,8].filter(i => board[i] === '');
+    if(corners.length) return corners[Math.floor(Math.random() * corners.length)];
+    return empties[Math.floor(Math.random() * empties.length)];
+  }
+
+  let bestScore = -Infinity;
+  let bestMove = empties[0];
+  for (const idx of empties) {
+    board[idx] = 'O';
+    const score = minimax(board, 0, false, -Infinity, Infinity);
+    board[idx] = '';
+    if (score > bestScore) {
+      bestScore = score;
+      bestMove = idx;
+    }
+  }
+  return bestMove;
+}
+
+function minimax(board, depth, isMaximizing, alpha, beta) {
+  const result = getBoardResult(board);
+  if (result !== null) {
+    if (result === 'O') return 10 - depth;
+    if (result === 'X') return depth - 10;
+    return 0;
+  }
+
+  const empties = board.map((c, i) => c === '' ? i : null).filter(i => i !== null);
+  if (isMaximizing) {
+    let maxEval = -Infinity;
+    for (const idx of empties) {
+      board[idx] = 'O';
+      const evalScore = minimax(board, depth + 1, false, alpha, beta);
+      board[idx] = '';
+      maxEval = Math.max(maxEval, evalScore);
+      alpha = Math.max(alpha, evalScore);
+      if (beta <= alpha) break;
+    }
+    return maxEval;
+  }
+
+  let minEval = Infinity;
+  for (const idx of empties) {
+    board[idx] = 'X';
+    const evalScore = minimax(board, depth + 1, true, alpha, beta);
+    board[idx] = '';
+    minEval = Math.min(minEval, evalScore);
+    beta = Math.min(beta, evalScore);
+    if (beta <= alpha) break;
+  }
+  return minEval;
+}
+
+function getBoardResult(board) {
+  const lines = [ [0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6] ];
+  for (const [a,b,c] of lines) {
+    if(board[a] && board[a] === board[b] && board[a] === board[c]) return board[a];
+  }
+  if(!board.includes('')) return 'draw';
+  return null;
+}
+
+function resetXO() {
+  state.xo = ['','','','','','','','',''];
+  state.gameStatus = 'pending';
+  state.gamePoints = 0;
+  state.xoLocked = false;
+  renderXO();
+  saveState();
 }
 
 function checkXO() {
-  const lines = [ [0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6] ];
-  for(let l of lines) {
-    if(state.xo[l[0]] && state.xo[l[0]] === state.xo[l[1]] && state.xo[l[0]] === state.xo[l[2]]) {
-      if(state.xo[l[0]] === 'X') {
-        state.gameStatus = 'won'; state.gamePoints = 1;
-        window.rigo.setEmotion('excited'); window.rigo.say("Felicidades, eres bueno en este juego, ten 1 punto extra", 5000);
-      } else {
-        state.gameStatus = 'lost'; state.gamePoints = 0;
-        window.rigo.setEmotion('sad'); window.rigo.say("Oops, más suerte para la próxima.", 5000);
-      }
-      return true;
-    }
+  const result = getBoardResult(state.xo);
+  if(result === 'X') {
+    state.gameStatus = 'won'; state.gamePoints = 1;
+    window.rigo.setEmotion('excited'); window.rigo.say("Felicidades, eres bueno en este juego, ten 1 punto extra", 5000);
+    return true;
   }
-  if(!state.xo.includes('')) {
+  if(result === 'O') {
+    state.gameStatus = 'lost'; state.gamePoints = 0;
+    window.rigo.setEmotion('sad'); window.rigo.say("Oops, más suerte para la próxima.", 5000);
+    return true;
+  }
+  if(result === 'draw') {
     state.gameStatus = 'draw'; state.gamePoints = 0.5;
     window.rigo.setEmotion('neutral'); window.rigo.say("Estamos a mano, ten 0.5 extra para tu nota", 5000);
     return true;
@@ -853,12 +968,15 @@ function updateXOResult() {
   if(state.gameStatus === 'won') res.innerHTML = "¡Ganaste! +1 pt";
   else if(state.gameStatus === 'lost') res.innerHTML = "Perdiste. 0 pts";
   else if(state.gameStatus === 'draw') res.innerHTML = "Empate. +0.5 pts";
+  else if(state.xoLocked) res.innerHTML = "Turno del teacher...";
+  else res.innerHTML = "Tu turno (X)";
 }
 
 function updateTotal() {
   calculateScores(); // Asegurarnos de tener los scores reales antes de sumar
   const sum = Object.values(state.scores).reduce((a,b)=>a+b, 0);
   document.getElementById('total-score').textContent = sum;
+  document.getElementById('bonus-score').textContent = state.gamePoints ? `(+${state.gamePoints} bonus)` : '';
 }
 
 // --- PDF GENERATION PREMIUM ---
