@@ -18,7 +18,7 @@
     --shadow: 5px 5px 0 var(--black);
   }
   
-  * { box-sizing: border-box; font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; }
+  * { box-sizing: border-box; font-family: 'Comic Sans MS', 'Chalkboard SE', system-ui, sans-serif; }
   
   body {
     margin: 0; padding: 0; background: var(--bg); color: var(--black);
@@ -29,18 +29,20 @@
   h1, h2, h3 { text-transform: uppercase; letter-spacing: 1px; text-shadow: 2px 2px 0 #fff, 3px 3px 0 var(--black); margin-top: 0; }
   
   .app-header {
-    background: var(--purple); color: #fff; padding: 20px; text-align: center;
+    background: var(--purple); color: #fff; padding: 25px 20px; text-align: center;
     border-bottom: var(--border); box-shadow: 0 4px 0 var(--black); margin-bottom: 30px;
   }
-  .app-header h1 { margin: 0; font-size: 32px; text-shadow: 3px 3px 0 var(--black); }
-  .app-header p { margin: 5px 0 0 0; font-weight: bold; font-size: 18px; }
+  .app-header h1 { margin: 0; font-size: 36px; text-shadow: 3px 3px 0 var(--black); letter-spacing: 2px; }
+  .app-header p { margin: 8px 0 0 0; font-weight: bold; font-size: 18px; opacity: 0.9; }
 
   .container { max-width: 1000px; margin: 0 auto; padding: 20px; padding-bottom: 120px; display: none; }
   
   .pop-box {
     border: var(--border); box-shadow: var(--shadow);
-    padding: 30px 25px 25px 25px; margin-bottom: 45px; border-radius: 12px; position: relative;
+    padding: 35px 25px 25px 25px; margin-bottom: 45px; border-radius: 12px; position: relative;
+    transition: transform 0.2s ease;
   }
+  .pop-box:hover { transform: translateY(-3px); }
   .pop-box::before {
     content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
     background-image: radial-gradient(#1a1a1a 10%, transparent 11%);
@@ -59,19 +61,21 @@
     background: repeating-linear-gradient(45deg, var(--yellow), var(--yellow) 20px, #f4d03f 20px, #f4d03f 40px);
     display: flex; justify-content: center; align-items: center; z-index: 1000;
   }
-  .login-card { background: #fff; border: var(--border); box-shadow: 8px 8px 0 var(--black); padding: 30px; width: 90%; max-width: 400px; text-align: center; border-radius: 15px; }
+  .login-card { background: #fff; border: var(--border); box-shadow: 8px 8px 0 var(--black); padding: 40px 30px; width: 90%; max-width: 420px; text-align: center; border-radius: 15px; }
   input[type="text"] {
-    width: 100%; padding: 12px; margin: 10px 0; border: var(--border);
+    width: 100%; padding: 14px; margin: 10px 0; border: var(--border);
     font-size: 16px; font-weight: bold; border-radius: 8px; outline: none; text-align: center;
+    transition: box-shadow 0.2s;
   }
+  input[type="text"]:focus { box-shadow: inset 2px 2px 0 rgba(0,0,0,0.1); }
   
   .btn {
-    background: var(--primary); color: #fff; border: var(--border); padding: 12px 20px;
+    background: var(--primary); color: #fff; border: var(--border); padding: 14px 20px;
     font-size: 18px; font-weight: bold; cursor: pointer; text-transform: uppercase;
-    box-shadow: 3px 3px 0 var(--black); border-radius: 8px; transition: transform 0.1s;
-    width: 100%; margin-top: 10px; display: inline-block; text-align: center;
+    box-shadow: 4px 4px 0 var(--black); border-radius: 8px; transition: all 0.1s;
+    width: 100%; margin-top: 15px; display: inline-block; text-align: center;
   }
-  .btn:active { transform: translate(3px, 3px); box-shadow: none; }
+  .btn:active { transform: translate(4px, 4px); box-shadow: none; }
   .btn-alt { background: var(--secondary); color: var(--black); }
   
   /* Ex 1: Sopa Letras */
@@ -88,8 +92,8 @@
   .grid-cell.selected { background: var(--yellow); }
   .grid-cell.found { background: var(--secondary); color: #fff; animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
   .word-list { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; justify-content: center; }
-  .word-item { padding: 8px 15px; border: 2px solid var(--black); border-radius: 20px; background: #fff; font-weight: bold; font-size: 16px; box-shadow: 2px 2px 0 rgba(0,0,0,0.2); }
-  .word-item.found { background: var(--primary); color: #fff; text-decoration: line-through; opacity: 0.8; }
+  .word-item { padding: 8px 15px; border: 2px solid var(--black); border-radius: 20px; background: #fff; font-weight: bold; font-size: 16px; box-shadow: 2px 2px 0 rgba(0,0,0,0.2); transition: all 0.3s; }
+  .word-item.found { background: var(--primary); color: #fff; text-decoration: line-through; opacity: 0.8; transform: scale(0.95); }
 
   /* Ex Drag & Drop */
   .drag-container { display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 25px; background: rgba(255,255,255,0.5); padding: 20px; border: 2px dashed var(--black); border-radius: 8px; justify-content: center; }
@@ -115,15 +119,23 @@
   select {
     padding: 8px 12px; border: 2px solid var(--black); border-radius: 6px; font-size: 16px; font-weight: bold; background: #fff; cursor: pointer; outline: none; box-shadow: 2px 2px 0 rgba(0,0,0,0.2);
   }
+  .scramble-input {
+    padding: 8px; border: 2px solid var(--black); border-radius: 6px; font-size: 16px; font-weight: bold; text-align: center; text-transform: uppercase; width: 150px;
+  }
   
   .reorder-zone { display: flex; gap: 10px; min-height: 65px; border: 2px dashed var(--black); padding: 15px; background: rgba(255,255,255,0.6); border-radius: 8px; flex-wrap: wrap; align-items: center; width: 100%; pointer-events: auto; }
   
+  .reading-box {
+    background: #fff; border: 2px solid var(--black); padding: 15px; border-radius: 8px; font-size: 18px; margin-bottom: 20px; font-style: italic; box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+  }
+
   /* Tic Tac Toe */
   .tictactoe { display: grid; grid-template-columns: repeat(3, 90px); gap: 8px; margin: 0 auto; width: max-content; background: var(--black); padding: 8px; border-radius: 12px; box-shadow: var(--shadow); }
   .xo-cell {
     width: 90px; height: 90px; background: #fff; display: flex; border-radius: 8px;
-    justify-content: center; align-items: center; font-size: 50px; font-weight: bold; cursor: pointer; box-shadow: inset 2px 2px 0 rgba(0,0,0,0.1);
+    justify-content: center; align-items: center; font-size: 50px; font-weight: bold; cursor: pointer; box-shadow: inset 2px 2px 0 rgba(0,0,0,0.1); transition: background 0.2s;
   }
+  .xo-cell:active { background: #f0f0f0; }
   
   @keyframes pop { 50% { transform: scale(1.15); } }
   .error-msg { color: var(--primary); font-weight: bold; margin-top: 10px; display: none; }
@@ -135,6 +147,7 @@
   @media (max-width: 600px) {
     .grid-cell { width: 30px; height: 30px; font-size: 16px; }
     .grid-container { grid-template-columns: repeat(10, 30px); }
+    .app-header h1 { font-size: 26px; }
   }
 </style>
 </head>
@@ -142,13 +155,13 @@
 
 <div id="login-modal">
   <div class="login-card">
-    <h2 style="color: var(--primary); margin-top: 0;">English A1+</h2>
-    <p><strong>Topic:</strong> Occupations & Past Verbs</p>
+    <h2 style="color: var(--primary); margin-top: 0; font-size: 32px;">English A1+</h2>
+    <p style="font-size: 18px;"><strong>Topic:</strong> Occupations & Past Verbs</p>
     <input type="text" id="nie1" placeholder="Tu NIE" autocomplete="off">
     <input type="text" id="nie2" placeholder="NIE Compañero (Opcional)" autocomplete="off" style="display:none;">
-    <button class="btn btn-alt" id="btn-add-partner" style="font-size:14px; padding:8px; margin-bottom:10px;">+ Agregar compañero</button>
+    <button class="btn btn-alt" id="btn-add-partner" style="font-size:14px; padding:10px; margin-bottom:10px; box-shadow: 2px 2px 0 var(--black);">+ Agregar compañero</button>
     <button class="btn" id="btn-login">Ingresar</button>
-    <div id="login-error" class="error-msg">NIE no encontrado.</div>
+    <div id="login-error" class="error-msg">NIE no encontrado en el sistema.</div>
   </div>
 </div>
 
@@ -168,12 +181,13 @@
     <div id="xo-result" style="text-align:center; font-weight:bold; margin-top:20px; font-size:24px;"></div>
   </div>
 
-  <button class="btn btn-alt" id="btn-pdf" style="margin-bottom: 60px; font-size: 20px; padding: 15px;">Descargar PDF para Classroom</button>
+  <button class="btn btn-alt" id="btn-pdf" style="margin-bottom: 60px; font-size: 20px; padding: 18px; width: 100%;">Descargar PDF para Classroom</button>
 </div>
 
-<div class="score-display">Puntos: <span id="total-score">0</span> / 42</div>
+<div class="score-display">Puntos: <span id="total-score">0</span> / 52</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
 <script src="students.js"></script>
 <script src="rigo.js"></script>
 <rigo-mascot></rigo-mascot>
@@ -242,6 +256,22 @@ const POOLS = {
       {q: "What did the painter do?", ans: "painted a house", opts: ["paint a house", "painted a house", "paynted a house"]},
       {q: "What did the driver do?", ans: "drove a bus", opts: ["drive a bus", "drived a bus", "drove a bus"]},
       {q: "What did the doctor do?", ans: "worked in a hospital", opts: ["work in a hospital", "worked in a hospital", "workt in a hospital"]}
+    ],
+    // New Exercises
+    readingText: "Yesterday, John worked as a chef at a famous restaurant. He cooked a big pizza and baked a delicious cake. After work, he drove his car home and rested.",
+    tf: [
+      {q: "John was a teacher yesterday.", ans: "False"},
+      {q: "He cooked a big pizza.", ans: "True"},
+      {q: "He baked some bread.", ans: "False"},
+      {q: "He walked home.", ans: "False"},
+      {q: "He worked at a restaurant.", ans: "True"}
+    ],
+    scramble: [
+      {j: "R E A H C T E", ans: "TEACHER"},
+      {j: "K E C O O D", ans: "COOKED"},
+      {j: "O T P L I", ans: "PILOT"},
+      {j: "W E L F", ans: "FLEW"},
+      {j: "R M R E F A", ans: "FARMER"}
     ]
   },
   B: {
@@ -299,25 +329,89 @@ const POOLS = {
       {q: "What did the actor do?", ans: "acted in a movie", opts: ["act in a movie", "acted in a movie", "acting in a movie"]},
       {q: "What did the vet do?", ans: "helped animals", opts: ["help animals", "helped animals", "holp animals"]},
       {q: "What did the builder do?", ans: "built a wall", opts: ["build a wall", "builded a wall", "built a wall"]}
+    ],
+    // New Exercises
+    readingText: "Last week, Mary acted in a theater play. She sang a beautiful song and danced for the audience. Later that day, she painted a picture of a tree.",
+    tf: [
+      {q: "Mary acted in a movie.", ans: "False"},
+      {q: "She sang a song.", ans: "True"},
+      {q: "She painted a picture.", ans: "True"},
+      {q: "She baked a big cake.", ans: "False"},
+      {q: "She danced for the audience.", ans: "True"}
+    ],
+    scramble: [
+      {j: "G R E N S I", ans: "SINGER"},
+      {j: "N P A I E T D", ans: "PAINTED"},
+      {j: "R O T C A", ans: "ACTOR"},
+      {j: "T L B U I", ans: "BUILT"},
+      {j: "E J U D G", ans: "JUDGE"}
     ]
   }
 };
 
 let state = {
   s1: null, s2: null, poolKey: 'A', pool: null,
-  scores: { ex1:0, ex2:0, ex3:0, ex4:0, ex5:0, ex6:0, ex7:0 },
+  scores: { ex1:0, ex2:0, ex3:0, ex4:0, ex5:0, ex6:0, ex7:0, ex8:0, ex9:0 },
   gamePoints: 0, gameStatus: 'pending',
-  answers: { ex1:[], ex2:{}, ex3:{}, ex4:{}, ex5:{}, ex6:{}, ex7:{} },
+  answers: { ex1:[], ex2:{}, ex3:{}, ex4:{}, ex5:{}, ex6:{}, ex7:{}, ex8:{}, ex9:{} },
   xo: ['','','','','','','','','']
 };
 
-const bgColors = ['#FFD1DC', '#FFFACD', '#E6E6FA', '#F0FFF0', '#FFE4E1', '#E8F7FA', '#FFDEAD'];
+const bgColors = ['#FFD1DC', '#FFFACD', '#E6E6FA', '#F0FFF0', '#FFE4E1', '#E8F7FA', '#FFDEAD', '#D4F0F0', '#FDE2E4'];
+const TOTAL_MAX_POINTS = 52; // 8+6+9+5+4+5+5+5+5
 
-function saveState() { localStorage.setItem('occ_ws_state_v3', JSON.stringify(state)); updateTotal(); }
+function saveState() { 
+  localStorage.setItem('occ_ws_state_v4', JSON.stringify(state)); 
+  updateTotal(); 
+}
+
 function loadState() {
-  const s = localStorage.getItem('occ_ws_state_v3');
-  if(s) { state = JSON.parse(s); return true; }
+  const s = localStorage.getItem('occ_ws_state_v4');
+  if(s) { 
+    state = JSON.parse(s); 
+    // Asegurar estructura para los nuevos ejercicios si viene de una versión anterior
+    if(!state.answers.ex8) {
+      state.answers.ex8 = {}; state.answers.ex9 = {};
+      state.scores.ex8 = 0; state.scores.ex9 = 0;
+    }
+    return true; 
+  }
   return false;
+}
+
+// Recalcula los puntos basados en las respuestas actuales para evitar exploits
+function calculateScores() {
+  let sc = { ex1:0, ex2:0, ex3:0, ex4:0, ex5:0, ex6:0, ex7:0, ex8:0, ex9:0 };
+  
+  sc.ex1 = state.answers.ex1.length; // Máx 8
+  
+  Object.keys(state.answers.ex2).forEach(k => {
+    if(state.answers.ex2[k] === state.pool.emojiMatch[k].ans) sc.ex2++;
+  });
+  Object.keys(state.answers.ex3).forEach(k => {
+    // Para Drag&Drop, se guardó el verbo en presente en ex3[k]. Hay que compararlo con el .p del verbo original en ese índice.
+    if(state.answers.ex3[k] === state.pool.verbs[k].p) sc.ex3++;
+  });
+  Object.keys(state.answers.ex4).forEach(k => {
+    if(state.answers.ex4[k] === state.pool.fill[k].ans) sc.ex4++;
+  });
+  Object.keys(state.answers.ex5).forEach(k => {
+    if(state.answers.ex5[k] && state.answers.ex5[k].join(' ') === state.pool.reorder[k].ans) sc.ex5++;
+  });
+  Object.keys(state.answers.ex6).forEach(k => {
+    if(state.answers.ex6[k] === state.pool.duties[k].ans) sc.ex6++;
+  });
+  Object.keys(state.answers.ex7).forEach(k => {
+    if(state.answers.ex7[k] === state.pool.mcq[k].ans) sc.ex7++;
+  });
+  Object.keys(state.answers.ex8).forEach(k => {
+    if(state.answers.ex8[k] === state.pool.tf[k].ans) sc.ex8++;
+  });
+  Object.keys(state.answers.ex9).forEach(k => {
+    if(state.answers.ex9[k].toUpperCase() === state.pool.scramble[k].ans) sc.ex9++;
+  });
+
+  state.scores = sc;
 }
 
 // --- INITIALIZATION ---
@@ -361,11 +455,11 @@ function showApp() {
   if(state.gameStatus === 'pending') window.rigo.inviteGame();
 }
 
-function evaluate(ex, val, maxPoints, correct) {
+function evaluate(ex, val, correct) {
+  calculateScores(); // Recalculamos globalmente para prevenir bugs
   if(correct) {
-    if(state.scores[ex] < maxPoints) state.scores[ex]++;
     window.rigo.cheer();
-  } else {
+  } else if (val !== "") { // Solo consolar si no fue limpiar una respuesta
     window.rigo.comfort();
   }
   saveState();
@@ -469,11 +563,33 @@ function renderExercises() {
   });
   html += `</ul></div>`;
 
+  // Ex 8: True / False Reading (5 pts)
+  html += `<div class="pop-box" style="background: ${bgColors[7]};"><div class="badge">EX 8 (5 pts)</div><h2>8. True or False</h2>
+           <div class="reading-box">"${state.pool.readingText}"</div><ul class="ex-list">`;
+  state.pool.tf.forEach((tf, i) => {
+    let sel = `<select data-ex="ex8" data-idx="${i}"><option value="">...</option>
+               <option value="True" ${state.answers.ex8[i]==='True'?'selected':''}>True</option>
+               <option value="False" ${state.answers.ex8[i]==='False'?'selected':''}>False</option></select>`;
+    html += `<li>${tf.q} &rarr; ${sel}</li>`;
+  });
+  html += `</ul></div>`;
+
+  // Ex 9: Word Scramble (5 pts)
+  html += `<div class="pop-box" style="background: ${bgColors[8]};"><div class="badge">EX 9 (5 pts)</div><h2>9. Word Scramble</h2>
+           <p>Unscramble the letters to find the correct occupation or past verb.</p><ul class="ex-list">`;
+  state.pool.scramble.forEach((sc, i) => {
+    let val = state.answers.ex9[i] || '';
+    html += `<li><span style="font-size:20px; font-weight:bold; letter-spacing:2px; min-width:140px; display:inline-block;">${sc.j}</span> &rarr; 
+             <input type="text" class="scramble-input" data-ex="ex9" data-idx="${i}" value="${val}" autocomplete="off"></li>`;
+  });
+  html += `</ul></div>`;
+
   container.innerHTML = html;
   
   setupWordSearch();
   setupDragAndDrop();
   setupSelects();
+  setupInputs();
 }
 
 function setupSelects() {
@@ -485,13 +601,28 @@ function setupSelects() {
       state.answers[ex][idx] = val;
       
       let correct = false;
-      let maxPts = 0;
-      if(ex === 'ex2') { correct = val === state.pool.emojiMatch[idx].ans; maxPts = 6; }
-      if(ex === 'ex4') { correct = val === state.pool.fill[idx].ans; maxPts = 5; }
-      if(ex === 'ex6') { correct = val === state.pool.duties[idx].ans; maxPts = 5; }
-      if(ex === 'ex7') { correct = val === state.pool.mcq[idx].ans; maxPts = 5; }
+      if(ex === 'ex2') { correct = val === state.pool.emojiMatch[idx].ans; }
+      if(ex === 'ex4') { correct = val === state.pool.fill[idx].ans; }
+      if(ex === 'ex6') { correct = val === state.pool.duties[idx].ans; }
+      if(ex === 'ex7') { correct = val === state.pool.mcq[idx].ans; }
+      if(ex === 'ex8') { correct = val === state.pool.tf[idx].ans; }
       
-      evaluate(ex, val, maxPts, correct);
+      evaluate(ex, val, correct);
+    });
+  });
+}
+
+function setupInputs() {
+  document.querySelectorAll('.scramble-input').forEach(inp => {
+    inp.addEventListener('change', (e) => {
+      const ex = e.target.getAttribute('data-ex');
+      const idx = parseInt(e.target.getAttribute('data-idx'));
+      const val = e.target.value.trim().toUpperCase();
+      state.answers[ex][idx] = val;
+      e.target.value = val;
+      
+      let correct = val === state.pool.scramble[idx].ans;
+      evaluate(ex, val, correct);
     });
   });
 }
@@ -515,7 +646,7 @@ function setupWordSearch() {
   }
 
   function onStart(e) {
-    if(e.target.tagName === 'SELECT' || e.target.classList.contains('draggable')) return;
+    if(e.target.tagName === 'SELECT' || e.target.tagName === 'INPUT' || e.target.classList.contains('draggable')) return;
     const c = getCell(e);
     if(!c) return;
     e.preventDefault();
@@ -542,7 +673,7 @@ function setupWordSearch() {
       state.answers.ex1.push(foundW.w);
       markCells(foundW.r1, foundW.c1, foundW.r2, foundW.c2);
       document.getElementById(`word-${foundW.w}`).classList.add('found');
-      evaluate('ex1', foundW.w, 8, true);
+      evaluate('ex1', foundW.w, true);
     }
   }
 
@@ -612,7 +743,6 @@ function setupDragAndDrop() {
     clone = null;
     draggedEl.style.opacity = '1';
 
-    // Temporarily hide the original element so it doesn't block point detection
     draggedEl.style.display = 'none';
     let dropTarget = document.elementFromPoint(clientX, clientY);
     draggedEl.style.display = '';
@@ -633,8 +763,7 @@ function setupDragAndDrop() {
       let currentWords = Array.from(document.querySelector(`.reorder-zone[data-idx="${idx}"]`).children).map(c => c.getAttribute('data-val'));
       state.answers.ex5[idx] = currentWords;
       let ansStr = currentWords.join(' ');
-      if(ansStr === state.pool.reorder[idx].ans) evaluate('ex5', ansStr, 4, true); // max 4 sentences
-      else saveState();
+      evaluate('ex5', ansStr, ansStr === state.pool.reorder[idx].ans);
 
     } else {
       let zone = dropTarget?.closest('.dropzone');
@@ -648,7 +777,7 @@ function setupDragAndDrop() {
         draggedEl.remove();
         
         state.answers.ex3[idx] = val;
-        evaluate('ex3', val, 9, val === correctAns); // max 9 verbs
+        evaluate('ex3', val, val === correctAns); 
       }
     }
     draggedEl = null;
@@ -727,11 +856,12 @@ function updateXOResult() {
 }
 
 function updateTotal() {
+  calculateScores(); // Asegurarnos de tener los scores reales antes de sumar
   const sum = Object.values(state.scores).reduce((a,b)=>a+b, 0);
   document.getElementById('total-score').textContent = sum;
 }
 
-// --- PDF GENERATION ---
+// --- PDF GENERATION PREMIUM ---
 function sanitize(str) {
   if(!str) return '';
   str = str.replace(/<[^>]*>?/gm, '');
@@ -741,54 +871,86 @@ function sanitize(str) {
 }
 
 function generatePDF() {
+  calculateScores(); // Recalcular antes del PDF final
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
   
-  let y = 20;
+  // Encabezado Superior Elegante
+  doc.setFillColor(157, 78, 221); // Var(--purple)
+  doc.rect(0, 0, 210, 35, 'F');
+  doc.setTextColor(255, 255, 255);
   doc.setFont("helvetica", "bold");
-  doc.setFontSize(16);
-  doc.text("Worksheet Results", 105, y, {align: "center"});
-  
-  y += 10;
-  doc.setFontSize(10);
+  doc.setFontSize(22);
+  doc.text("English A1+ Worksheet Results", 105, 18, {align: "center"});
+  doc.setFontSize(14);
   doc.setFont("helvetica", "normal");
+  doc.text("Occupations & Past Verbs", 105, 26, {align: "center"});
+
+  // Datos del Estudiante
+  let y = 45;
+  doc.setTextColor(0, 0, 0);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(11);
   
-  const header = [
-    `Profesor: Jose Eliseo Martinez | Escuela: COEDUCA | Seccion: A`,
-    `Nivel: Ingles A1+ | Grado: ${sanitize(state.s1.grade)}`,
-    `Nombre/NIE: ${sanitize(state.s1.name)} / ${state.s1.nie}`
-  ];
-  if(state.s2) header.push(`Companero/NIE: ${sanitize(state.s2.name)} / ${state.s2.nie}`);
-  header.push(`Tema: Occupations and Occupations Related Verbs in past`);
-  header.push(`Fecha: ${new Date().toLocaleDateString()}`);
+  doc.text(`Profesor:`, 20, y); doc.setFont("helvetica", "normal"); doc.text(`Jose Eliseo Martinez`, 45, y);
+  doc.setFont("helvetica", "bold"); doc.text(`Escuela:`, 110, y); doc.setFont("helvetica", "normal"); doc.text(`COEDUCA (Sección A)`, 130, y); y += 8;
   
-  header.forEach(line => { doc.text(line, 20, y); y += 6; });
+  doc.setFont("helvetica", "bold"); doc.text(`Nivel:`, 20, y); doc.setFont("helvetica", "normal"); doc.text(`Inglés A1+`, 35, y);
+  doc.setFont("helvetica", "bold"); doc.text(`Grado:`, 110, y); doc.setFont("helvetica", "normal"); doc.text(`${sanitize(state.s1.grade)}`, 125, y); y += 8;
   
-  const totalItems = 42; // 8+6+9+5+4+5+5 = 42 pts
+  doc.setFont("helvetica", "bold"); doc.text(`Estudiante:`, 20, y); doc.setFont("helvetica", "normal"); doc.text(`${sanitize(state.s1.name)} (NIE: ${state.s1.nie})`, 45, y); y += 8;
+  
+  if(state.s2) {
+    doc.setFont("helvetica", "bold"); doc.text(`Compañero:`, 20, y); doc.setFont("helvetica", "normal"); doc.text(`${sanitize(state.s2.name)} (NIE: ${state.s2.nie})`, 45, y); y += 8;
+  }
+  
+  doc.setFont("helvetica", "bold"); doc.text(`Fecha:`, 20, y); doc.setFont("helvetica", "normal"); doc.text(`${new Date().toLocaleDateString()}`, 35, y); y += 12;
+
+  // Calculo de Notas
   const correct = Object.values(state.scores).reduce((a,b)=>a+b, 0);
-  const note = ((correct / totalItems) * 10) + state.gamePoints;
-  
+  const note = ((correct / TOTAL_MAX_POINTS) * 10) + state.gamePoints;
+
+  // Cuadro de Calificación Destacado
+  doc.setDrawColor(255, 51, 102); // Var(--primary)
+  doc.setLineWidth(1);
+  doc.setFillColor(255, 240, 245);
+  doc.roundedRect(140, 42, 55, 30, 3, 3, 'FD');
+  doc.setTextColor(255, 51, 102);
   doc.setFont("helvetica", "bold");
-  doc.text(`Nota Final: ${note.toFixed(2)} / 10.00`, 140, 30);
-  doc.text(`Puntos Extra Juego: +${state.gamePoints}`, 140, 36);
-  doc.text(`Aciertos: ${correct} / ${totalItems}`, 140, 42);
+  doc.setFontSize(10);
+  doc.text(`Aciertos: ${correct} / ${TOTAL_MAX_POINTS}`, 145, 50);
+  doc.text(`Bonus Game: +${state.gamePoints}`, 145, 58);
+  doc.setFontSize(14);
+  doc.text(`Nota: ${note.toFixed(2)}`, 145, 68);
   
-  y += 10;
-  doc.text("Detalle de Respuestas:", 20, y); y+=8;
-  doc.setFont("helvetica", "normal");
-  
-  const details = [
-    `1. Word Search: ${state.scores.ex1}/8`,
-    `2. Match Emoji: ${state.scores.ex2}/6`,
-    `3. Drag & Drop (Verbs): ${state.scores.ex3}/9`,
-    `4. Fill in blanks: ${state.scores.ex4}/5`,
-    `5. Reorder sentences: ${state.scores.ex5}/4`,
-    `6. What did they do: ${state.scores.ex6}/5`,
-    `7. Multiple Choice: ${state.scores.ex7}/5`
-  ];
-  
-  details.forEach(d => { doc.text(d, 20, y); y+=6; });
-  
+  y += 5;
+  doc.setTextColor(0, 0, 0);
+  doc.setFontSize(14);
+  doc.text("Detalle de Puntuación:", 20, y); 
+  y += 6;
+
+  // Tabla usando autoTable
+  doc.autoTable({
+    startY: y,
+    head: [['Ejercicio', 'Descripción', 'Puntaje']],
+    body: [
+      ['Exercise 1', 'Word Search', `${state.scores.ex1} / 8`],
+      ['Exercise 2', 'Emoji Match', `${state.scores.ex2} / 6`],
+      ['Exercise 3', 'Present to Past (Drag & Drop)', `${state.scores.ex3} / 9`],
+      ['Exercise 4', 'Fill in the blanks', `${state.scores.ex4} / 5`],
+      ['Exercise 5', 'Reorder Sentences', `${state.scores.ex5} / 4`],
+      ['Exercise 6', 'What did they do?', `${state.scores.ex6} / 5`],
+      ['Exercise 7', 'Multiple Choice', `${state.scores.ex7} / 5`],
+      ['Exercise 8', 'Reading (True or False)', `${state.scores.ex8} / 5`],
+      ['Exercise 9', 'Word Scramble', `${state.scores.ex9} / 5`]
+    ],
+    theme: 'grid',
+    headStyles: { fillColor: [78, 205, 196], textColor: [255, 255, 255], fontStyle: 'bold' },
+    alternateRowStyles: { fillColor: [244, 244, 240] },
+    margin: { left: 20, right: 20 }
+  });
+
+  // Descarga del PDF
   const blob = doc.output('blob');
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
