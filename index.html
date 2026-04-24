@@ -5,187 +5,554 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="google" content="notranslate">
 <meta http-equiv="Content-Language" content="es">
-<title>Worksheet: Occupations & Past Verbs</title>
+<title>English A1+ | Occupations & Past Verbs</title>
 <style>
-  :root {
-    --bg: #f4f4f0;
-    --primary: #FF3366;
-    --secondary: #4ECDC4;
-    --yellow: #FFE66D;
-    --purple: #9D4EDD;
-    --black: #1a1a1a;
-    --border: 3px solid var(--black);
-    --shadow: 5px 5px 0 var(--black);
-  }
-  
-  * { box-sizing: border-box; font-family: 'Comic Sans MS', 'Chalkboard SE', system-ui, sans-serif; }
-  
-  body {
-    margin: 0; padding: 0; background: var(--bg); color: var(--black);
-    user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
-    overflow-x: hidden;
-  }
-  
-  h1, h2, h3 { text-transform: uppercase; letter-spacing: 1px; text-shadow: 2px 2px 0 #fff, 3px 3px 0 var(--black); margin-top: 0; }
-  
-  .app-header {
-    background: var(--purple); color: #fff; padding: 25px 20px; text-align: center;
-    border-bottom: var(--border); box-shadow: 0 4px 0 var(--black); margin-bottom: 30px;
-  }
-  .app-header h1 { margin: 0; font-size: 36px; text-shadow: 3px 3px 0 var(--black); letter-spacing: 2px; }
-  .app-header p { margin: 8px 0 0 0; font-weight: bold; font-size: 18px; opacity: 0.9; }
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;700;900&display=swap');
 
-  .container { max-width: 1000px; margin: 0 auto; padding: 20px; padding-bottom: 120px; display: none; }
-  
-  .pop-box {
-    border: var(--border); box-shadow: var(--shadow);
-    padding: 35px 25px 25px 25px; margin-bottom: 45px; border-radius: 12px; position: relative;
-    transition: transform 0.2s ease;
-  }
-  .pop-box:hover { transform: translateY(-3px); }
-  .pop-box::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-    background-image: radial-gradient(#1a1a1a 10%, transparent 11%);
-    background-size: 10px 10px; opacity: 0.05; pointer-events: none; border-radius: 10px;
-  }
-  
-  .badge {
-    position: absolute; top: -15px; left: -10px; background: var(--yellow);
-    border: var(--border); padding: 8px 15px; font-weight: bold; font-size: 18px;
-    transform: rotate(-3deg); box-shadow: 3px 3px 0 var(--black); z-index: 2;
-  }
+:root {
+  --bg: #FFFBF0;
+  --ink: #1a1a1a;
+  --red: #FF2D55;
+  --yellow: #FFD60A;
+  --cyan: #00C6CF;
+  --green: #39D353;
+  --purple: #BF5AF2;
+  --orange: #FF9F0A;
+  --white: #FFFFFF;
+  --shadow: 5px 5px 0 var(--ink);
+  --shadow-sm: 3px 3px 0 var(--ink);
+  --border: 3px solid var(--ink);
+  --border-thick: 5px solid var(--ink);
+  --font-display: 'Bangers', system-ui;
+  --font-body: 'Nunito', system-ui;
+}
 
-  /* Modal Login */
-  #login-modal {
-    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-    background: repeating-linear-gradient(45deg, var(--yellow), var(--yellow) 20px, #f4d03f 20px, #f4d03f 40px);
-    display: flex; justify-content: center; align-items: center; z-index: 1000;
-  }
-  .login-card { background: #fff; border: var(--border); box-shadow: 8px 8px 0 var(--black); padding: 40px 30px; width: 90%; max-width: 420px; text-align: center; border-radius: 15px; }
-  input[type="text"] {
-    width: 100%; padding: 14px; margin: 10px 0; border: var(--border);
-    font-size: 16px; font-weight: bold; border-radius: 8px; outline: none; text-align: center;
-    transition: box-shadow 0.2s;
-  }
-  input[type="text"]:focus { box-shadow: inset 2px 2px 0 rgba(0,0,0,0.1); }
-  
-  .btn {
-    background: var(--primary); color: #fff; border: var(--border); padding: 14px 20px;
-    font-size: 18px; font-weight: bold; cursor: pointer; text-transform: uppercase;
-    box-shadow: 4px 4px 0 var(--black); border-radius: 8px; transition: all 0.1s;
-    width: 100%; margin-top: 15px; display: inline-block; text-align: center;
-  }
-  .btn:active { transform: translate(4px, 4px); box-shadow: none; }
-  .btn-alt { background: var(--secondary); color: var(--black); }
-  
-  /* Ex 1: Sopa Letras */
-  .grid-wrapper { display: flex; flex-direction: column; align-items: center; }
-  .grid-container {
-    display: grid; grid-template-columns: repeat(10, 40px); gap: 2px;
-    border: var(--border); padding: 10px; background: var(--black); border-radius: 8px; touch-action: none;
-    margin: 0 auto; width: max-content; box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
-  }
-  .grid-cell {
-    width: 40px; height: 40px; background: #fff; display: flex; justify-content: center; align-items: center;
-    font-weight: bold; font-size: 20px; cursor: pointer; border-radius: 4px; user-select: none;
-  }
-  .grid-cell.selected { background: var(--yellow); }
-  .grid-cell.found { background: var(--secondary); color: #fff; animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-  .word-list { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; justify-content: center; }
-  .word-item { padding: 8px 15px; border: 2px solid var(--black); border-radius: 20px; background: #fff; font-weight: bold; font-size: 16px; box-shadow: 2px 2px 0 rgba(0,0,0,0.2); transition: all 0.3s; }
-  .word-item.found { background: var(--primary); color: #fff; text-decoration: line-through; opacity: 0.8; transform: scale(0.95); }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  /* Ex Drag & Drop */
-  .drag-container { display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 25px; background: rgba(255,255,255,0.5); padding: 20px; border: 2px dashed var(--black); border-radius: 8px; justify-content: center; }
-  .draggable {
-    padding: 12px 20px; background: var(--purple); color: #fff; border: var(--border);
-    border-radius: 8px; font-weight: bold; cursor: grab; box-shadow: 3px 3px 0 var(--black); touch-action: none; z-index: 10; font-size: 18px; text-transform: uppercase;
-  }
-  .dropzone-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
-  @media (max-width: 850px) { .dropzone-container { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 600px) { .dropzone-container { grid-template-columns: 1fr; } }
-  
-  .drop-row { display: flex; align-items: center; gap: 10px; background: #fff; padding: 12px; border: 2px solid var(--black); border-radius: 8px; box-shadow: 2px 2px 0 rgba(0,0,0,0.1); }
-  .dropzone {
-    flex-grow: 1; min-width: 100px; height: 50px; border: 2px dashed var(--black); border-radius: 8px;
-    background: #f0f0f0; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 16px; color: #666; transition: all 0.2s; pointer-events: auto;
-  }
-  .dropzone > * { pointer-events: none; }
-  .dropzone.filled { border: var(--border); background: var(--yellow); color: var(--black); text-transform: uppercase; box-shadow: inset 2px 2px 0 rgba(0,0,0,0.1); }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--ink);
+  user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
+  overflow-x: hidden;
+}
 
-  /* Ex Select / Inputs / Lists */
-  .ex-list { list-style: none; padding: 0; margin: 0; }
-  .ex-list li { margin-bottom: 15px; font-size: 18px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; background: rgba(255,255,255,0.7); padding: 12px 15px; border: 2px solid var(--black); border-radius: 8px; }
-  select {
-    padding: 8px 12px; border: 2px solid var(--black); border-radius: 6px; font-size: 16px; font-weight: bold; background: #fff; cursor: pointer; outline: none; box-shadow: 2px 2px 0 rgba(0,0,0,0.2);
-  }
-  .scramble-input {
-    padding: 8px; border: 2px solid var(--black); border-radius: 6px; font-size: 16px; font-weight: bold; text-align: center; text-transform: uppercase; width: 150px;
-  }
-  
-  .reorder-zone { display: flex; gap: 10px; min-height: 65px; border: 2px dashed var(--black); padding: 15px; background: rgba(255,255,255,0.6); border-radius: 8px; flex-wrap: wrap; align-items: center; width: 100%; pointer-events: auto; }
-  
-  .reading-box {
-    background: #fff; border: 2px solid var(--black); padding: 15px; border-radius: 8px; font-size: 18px; margin-bottom: 20px; font-style: italic; box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
-  }
+/* ─── HALFTONE BACKGROUND ─── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: radial-gradient(var(--ink) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 0;
+}
 
-  /* Tic Tac Toe */
-  .tictactoe { display: grid; grid-template-columns: repeat(3, 90px); gap: 8px; margin: 0 auto; width: max-content; background: var(--black); padding: 8px; border-radius: 12px; box-shadow: var(--shadow); }
-  .xo-cell {
-    width: 90px; height: 90px; background: #fff; display: flex; border-radius: 8px;
-    justify-content: center; align-items: center; font-size: 50px; font-weight: bold; cursor: pointer; box-shadow: inset 2px 2px 0 rgba(0,0,0,0.1); transition: background 0.2s;
-  }
-  .xo-cell:active { background: #f0f0f0; }
-  
-  @keyframes pop { 50% { transform: scale(1.15); } }
-  .error-msg { color: var(--primary); font-weight: bold; margin-top: 10px; display: none; }
-  .score-display {
-    position: fixed; bottom: 20px; left: 20px; background: #fff; border: var(--border); box-shadow: 3px 3px 0 var(--black);
-    padding: 10px 20px; font-size: 20px; font-weight: bold; color: var(--primary); border-radius: 30px; z-index: 900;
-  }
-  
-  @media (max-width: 600px) {
-    .grid-cell { width: 30px; height: 30px; font-size: 16px; }
-    .grid-container { grid-template-columns: repeat(10, 30px); }
-    .app-header h1 { font-size: 26px; }
-  }
+/* ─── LOGIN MODAL ─── */
+#login-modal {
+  position: fixed; inset: 0; z-index: 2000;
+  background: repeating-linear-gradient(
+    -45deg, var(--yellow) 0, var(--yellow) 12px,
+    #fff 12px, #fff 24px
+  );
+  display: flex; align-items: center; justify-content: center;
+}
+
+.login-card {
+  background: var(--white);
+  border: var(--border-thick);
+  box-shadow: 8px 8px 0 var(--ink);
+  border-radius: 20px;
+  padding: 40px 32px;
+  width: min(95%, 440px);
+  text-align: center;
+  position: relative;
+  animation: cardIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+@keyframes cardIn { from { transform: scale(0.7) rotate(-4deg); opacity: 0; } }
+
+.login-card .card-top-bar {
+  background: var(--red);
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 12px; border-radius: 17px 17px 0 0;
+}
+
+.login-logo {
+  font-family: var(--font-display);
+  font-size: 52px; letter-spacing: 2px;
+  color: var(--red);
+  text-shadow: 4px 4px 0 var(--ink);
+  line-height: 1;
+  margin: 18px 0 4px;
+}
+.login-sub {
+  font-size: 17px; font-weight: 900;
+  color: var(--ink); margin-bottom: 24px;
+}
+.login-topic {
+  background: var(--yellow);
+  border: var(--border);
+  border-radius: 40px;
+  display: inline-block;
+  padding: 6px 18px;
+  font-size: 15px; font-weight: 900;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+.field-wrap {
+  position: relative; margin-bottom: 12px;
+}
+.field-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 22px; pointer-events: none; }
+.nie-input {
+  width: 100%; padding: 14px 14px 14px 48px;
+  border: var(--border); border-radius: 10px;
+  font-family: var(--font-body); font-size: 18px; font-weight: 700;
+  text-align: center; background: var(--bg); outline: none;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.nie-input:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(0,198,207,0.25); }
+
+.btn {
+  width: 100%; padding: 15px;
+  font-family: var(--font-display); font-size: 26px; letter-spacing: 1px;
+  border: var(--border); border-radius: 10px;
+  cursor: pointer; transition: all 0.1s;
+  box-shadow: var(--shadow); text-transform: uppercase;
+  margin-top: 6px;
+}
+.btn:active { transform: translate(5px,5px); box-shadow: none; }
+.btn-primary { background: var(--red); color: var(--white); }
+.btn-alt    { background: var(--cyan); color: var(--ink); }
+.btn-sm { width: auto; padding: 10px 20px; font-size: 18px; margin-top: 4px; }
+.btn-pdf { background: var(--purple); color: var(--white); width: 100%; padding: 20px; font-family: var(--font-display); font-size: 28px; letter-spacing: 1px; border: var(--border); border-radius: 12px; cursor: pointer; box-shadow: var(--shadow); transition: all 0.1s; margin-bottom: 80px; }
+.btn-pdf:active { transform: translate(5px,5px); box-shadow: none; }
+
+.err-msg { color: var(--red); font-weight: 900; font-size: 15px; margin-top: 10px; display: none; }
+
+/* ─── MAIN APP ─── */
+#main-app { display: none; }
+
+/* ─── HERO HEADER ─── */
+.hero {
+  background: var(--ink);
+  color: var(--white);
+  padding: 30px 20px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(var(--yellow) 1.5px, transparent 1.5px);
+  background-size: 18px 18px;
+  opacity: 0.2;
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 8vw, 64px);
+  letter-spacing: 3px;
+  line-height: 1;
+  color: var(--yellow);
+  text-shadow: 4px 4px 0 var(--red);
+  position: relative;
+}
+.hero-sub {
+  font-size: 16px; font-weight: 700; color: var(--cyan);
+  margin-top: 8px; position: relative; letter-spacing: 1px;
+}
+.hero-chips {
+  display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+  margin-top: 14px; position: relative;
+}
+.chip {
+  background: var(--red); color: var(--white);
+  border: 2px solid var(--white);
+  border-radius: 30px; padding: 5px 14px;
+  font-size: 13px; font-weight: 900;
+}
+
+/* ─── SCORE BAR ─── */
+.score-bar {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 800;
+  background: var(--ink); color: var(--white);
+  display: flex; align-items: center; justify-content: center; gap: 20px;
+  padding: 10px 20px; border-top: 3px solid var(--yellow);
+  font-family: var(--font-display); font-size: 22px; letter-spacing: 1px;
+}
+.score-pill {
+  background: var(--yellow); color: var(--ink);
+  border-radius: 30px; padding: 4px 18px;
+  font-size: 26px; border: 2px solid var(--white);
+}
+
+/* ─── CONTAINER & CARDS ─── */
+.container {
+  max-width: 980px; margin: 0 auto;
+  padding: 24px 16px 160px;
+}
+
+.ex-card {
+  border: var(--border-thick);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  margin-bottom: 40px;
+  position: relative;
+  overflow: hidden;
+  animation: slideUp 0.5s cubic-bezier(0.22,1,0.36,1) both;
+  animation-delay: calc(var(--i, 0) * 60ms);
+}
+@keyframes slideUp { from { opacity: 0; transform: translateY(30px); } }
+
+.ex-card-header {
+  padding: 18px 20px 14px;
+  border-bottom: 3px solid var(--ink);
+  display: flex; align-items: center; gap: 14px;
+}
+.ex-emoji { font-size: 40px; line-height: 1; flex-shrink: 0; }
+.ex-title-wrap { flex: 1; }
+.ex-num {
+  font-family: var(--font-display);
+  font-size: 13px; letter-spacing: 2px;
+  color: var(--white);
+  background: var(--ink);
+  border-radius: 4px;
+  display: inline-block;
+  padding: 1px 10px;
+  margin-bottom: 3px;
+}
+.ex-title {
+  font-family: var(--font-display);
+  font-size: 28px; letter-spacing: 1px;
+  line-height: 1.1;
+}
+.ex-pts {
+  font-family: var(--font-display);
+  font-size: 22px;
+  background: var(--yellow);
+  border: 2px solid var(--ink);
+  border-radius: 30px;
+  padding: 4px 14px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.ex-card-body { padding: 20px; }
+
+/* Card color variants */
+.card-red    { background: #FFF0F3; }
+.card-yellow { background: #FFFDE7; }
+.card-cyan   { background: #E8FFFE; }
+.card-green  { background: #F0FFF4; }
+.card-purple { background: #F9F0FF; }
+.card-orange { background: #FFF8F0; }
+.card-pink   { background: #FFF0F8; }
+.card-lime   { background: #F2FFE8; }
+.card-blue   { background: #F0F4FF; }
+
+.card-red    .ex-card-header { background: #FFD6E0; }
+.card-yellow .ex-card-header { background: #FFF8C5; }
+.card-cyan   .ex-card-header { background: #C8F7F9; }
+.card-green  .ex-card-header { background: #C8F7DA; }
+.card-purple .ex-card-header { background: #E8D5FF; }
+.card-orange .ex-card-header { background: #FFE8C8; }
+.card-pink   .ex-card-header { background: #FFD6F0; }
+.card-lime   .ex-card-header { background: #DAFFC8; }
+.card-blue   .ex-card-header { background: #D5E4FF; }
+
+/* ─── SELECTS ─── */
+select {
+  padding: 8px 12px;
+  border: 2px solid var(--ink); border-radius: 8px;
+  font-family: var(--font-body); font-size: 16px; font-weight: 700;
+  background: #fff; cursor: pointer; outline: none;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.1s;
+}
+select:active { transform: translate(3px,3px); box-shadow: none; }
+
+/* ─── EX LIST ─── */
+.ex-list { list-style: none; }
+.ex-list li {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 10px;
+  background: rgba(255,255,255,0.8);
+  border: 2px solid var(--ink); border-radius: 10px;
+  padding: 12px 16px; margin-bottom: 12px;
+  font-size: 17px; font-weight: 700;
+  transition: transform 0.15s;
+}
+.ex-list li:hover { transform: translateX(3px); }
+
+/* ─── READING BOX ─── */
+.reading-box {
+  background: var(--white);
+  border: 3px solid var(--ink);
+  border-radius: 10px;
+  padding: 18px 20px;
+  font-size: 18px; font-weight: 700;
+  font-style: italic;
+  margin-bottom: 20px;
+  box-shadow: inset 3px 3px 0 rgba(0,0,0,0.06);
+  line-height: 1.6;
+}
+
+/* ─── WORD SEARCH ─── */
+.ws-wrap { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.ws-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 3px;
+  background: var(--ink);
+  border: var(--border-thick);
+  border-radius: 12px;
+  padding: 8px;
+  touch-action: none;
+  width: min(100%, 420px);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+.ws-cell {
+  aspect-ratio: 1;
+  background: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-size: clamp(14px, 3.5vw, 22px);
+  letter-spacing: 1px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.08s, transform 0.08s;
+  position: relative;
+  z-index: 1;
+}
+.ws-cell.trail {
+  background: var(--yellow);
+  transform: scale(1.12);
+  z-index: 2;
+}
+.ws-cell.found {
+  background: var(--cyan);
+  color: var(--ink);
+}
+.ws-cell.found-anim {
+  animation: cellPop 0.4s cubic-bezier(0.175,0.885,0.32,1.275) forwards;
+  background: var(--green);
+}
+@keyframes cellPop {
+  0%   { transform: scale(1); background: var(--cyan); }
+  40%  { transform: scale(1.25); background: var(--green); }
+  100% { transform: scale(1); background: var(--green); }
+}
+
+.word-chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.word-chip {
+  padding: 7px 16px;
+  border: 2px solid var(--ink);
+  border-radius: 30px;
+  font-weight: 900; font-size: 15px;
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s;
+}
+.word-chip.found {
+  background: var(--green); color: var(--white);
+  text-decoration: line-through;
+  transform: scale(0.93);
+  box-shadow: none;
+}
+
+/* ─── DRAG & DROP ─── */
+.drag-bank {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  padding: 16px; border: 2px dashed var(--ink);
+  border-radius: 10px; background: rgba(255,255,255,0.5);
+  justify-content: center; min-height: 60px;
+  margin-bottom: 20px;
+}
+.draggable {
+  padding: 10px 18px;
+  background: var(--purple); color: var(--white);
+  border: 2px solid var(--ink); border-radius: 8px;
+  font-weight: 900; font-size: 17px;
+  cursor: grab; box-shadow: var(--shadow-sm);
+  touch-action: none; text-transform: uppercase;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+.draggable:hover { transform: rotate(-2deg) scale(1.04); }
+
+.dnd-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+@media (max-width: 640px) { .dnd-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 420px) { .dnd-grid { grid-template-columns: 1fr; } }
+
+.dnd-row {
+  display: flex; align-items: center; gap: 8px;
+  background: #fff; border: 2px solid var(--ink);
+  border-radius: 10px; padding: 10px 12px;
+}
+.dnd-label { font-weight: 900; font-size: 16px; color: var(--red); text-transform: uppercase; min-width: 80px; }
+.dropzone {
+  flex: 1; height: 44px;
+  border: 2px dashed var(--ink); border-radius: 8px;
+  background: #f5f5f5;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 15px; color: #aaa;
+  transition: background 0.2s, border-color 0.2s;
+}
+.dropzone.over { border-color: var(--cyan); background: rgba(0,198,207,0.1); }
+.dropzone.filled {
+  background: var(--yellow);
+  border: 2px solid var(--ink);
+  color: var(--ink); font-weight: 900; text-transform: uppercase;
+  box-shadow: inset 2px 2px 0 rgba(0,0,0,0.08);
+  font-size: 15px;
+}
+
+/* ─── REORDER ─── */
+.reorder-block { margin-bottom: 20px; }
+.reorder-src {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  padding: 12px; border: 2px dashed rgba(0,0,0,0.25);
+  border-radius: 10px; min-height: 50px; margin-bottom: 10px;
+}
+.reorder-zone {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  padding: 12px; border: 2px solid var(--ink);
+  border-radius: 10px; min-height: 56px;
+  background: rgba(255,255,255,0.7);
+  transition: background 0.2s;
+}
+.reorder-zone.over { background: rgba(0,198,207,0.15); }
+.reorder-drag {
+  background: var(--orange); color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 8px; padding: 7px 14px;
+  font-weight: 900; font-size: 16px;
+  cursor: grab; touch-action: none;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ─── SCRAMBLE INPUT ─── */
+.scramble-input {
+  padding: 8px 12px; border: 2px solid var(--ink);
+  border-radius: 8px; font-family: var(--font-body);
+  font-size: 16px; font-weight: 900; text-align: center;
+  text-transform: uppercase; width: 130px;
+  background: #fff; outline: none; box-shadow: var(--shadow-sm);
+}
+.scramble-input:focus { border-color: var(--purple); box-shadow: 0 0 0 3px rgba(191,90,242,0.2); }
+
+/* ─── XO GAME ─── */
+.game-section {
+  background: var(--ink) !important;
+  color: var(--white);
+}
+.game-section .ex-card-header { background: #2a2a2a !important; border-color: #444; }
+.game-section .ex-num { background: var(--yellow); color: var(--ink); }
+.game-section .ex-title { color: var(--yellow); }
+.game-section .ex-pts { background: var(--green); }
+
+.xo-wrap { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.xo-info { text-align: center; font-weight: 700; font-size: 15px; color: #ccc; }
+
+.xo-board {
+  display: grid; grid-template-columns: repeat(3, 88px);
+  gap: 6px;
+  padding: 8px;
+  background: #333;
+  border: 3px solid #555;
+  border-radius: 14px;
+  box-shadow: 0 0 30px rgba(255,214,10,0.3);
+}
+.xo-cell {
+  width: 88px; height: 88px;
+  background: #1a1a1a;
+  border: 2px solid #444;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-size: 52px; cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+.xo-cell:hover:not(.taken) { background: #2a2a2a; transform: scale(1.05); }
+.xo-cell.taken { cursor: default; }
+.xo-cell.x-mark { color: var(--red); animation: markIn 0.3s cubic-bezier(0.175,0.885,0.32,1.275); }
+.xo-cell.o-mark { color: var(--cyan); animation: markIn 0.3s cubic-bezier(0.175,0.885,0.32,1.275); }
+.xo-cell.win-line { background: #333; box-shadow: inset 0 0 20px var(--yellow); }
+@keyframes markIn { from { transform: scale(0) rotate(-20deg); } to { transform: scale(1); } }
+
+.xo-result {
+  font-family: var(--font-display);
+  font-size: 32px; letter-spacing: 1px;
+  text-align: center;
+  min-height: 44px;
+}
+.xo-result.won  { color: var(--green); }
+.xo-result.lost { color: var(--red); }
+.xo-result.draw { color: var(--yellow); }
+
+.xo-reset { background: transparent; color: #ccc; border: 1px solid #555; border-radius: 8px; padding: 8px 20px; cursor: pointer; font-family: var(--font-body); font-weight: 700; font-size: 14px; transition: all 0.2s; }
+.xo-reset:hover { background: #333; color: var(--white); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 500px) {
+  .xo-board { grid-template-columns: repeat(3, 76px); }
+  .xo-cell { width: 76px; height: 76px; font-size: 44px; }
+}
 </style>
 </head>
 <body>
 
+<!-- ═══ LOGIN ═══ -->
 <div id="login-modal">
   <div class="login-card">
-    <h2 style="color: var(--primary); margin-top: 0; font-size: 32px;">English A1+</h2>
-    <p style="font-size: 18px;"><strong>Topic:</strong> Occupations & Past Verbs</p>
-    <input type="text" id="nie1" placeholder="Tu NIE" autocomplete="off">
-    <input type="text" id="nie2" placeholder="NIE Compañero (Opcional)" autocomplete="off" style="display:none;">
-    <button class="btn btn-alt" id="btn-add-partner" style="font-size:14px; padding:10px; margin-bottom:10px; box-shadow: 2px 2px 0 var(--black);">+ Agregar compañero</button>
-    <button class="btn" id="btn-login">Ingresar</button>
-    <div id="login-error" class="error-msg">NIE no encontrado en el sistema.</div>
+    <div class="card-top-bar"></div>
+    <div class="login-logo">ENGLISH A1+</div>
+    <div class="login-sub">🎓 Escuela COEDUCA — Sección A</div>
+    <div class="login-topic">📚 Occupations &amp; Past Verbs</div>
+
+    <div class="field-wrap">
+      <span class="field-icon">🪪</span>
+      <input class="nie-input" id="nie1" type="text" placeholder="Tu NIE" autocomplete="off">
+    </div>
+
+    <div id="partner-wrap" style="display:none;">
+      <div class="field-wrap">
+        <span class="field-icon">👥</span>
+        <input class="nie-input" id="nie2" type="text" placeholder="NIE Compañero (opcional)" autocomplete="off">
+      </div>
+    </div>
+
+    <button class="btn btn-alt btn-sm" id="btn-partner">➕ Agregar compañero</button>
+    <button class="btn btn-primary" id="btn-login">¡ Ingresar !</button>
+    <div class="err-msg" id="login-err">❌ NIE no encontrado en el sistema.</div>
   </div>
 </div>
 
-<div class="container" id="main-app">
-  <header class="app-header">
-    <h1>Occupations & Past Verbs</h1>
-    <p>Complete all exercises to get your grade!</p>
-  </header>
-
-  <div id="exercises-container"></div>
-  
-  <div class="pop-box" id="game-section" style="background: #E0FFFF;">
-    <div class="badge">BONUS GAME</div>
-    <h2 style="text-align: center;">Play with Teacher XO</h2>
-    <p style="text-align: center; font-weight: bold;">Gana para 1 pt extra. Empata para 0.5 pts.</p>
-    <div class="tictactoe" id="xo-board"></div>
-    <div id="xo-result" style="text-align:center; font-weight:bold; margin-top:20px; font-size:24px;"></div>
+<!-- ═══ APP ═══ -->
+<div id="main-app">
+  <div class="hero">
+    <div class="hero-title">OCCUPATIONS &amp; PAST VERBS</div>
+    <div class="hero-sub">Complete todos los ejercicios y descarga tu calificación 🚀</div>
+    <div class="hero-chips">
+      <span class="chip">📝 9 Ejercicios</span>
+      <span class="chip">🎮 Juego Bonus</span>
+      <span class="chip">📄 PDF Automático</span>
+    </div>
   </div>
 
-  <button class="btn btn-alt" id="btn-pdf" style="margin-bottom: 60px; font-size: 20px; padding: 18px; width: 100%;">Descargar PDF para Classroom</button>
+  <div class="container" id="exs-container"></div>
+
+  <div class="container" style="padding-top:0;">
+    <button class="btn-pdf" id="btn-pdf">📄 Descargar PDF para Classroom</button>
+  </div>
 </div>
 
-<div class="score-display">Puntos: <span id="total-score">0</span> / 52</div>
+<div class="score-bar">
+  <span>⚡ Puntos</span>
+  <span class="score-pill" id="score-live">0</span>
+  <span>/ 52</span>
+  <span style="font-size:16px; color:#ccc; margin-left:10px;">🎮 Bonus: <span id="bonus-live">0</span></span>
+</div>
 
+<!-- Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
 <script src="students.js"></script>
@@ -193,20 +560,22 @@
 <rigo-mascot></rigo-mascot>
 
 <script>
-// --- SEGURIDAD ---
+// ─── SECURITY ───
 document.addEventListener('contextmenu', e => e.preventDefault());
-['copy', 'cut', 'paste', 'selectstart'].forEach(evt => document.addEventListener(evt, e => {
-  if(!e.target.tagName.match(/INPUT|TEXTAREA|SELECT/)) e.preventDefault();
-}));
+['copy','cut','paste','selectstart'].forEach(ev =>
+  document.addEventListener(ev, e => {
+    if(!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) e.preventDefault();
+  })
+);
 
-// --- DATOS Y ESTADO ---
+// ─── DATA ───
 const POOLS = {
   A: {
     words: [
-      {w:'TEACHER', r1:0, c1:0, r2:0, c2:6}, {w:'DOCTOR', r1:2, c1:0, r2:2, c2:5},
-      {w:'PILOT', r1:4, c1:0, r2:4, c2:4}, {w:'NURSE', r1:6, c1:0, r2:6, c2:4},
-      {w:'CHEF', r1:8, c1:0, r2:8, c2:3}, {w:'POLICE', r1:0, c1:8, r2:5, c2:8},
-      {w:'FARMER', r1:0, c1:9, r2:5, c2:9}, {w:'DENTIST', r1:9, c1:0, r2:9, c2:6}
+      {w:'TEACHER',r1:0,c1:0,r2:0,c2:6},{w:'DOCTOR',r1:2,c1:0,r2:2,c2:5},
+      {w:'PILOT',r1:4,c1:0,r2:4,c2:4},{w:'NURSE',r1:6,c1:0,r2:6,c2:4},
+      {w:'CHEF',r1:8,c1:0,r2:8,c2:3},{w:'POLICE',r1:0,c1:8,r2:5,c2:8},
+      {w:'FARMER',r1:0,c1:9,r2:5,c2:9},{w:'DENTIST',r1:9,c1:0,r2:9,c2:6}
     ],
     grid: [
       ['T','E','A','C','H','E','R','X','P','F'],
@@ -220,66 +589,62 @@ const POOLS = {
       ['C','H','E','F','E','T','W','X','Y','Z'],
       ['D','E','N','T','I','S','T','I','O','U']
     ],
-    emojiMatch: [
-      {em: '👩‍🏫', ans: 'Teacher'}, {em: '👨‍🍳', ans: 'Chef'}, {em: '👮‍♂️', ans: 'Police'}, 
-      {em: '👩‍⚕️', ans: 'Doctor'}, {em: '👨‍🌾', ans: 'Farmer'}, {em: '✈️👨‍✈️', ans: 'Pilot'}
+    emojiMatch:[
+      {em:'👩‍🏫',ans:'Teacher'},{em:'👨‍🍳',ans:'Chef'},{em:'👮‍♂️',ans:'Police'},
+      {em:'👩‍⚕️',ans:'Doctor'},{em:'👨‍🌾',ans:'Farmer'},{em:'✈️',ans:'Pilot'}
     ],
-    emojiOpts: ['Chef', 'Police', 'Teacher', 'Doctor', 'Farmer', 'Pilot', 'Dentist', 'Actor'],
-    verbs: [
-      {p:'work', pst:'worked'}, {p:'teach', pst:'taught'}, {p:'cook', pst:'cooked'}, 
-      {p:'drive', pst:'drove'}, {p:'help', pst:'helped'}, {p:'fix', pst:'fixed'}, 
-      {p:'paint', pst:'painted'}, {p:'fly', pst:'flew'}, {p:'wash', pst:'washed'}
+    emojiOpts:['Chef','Police','Teacher','Doctor','Farmer','Pilot','Dentist','Actor'],
+    verbs:[
+      {p:'work',pst:'worked'},{p:'teach',pst:'taught'},{p:'cook',pst:'cooked'},
+      {p:'drive',pst:'drove'},{p:'help',pst:'helped'},{p:'fix',pst:'fixed'},
+      {p:'paint',pst:'painted'},{p:'fly',pst:'flew'},{p:'wash',pst:'washed'}
     ],
-    fill: [
-      {q: "The teacher ___ the math class yesterday.", ans: "taught", opts: ["teach", "taught", "teached"]},
-      {q: "The chef ___ a delicious pizza for us.", ans: "cooked", opts: ["cooks", "cooked", "cook"]},
-      {q: "The police officer ___ the lost child.", ans: "helped", opts: ["help", "helped", "holp"]},
-      {q: "The pilot ___ the airplane to Madrid.", ans: "flew", opts: ["fly", "flied", "flew"]},
-      {q: "The mechanic ___ my father's car.", ans: "fixed", opts: ["fixed", "fix", "fox"]}
+    fill:[
+      {q:"The teacher ___ the math class yesterday.",ans:"taught",opts:["teach","taught","teached"]},
+      {q:"The chef ___ a delicious pizza for us.",ans:"cooked",opts:["cooks","cooked","cook"]},
+      {q:"The police officer ___ the lost child.",ans:"helped",opts:["help","helped","holp"]},
+      {q:"The pilot ___ the airplane to Madrid.",ans:"flew",opts:["fly","flied","flew"]},
+      {q:"The mechanic ___ my father's car.",ans:"fixed",opts:["fixed","fix","fox"]}
     ],
-    reorder: [
-      {w: ["The", "doctor", "worked", "late", "yesterday"], ans: "The doctor worked late yesterday"},
-      {w: ["The", "pilot", "flew", "very", "high"], ans: "The pilot flew very high"},
-      {w: ["She", "taught", "English", "last", "year"], ans: "She taught English last year"},
-      {w: ["He", "drove", "the", "bus", "fast"], ans: "He drove the bus fast"}
+    reorder:[
+      {w:["The","doctor","worked","late","yesterday"],ans:"The doctor worked late yesterday"},
+      {w:["The","pilot","flew","very","high"],ans:"The pilot flew very high"},
+      {w:["She","taught","English","last","year"],ans:"She taught English last year"},
+      {w:["He","drove","the","bus","fast"],ans:"He drove the bus fast"}
     ],
-    duties: [
-      {occ: "Teacher", ans: "taught a lesson", opts: ["taught a lesson", "cooked food", "fixed cars"]},
-      {occ: "Chef", ans: "cooked food", opts: ["taught a lesson", "cooked food", "drove a bus"]},
-      {occ: "Pilot", ans: "flew an airplane", opts: ["helped people", "flew an airplane", "painted a picture"]},
-      {occ: "Mechanic", ans: "fixed cars", opts: ["fixed cars", "grew vegetables", "caught thieves"]},
-      {occ: "Farmer", ans: "grew vegetables", opts: ["cooked food", "taught a lesson", "grew vegetables"]}
+    duties:[
+      {occ:"Teacher",ans:"taught a lesson",opts:["taught a lesson","cooked food","fixed cars"]},
+      {occ:"Chef",ans:"cooked food",opts:["taught a lesson","cooked food","drove a bus"]},
+      {occ:"Pilot",ans:"flew an airplane",opts:["helped people","flew an airplane","painted a picture"]},
+      {occ:"Mechanic",ans:"fixed cars",opts:["fixed cars","grew vegetables","caught thieves"]},
+      {occ:"Farmer",ans:"grew vegetables",opts:["cooked food","taught a lesson","grew vegetables"]}
     ],
-    mcq: [
-      {q: "What did the pilot do?", ans: "flew an airplane", opts: ["fly an airplane", "flew an airplane", "flied an airplane"]},
-      {q: "What did the police officer do?", ans: "helped people", opts: ["help people", "helped people", "holp people"]},
-      {q: "What did the painter do?", ans: "painted a house", opts: ["paint a house", "painted a house", "paynted a house"]},
-      {q: "What did the driver do?", ans: "drove a bus", opts: ["drive a bus", "drived a bus", "drove a bus"]},
-      {q: "What did the doctor do?", ans: "worked in a hospital", opts: ["work in a hospital", "worked in a hospital", "workt in a hospital"]}
+    mcq:[
+      {q:"What did the pilot do?",ans:"flew an airplane",opts:["fly an airplane","flew an airplane","flied an airplane"]},
+      {q:"What did the police officer do?",ans:"helped people",opts:["help people","helped people","holp people"]},
+      {q:"What did the painter do?",ans:"painted a house",opts:["paint a house","painted a house","paynted a house"]},
+      {q:"What did the driver do?",ans:"drove a bus",opts:["drive a bus","drived a bus","drove a bus"]},
+      {q:"What did the doctor do?",ans:"worked in a hospital",opts:["work in a hospital","worked in a hospital","workt in a hospital"]}
     ],
-    // New Exercises
-    readingText: "Yesterday, John worked as a chef at a famous restaurant. He cooked a big pizza and baked a delicious cake. After work, he drove his car home and rested.",
-    tf: [
-      {q: "John was a teacher yesterday.", ans: "False"},
-      {q: "He cooked a big pizza.", ans: "True"},
-      {q: "He baked some bread.", ans: "False"},
-      {q: "He walked home.", ans: "False"},
-      {q: "He worked at a restaurant.", ans: "True"}
+    readingText:"Yesterday, John worked as a chef at a famous restaurant. He cooked a big pizza and baked a delicious cake. After work, he drove his car home and rested.",
+    tf:[
+      {q:"John was a teacher yesterday.",ans:"False"},
+      {q:"He cooked a big pizza.",ans:"True"},
+      {q:"He baked some bread.",ans:"False"},
+      {q:"He walked home.",ans:"False"},
+      {q:"He worked at a restaurant.",ans:"True"}
     ],
-    scramble: [
-      {j: "R E A H C T E", ans: "TEACHER"},
-      {j: "K E C O O D", ans: "COOKED"},
-      {j: "O T P L I", ans: "PILOT"},
-      {j: "W E L F", ans: "FLEW"},
-      {j: "R M R E F A", ans: "FARMER"}
+    scramble:[
+      {j:"R E A H C T E",ans:"TEACHER"},{j:"K E C O O D",ans:"COOKED"},
+      {j:"O T P L I",ans:"PILOT"},{j:"W E L F",ans:"FLEW"},{j:"R M R E F A",ans:"FARMER"}
     ]
   },
   B: {
     words: [
-      {w:'ACTOR', r1:0, c1:0, r2:0, c2:4}, {w:'BAKER', r1:2, c1:0, r2:2, c2:4},
-      {w:'JUDGE', r1:4, c1:0, r2:4, c2:4}, {w:'SINGER', r1:6, c1:0, r2:6, c2:5},
-      {w:'ARTIST', r1:8, c1:0, r2:8, c2:5}, {w:'FIREMAN', r1:0, c1:8, r2:6, c2:8},
-      {w:'PLUMBER', r1:0, c1:9, r2:6, c2:9}, {w:'VET', r1:9, c1:0, r2:9, c2:2}
+      {w:'ACTOR',r1:0,c1:0,r2:0,c2:4},{w:'BAKER',r1:2,c1:0,r2:2,c2:4},
+      {w:'JUDGE',r1:4,c1:0,r2:4,c2:4},{w:'SINGER',r1:6,c1:0,r2:6,c2:5},
+      {w:'ARTIST',r1:8,c1:0,r2:8,c2:5},{w:'FIREMAN',r1:0,c1:8,r2:6,c2:8},
+      {w:'PLUMBER',r1:0,c1:9,r2:6,c2:9},{w:'VET',r1:9,c1:0,r2:9,c2:2}
     ],
     grid: [
       ['A','C','T','O','R','M','L','P','F','P'],
@@ -293,674 +658,831 @@ const POOLS = {
       ['A','R','T','I','S','T','H','J','K','L'],
       ['V','E','T','M','N','B','V','C','X','Z']
     ],
-    emojiMatch: [
-      {em: '👨‍🚒', ans: 'Fireman'}, {em: '👩‍⚖️', ans: 'Judge'}, {em: '👨‍🎨', ans: 'Artist'}, 
-      {em: '🎤👩‍🎤', ans: 'Singer'}, {em: '🥖👨‍🍳', ans: 'Baker'}, {em: '🐶👨‍⚕️', ans: 'Vet'}
+    emojiMatch:[
+      {em:'👨‍🚒',ans:'Fireman'},{em:'👩‍⚖️',ans:'Judge'},{em:'👨‍🎨',ans:'Artist'},
+      {em:'🎤',ans:'Singer'},{em:'🥖',ans:'Baker'},{em:'🐶',ans:'Vet'}
     ],
-    emojiOpts: ['Artist', 'Fireman', 'Judge', 'Singer', 'Baker', 'Vet', 'Actor', 'Plumber'],
-    verbs: [
-      {p:'sing', pst:'sang'}, {p:'bake', pst:'baked'}, {p:'act', pst:'acted'}, 
-      {p:'write', pst:'wrote'}, {p:'build', pst:'built'}, {p:'repair', pst:'repaired'}, 
-      {p:'design', pst:'designed'}, {p:'clean', pst:'cleaned'}, {p:'play', pst:'played'}
+    emojiOpts:['Artist','Fireman','Judge','Singer','Baker','Vet','Actor','Plumber'],
+    verbs:[
+      {p:'sing',pst:'sang'},{p:'bake',pst:'baked'},{p:'act',pst:'acted'},
+      {p:'write',pst:'wrote'},{p:'build',pst:'built'},{p:'repair',pst:'repaired'},
+      {p:'design',pst:'designed'},{p:'clean',pst:'cleaned'},{p:'play',pst:'played'}
     ],
-    fill: [
-      {q: "The singer ___ a beautiful song.", ans: "sang", opts: ["sing", "sang", "singed"]},
-      {q: "The baker ___ fresh bread this morning.", ans: "baked", opts: ["bake", "bakes", "baked"]},
-      {q: "The author ___ a new book last year.", ans: "wrote", opts: ["write", "wrote", "writed"]},
-      {q: "The builder ___ a big house.", ans: "built", opts: ["build", "builded", "built"]},
-      {q: "The janitor ___ the entire school.", ans: "cleaned", opts: ["clean", "cleaned", "clent"]}
+    fill:[
+      {q:"The singer ___ a beautiful song.",ans:"sang",opts:["sing","sang","singed"]},
+      {q:"The baker ___ fresh bread this morning.",ans:"baked",opts:["bake","bakes","baked"]},
+      {q:"The author ___ a new book last year.",ans:"wrote",opts:["write","wrote","writed"]},
+      {q:"The builder ___ a big house.",ans:"built",opts:["build","builded","built"]},
+      {q:"The janitor ___ the entire school.",ans:"cleaned",opts:["clean","cleaned","clent"]}
     ],
-    reorder: [
-      {w: ["The", "actor", "played", "his", "role"], ans: "The actor played his role"},
-      {w: ["The", "judge", "listened", "very", "carefully"], ans: "The judge listened very carefully"},
-      {w: ["She", "sang", "loudly", "on", "stage"], ans: "She sang loudly on stage"},
-      {w: ["He", "baked", "a", "huge", "cake"], ans: "He baked a huge cake"}
+    reorder:[
+      {w:["The","actor","played","his","role"],ans:"The actor played his role"},
+      {w:["The","judge","listened","very","carefully"],ans:"The judge listened very carefully"},
+      {w:["She","sang","loudly","on","stage"],ans:"She sang loudly on stage"},
+      {w:["He","baked","a","huge","cake"],ans:"He baked a huge cake"}
     ],
-    duties: [
-      {occ: "Singer", ans: "sang a song", opts: ["sang a song", "baked bread", "painted art"]},
-      {occ: "Baker", ans: "baked bread", opts: ["sang a song", "baked bread", "put out fires"]},
-      {occ: "Fireman", ans: "put out fires", opts: ["judged a case", "put out fires", "fixed pipes"]},
-      {occ: "Judge", ans: "judged a case", opts: ["judged a case", "painted art", "sang a song"]},
-      {occ: "Plumber", ans: "fixed pipes", opts: ["baked bread", "fixed pipes", "put out fires"]}
+    duties:[
+      {occ:"Singer",ans:"sang a song",opts:["sang a song","baked bread","painted art"]},
+      {occ:"Baker",ans:"baked bread",opts:["sang a song","baked bread","put out fires"]},
+      {occ:"Fireman",ans:"put out fires",opts:["judged a case","put out fires","fixed pipes"]},
+      {occ:"Judge",ans:"judged a case",opts:["judged a case","painted art","sang a song"]},
+      {occ:"Plumber",ans:"fixed pipes",opts:["baked bread","fixed pipes","put out fires"]}
     ],
-    mcq: [
-      {q: "What did the artist do?", ans: "painted a picture", opts: ["paint a picture", "painted a picture", "paynted a picture"]},
-      {q: "What did the singer do?", ans: "sang a song", opts: ["sing a song", "sang a song", "singed a song"]},
-      {q: "What did the actor do?", ans: "acted in a movie", opts: ["act in a movie", "acted in a movie", "acting in a movie"]},
-      {q: "What did the vet do?", ans: "helped animals", opts: ["help animals", "helped animals", "holp animals"]},
-      {q: "What did the builder do?", ans: "built a wall", opts: ["build a wall", "builded a wall", "built a wall"]}
+    mcq:[
+      {q:"What did the artist do?",ans:"painted a picture",opts:["paint a picture","painted a picture","paynted a picture"]},
+      {q:"What did the singer do?",ans:"sang a song",opts:["sing a song","sang a song","singed a song"]},
+      {q:"What did the actor do?",ans:"acted in a movie",opts:["act in a movie","acted in a movie","acting in a movie"]},
+      {q:"What did the vet do?",ans:"helped animals",opts:["help animals","helped animals","holp animals"]},
+      {q:"What did the builder do?",ans:"built a wall",opts:["build a wall","builded a wall","built a wall"]}
     ],
-    // New Exercises
-    readingText: "Last week, Mary acted in a theater play. She sang a beautiful song and danced for the audience. Later that day, she painted a picture of a tree.",
-    tf: [
-      {q: "Mary acted in a movie.", ans: "False"},
-      {q: "She sang a song.", ans: "True"},
-      {q: "She painted a picture.", ans: "True"},
-      {q: "She baked a big cake.", ans: "False"},
-      {q: "She danced for the audience.", ans: "True"}
+    readingText:"Last week, Mary acted in a theater play. She sang a beautiful song and danced for the audience. Later that day, she painted a picture of a tree.",
+    tf:[
+      {q:"Mary acted in a movie.",ans:"False"},
+      {q:"She sang a song.",ans:"True"},
+      {q:"She painted a picture.",ans:"True"},
+      {q:"She baked a big cake.",ans:"False"},
+      {q:"She danced for the audience.",ans:"True"}
     ],
-    scramble: [
-      {j: "G R E N S I", ans: "SINGER"},
-      {j: "N P A I E T D", ans: "PAINTED"},
-      {j: "R O T C A", ans: "ACTOR"},
-      {j: "T L B U I", ans: "BUILT"},
-      {j: "E J U D G", ans: "JUDGE"}
+    scramble:[
+      {j:"G R E N S I",ans:"SINGER"},{j:"N P A I E T D",ans:"PAINTED"},
+      {j:"R O T C A",ans:"ACTOR"},{j:"T L B U I",ans:"BUILT"},{j:"E J U D G",ans:"JUDGE"}
     ]
   }
 };
 
-let state = {
+const CARD_COLORS  = ['card-red','card-yellow','card-cyan','card-green','card-purple','card-orange','card-pink','card-lime','card-blue'];
+
+// ─── STATE ───
+let ST = {
   s1: null, s2: null, poolKey: 'A', pool: null,
-  scores: { ex1:0, ex2:0, ex3:0, ex4:0, ex5:0, ex6:0, ex7:0, ex8:0, ex9:0 },
+  scores: {ex1:0,ex2:0,ex3:0,ex4:0,ex5:0,ex6:0,ex7:0,ex8:0,ex9:0},
   gamePoints: 0, gameStatus: 'pending',
-  answers: { ex1:[], ex2:{}, ex3:{}, ex4:{}, ex5:{}, ex6:{}, ex7:{}, ex8:{}, ex9:{} },
+  answers: {ex1:[],ex2:{},ex3:{},ex4:{},ex5:{},ex6:{},ex7:{},ex8:{},ex9:{}},
   xo: ['','','','','','','','','']
 };
+const SAVE_KEY = 'occ_ws_v5';
 
-const bgColors = ['#FFD1DC', '#FFFACD', '#E6E6FA', '#F0FFF0', '#FFE4E1', '#E8F7FA', '#FFDEAD', '#D4F0F0', '#FDE2E4'];
-const TOTAL_MAX_POINTS = 52; // 8+6+9+5+4+5+5+5+5
-
-function saveState() { 
-  localStorage.setItem('occ_ws_state_v4', JSON.stringify(state)); 
-  updateTotal(); 
-}
-
-function loadState() {
-  const s = localStorage.getItem('occ_ws_state_v4');
-  if(s) { 
-    state = JSON.parse(s); 
-    // Asegurar estructura para los nuevos ejercicios si viene de una versión anterior
-    if(!state.answers.ex8) {
-      state.answers.ex8 = {}; state.answers.ex9 = {};
-      state.scores.ex8 = 0; state.scores.ex9 = 0;
-    }
-    return true; 
-  }
+function save() { localStorage.setItem(SAVE_KEY, JSON.stringify(ST)); recalc(); updateUI(); }
+function loadSaved() {
+  try {
+    const s = localStorage.getItem(SAVE_KEY);
+    if(s) { ST = JSON.parse(s); return !!ST.s1; }
+  } catch(e) {}
   return false;
 }
 
-// Recalcula los puntos basados en las respuestas actuales para evitar exploits
-function calculateScores() {
-  let sc = { ex1:0, ex2:0, ex3:0, ex4:0, ex5:0, ex6:0, ex7:0, ex8:0, ex9:0 };
-  
-  sc.ex1 = state.answers.ex1.length; // Máx 8
-  
-  Object.keys(state.answers.ex2).forEach(k => {
-    if(state.answers.ex2[k] === state.pool.emojiMatch[k].ans) sc.ex2++;
-  });
-  Object.keys(state.answers.ex3).forEach(k => {
-    // Para Drag&Drop, se guardó el verbo en presente en ex3[k]. Hay que compararlo con el .p del verbo original en ese índice.
-    if(state.answers.ex3[k] === state.pool.verbs[k].p) sc.ex3++;
-  });
-  Object.keys(state.answers.ex4).forEach(k => {
-    if(state.answers.ex4[k] === state.pool.fill[k].ans) sc.ex4++;
-  });
-  Object.keys(state.answers.ex5).forEach(k => {
-    if(state.answers.ex5[k] && state.answers.ex5[k].join(' ') === state.pool.reorder[k].ans) sc.ex5++;
-  });
-  Object.keys(state.answers.ex6).forEach(k => {
-    if(state.answers.ex6[k] === state.pool.duties[k].ans) sc.ex6++;
-  });
-  Object.keys(state.answers.ex7).forEach(k => {
-    if(state.answers.ex7[k] === state.pool.mcq[k].ans) sc.ex7++;
-  });
-  Object.keys(state.answers.ex8).forEach(k => {
-    if(state.answers.ex8[k] === state.pool.tf[k].ans) sc.ex8++;
-  });
-  Object.keys(state.answers.ex9).forEach(k => {
-    if(state.answers.ex9[k].toUpperCase() === state.pool.scramble[k].ans) sc.ex9++;
-  });
-
-  state.scores = sc;
+function recalc() {
+  const p = ST.pool || POOLS[ST.poolKey];
+  const sc = {ex1:0,ex2:0,ex3:0,ex4:0,ex5:0,ex6:0,ex7:0,ex8:0,ex9:0};
+  sc.ex1 = ST.answers.ex1.length;
+  p.emojiMatch.forEach((_,i) => { if(ST.answers.ex2[i]===p.emojiMatch[i].ans) sc.ex2++; });
+  p.verbs.forEach((_,i)     => { if(ST.answers.ex3[i]===p.verbs[i].p) sc.ex3++; });
+  p.fill.forEach((_,i)      => { if(ST.answers.ex4[i]===p.fill[i].ans) sc.ex4++; });
+  p.reorder.forEach((_,i)   => { if(ST.answers.ex5[i]?.join(' ')===p.reorder[i].ans) sc.ex5++; });
+  p.duties.forEach((_,i)    => { if(ST.answers.ex6[i]===p.duties[i].ans) sc.ex6++; });
+  p.mcq.forEach((_,i)       => { if(ST.answers.ex7[i]===p.mcq[i].ans) sc.ex7++; });
+  p.tf.forEach((_,i)        => { if(ST.answers.ex8[i]===p.tf[i].ans) sc.ex8++; });
+  p.scramble.forEach((_,i)  => { if((ST.answers.ex9[i]||'').toUpperCase()===p.scramble[i].ans) sc.ex9++; });
+  ST.scores = sc;
 }
 
-// --- INITIALIZATION ---
+function updateUI() {
+  const tot = Object.values(ST.scores).reduce((a,b)=>a+b,0);
+  document.getElementById('score-live').textContent = tot;
+  document.getElementById('bonus-live').textContent = ST.gamePoints;
+}
+
+function onAnswer(ex, correct) {
+  if(correct) window.rigo?.cheer();
+  else        window.rigo?.comfort();
+  save();
+}
+
+// ─── LOGIN ───
 window.addEventListener('DOMContentLoaded', () => {
-  if (loadState() && state.s1) { showApp(); } 
-  else { setTimeout(() => window.rigo.welcome(), 500); }
+  if(loadSaved() && ST.s1) { beginApp(); }
+  else { setTimeout(() => window.rigo?.welcome(), 400); }
 
-  document.getElementById('btn-add-partner').addEventListener('click', (e) => {
-    e.target.style.display = 'none';
-    document.getElementById('nie2').style.display = 'block';
+  document.getElementById('btn-partner').addEventListener('click', () => {
+    document.getElementById('partner-wrap').style.display='block';
+    document.getElementById('btn-partner').style.display='none';
   });
-
-  document.getElementById('btn-login').addEventListener('click', () => {
-    const n1 = document.getElementById('nie1').value.trim();
-    const n2 = document.getElementById('nie2').value.trim();
-    const err = document.getElementById('login-error');
-    if(!STUDENTS[n1]) { err.style.display = 'block'; return; }
-    
-    state.s1 = Object.assign({nie: n1}, STUDENTS[n1]);
-    if(n2 && STUDENTS[n2]) state.s2 = Object.assign({nie: n2}, STUDENTS[n2]);
-    
-    state.poolKey = Math.random() > 0.5 ? 'A' : 'B';
-    saveState();
-    
-    window.rigo.setGrade(state.s1.grade);
-    window.rigo.loginSuccess(state.s1.name);
-    setTimeout(showApp, 2000);
-  });
-  
+  document.getElementById('btn-login').addEventListener('click', doLogin);
+  document.getElementById('nie1').addEventListener('keyup', e => { if(e.key==='Enter') doLogin(); });
   document.getElementById('btn-pdf').addEventListener('click', generatePDF);
 });
 
-function showApp() {
-  document.getElementById('login-modal').style.display = 'none';
-  document.getElementById('main-app').style.display = 'block';
-  state.pool = POOLS[state.poolKey];
-  window.rigo.setGrade(state.s1.grade);
-  renderExercises();
-  renderXO();
-  updateTotal();
-  if(state.gameStatus === 'pending') window.rigo.inviteGame();
+function doLogin() {
+  const n1 = document.getElementById('nie1').value.trim();
+  const n2 = document.getElementById('nie2').value.trim();
+  const err = document.getElementById('login-err');
+  err.style.display='none';
+  if(!STUDENTS[n1]) { err.style.display='block'; return; }
+  ST.s1 = {nie:n1,...STUDENTS[n1]};
+  if(n2 && STUDENTS[n2]) ST.s2 = {nie:n2,...STUDENTS[n2]};
+  else ST.s2 = null;
+  ST.poolKey = Math.random()>0.5?'A':'B';
+  ST.pool = POOLS[ST.poolKey];
+  save();
+  window.rigo?.setGrade(ST.s1.grade);
+  window.rigo?.loginSuccess(ST.s1.name);
+  setTimeout(beginApp, 1800);
 }
 
-function evaluate(ex, val, correct) {
-  calculateScores(); // Recalculamos globalmente para prevenir bugs
-  if(correct) {
-    window.rigo.cheer();
-  } else if (val !== "") { // Solo consolar si no fue limpiar una respuesta
-    window.rigo.comfort();
-  }
-  saveState();
+function beginApp() {
+  ST.pool = POOLS[ST.poolKey];
+  document.getElementById('login-modal').style.display='none';
+  document.getElementById('main-app').style.display='block';
+  window.rigo?.setGrade(ST.s1.grade);
+  renderAll();
+  recalc();
+  updateUI();
+  if(ST.gameStatus==='pending') setTimeout(()=>window.rigo?.inviteGame(), 1000);
 }
 
-// --- RENDER EXERCISES ---
-function renderExercises() {
-  const container = document.getElementById('exercises-container');
-  container.innerHTML = '';
-  
-  // Ex 1: Sopa Letras (8 pts)
-  let html = `<div class="pop-box" style="background: ${bgColors[0]};"><div class="badge">EX 1 (8 pts)</div><h2>1. Word Search</h2><p>Find 8 occupations. Swipe to select!</p>
-    <div class="grid-wrapper"><div class="grid-container" id="ws-grid">`;
-  for(let r=0; r<10; r++) {
-    for(let c=0; c<10; c++) {
-      html += `<div class="grid-cell" data-r="${r}" data-c="${c}">${state.pool.grid[r][c]}</div>`;
-    }
-  }
-  html += `</div></div><div class="word-list" id="ws-words">`;
-  state.pool.words.forEach(w => {
-    const found = state.answers.ex1.includes(w.w) ? 'found' : '';
-    html += `<div class="word-item ${found}" id="word-${w.w}">${w.w}</div>`;
-  });
-  html += `</div></div>`;
-
-  // Ex 2: Match Emoji (6 pts)
-  html += `<div class="pop-box" style="background: ${bgColors[1]};"><div class="badge">EX 2 (6 pts)</div><h2>2. Emoji Match</h2><ul class="ex-list">`;
-  state.pool.emojiMatch.forEach((em, i) => {
-    let sel = `<select data-ex="ex2" data-idx="${i}"><option value="">Select...</option>`;
-    state.pool.emojiOpts.forEach(o => {
-      let selected = state.answers.ex2[i] === o ? 'selected' : '';
-      sel += `<option value="${o}" ${selected}>${o}</option>`;
-    });
-    sel += `</select>`;
-    html += `<li><span style="font-size:32px;">${em.em}</span> &rarr; ${sel}</li>`;
-  });
-  html += `</ul></div>`;
-
-  // Ex 3: Drag & Drop (9 pts)
-  html += `<div class="pop-box" style="background: ${bgColors[2]};"><div class="badge">EX 3 (9 pts)</div><h2>3. Present to Past Match</h2><p>Drag the present verb and drop it into its correct past form box.</p>
-    <div class="drag-container" id="dnd-src">`;
-  let shuffledVerbs = [...state.pool.verbs].sort(()=>Math.random()-0.5);
-  shuffledVerbs.forEach((v, i) => {
-    if(Object.values(state.answers.ex3).includes(v.p)) return;
-    html += `<div class="draggable" data-val="${v.p}">${v.p}</div>`;
-  });
-  html += `</div><div class="dropzone-container">`;
-  state.pool.verbs.forEach((v, i) => {
-    let ans = state.answers.ex3[i] || '';
-    let cls = ans ? 'filled' : '';
-    html += `<div class="drop-row"><span style="width:100px; font-weight:bold; font-size:18px; text-transform:uppercase; color:var(--primary);">${v.pst}</span> 
-             <span style="font-size:24px;">&larr;</span> <div class="dropzone ${cls}" data-idx="${i}" data-ans="${v.p}"><span>${ans || 'Drop here'}</span></div></div>`;
-  });
-  html += `</div></div>`;
-
-  // Ex 4: Fill in blanks (5 pts)
-  html += `<div class="pop-box" style="background: ${bgColors[3]};"><div class="badge">EX 4 (5 pts)</div><h2>4. Fill in the blanks</h2><ul class="ex-list">`;
-  state.pool.fill.forEach((f, i) => {
-    let sel = `<select data-ex="ex4" data-idx="${i}"><option value="">...</option>`;
-    f.opts.forEach(o => sel += `<option value="${o}" ${state.answers.ex4[i]===o?'selected':''}>${o}</option>`);
-    sel += `</select>`;
-    html += `<li>${f.q.replace('___', sel)}</li>`;
-  });
-  html += `</ul></div>`;
-
-  // Ex 5: Reorder (4 pts)
-  html += `<div class="pop-box" style="background: ${bgColors[4]};"><div class="badge">EX 5 (4 pts)</div><h2>5. Reorder the sentences</h2>`;
-  state.pool.reorder.forEach((r, i) => {
-    html += `<div style="margin-bottom:25px; border:2px solid var(--black); padding:15px; border-radius:8px; background: rgba(255,255,255,0.5);">`;
-    let words = [...r.w].sort(()=>Math.random()-0.5);
-    html += `<div class="drag-container reorder-src" data-idx="${i}" style="border:none; background:transparent; padding:0; margin-bottom:10px;">`;
-    words.forEach(w => {
-      if(state.answers.ex5[i] && state.answers.ex5[i].includes(w)) return;
-      html += `<div class="draggable reorder-drag" data-val="${w}">${w}</div>`;
-    });
-    html += `</div><div class="reorder-zone" data-idx="${i}">`;
-    if(state.answers.ex5[i]) {
-      state.answers.ex5[i].forEach(w => html += `<div class="draggable reorder-drag" data-val="${w}">${w}</div>`);
-    }
-    html += `</div></div>`;
-  });
-  html += `</div>`;
-
-  // Ex 6: Match Duty (5 pts)
-  html += `<div class="pop-box" style="background: ${bgColors[5]};"><div class="badge">EX 6 (5 pts)</div><h2>6. What did they do?</h2><ul class="ex-list">`;
-  state.pool.duties.forEach((d, i) => {
-    let sel = `<select data-ex="ex6" data-idx="${i}"><option value="">...</option>`;
-    d.opts.forEach(o => sel += `<option value="${o}" ${state.answers.ex6[i]===o?'selected':''}>${o}</option>`);
-    sel += `</select>`;
-    html += `<li>The <strong>${d.occ}</strong> ${sel}</li>`;
-  });
-  html += `</ul></div>`;
-
-  // Ex 7: MCQ (5 pts)
-  html += `<div class="pop-box" style="background: ${bgColors[6]};"><div class="badge">EX 7 (5 pts)</div><h2>7. Multiple Choice</h2><ul class="ex-list">`;
-  state.pool.mcq.forEach((m, i) => {
-    let sel = `<select data-ex="ex7" data-idx="${i}"><option value="">...</option>`;
-    m.opts.forEach(o => sel += `<option value="${o}" ${state.answers.ex7[i]===o?'selected':''}>${o}</option>`);
-    sel += `</select>`;
-    html += `<li>${m.q} &rarr; ${sel}</li>`;
-  });
-  html += `</ul></div>`;
-
-  // Ex 8: True / False Reading (5 pts)
-  html += `<div class="pop-box" style="background: ${bgColors[7]};"><div class="badge">EX 8 (5 pts)</div><h2>8. True or False</h2>
-           <div class="reading-box">"${state.pool.readingText}"</div><ul class="ex-list">`;
-  state.pool.tf.forEach((tf, i) => {
-    let sel = `<select data-ex="ex8" data-idx="${i}"><option value="">...</option>
-               <option value="True" ${state.answers.ex8[i]==='True'?'selected':''}>True</option>
-               <option value="False" ${state.answers.ex8[i]==='False'?'selected':''}>False</option></select>`;
-    html += `<li>${tf.q} &rarr; ${sel}</li>`;
-  });
-  html += `</ul></div>`;
-
-  // Ex 9: Word Scramble (5 pts)
-  html += `<div class="pop-box" style="background: ${bgColors[8]};"><div class="badge">EX 9 (5 pts)</div><h2>9. Word Scramble</h2>
-           <p>Unscramble the letters to find the correct occupation or past verb.</p><ul class="ex-list">`;
-  state.pool.scramble.forEach((sc, i) => {
-    let val = state.answers.ex9[i] || '';
-    html += `<li><span style="font-size:20px; font-weight:bold; letter-spacing:2px; min-width:140px; display:inline-block;">${sc.j}</span> &rarr; 
-             <input type="text" class="scramble-input" data-ex="ex9" data-idx="${i}" value="${val}" autocomplete="off"></li>`;
-  });
-  html += `</ul></div>`;
-
-  container.innerHTML = html;
-  
-  setupWordSearch();
-  setupDragAndDrop();
-  setupSelects();
-  setupInputs();
+// ─── RENDER ALL ───
+function renderAll() {
+  const c = document.getElementById('exs-container');
+  c.innerHTML = '';
+  renderWS(c);
+  renderEmoji(c);
+  renderDnD(c);
+  renderFill(c);
+  renderReorder(c);
+  renderDuties(c);
+  renderMCQ(c);
+  renderTF(c);
+  renderScramble(c);
+  renderXOCard(c);
 }
 
-function setupSelects() {
-  document.querySelectorAll('select').forEach(s => {
-    s.addEventListener('change', (e) => {
-      const ex = e.target.getAttribute('data-ex');
-      const idx = parseInt(e.target.getAttribute('data-idx'));
-      const val = e.target.value;
-      state.answers[ex][idx] = val;
-      
-      let correct = false;
-      if(ex === 'ex2') { correct = val === state.pool.emojiMatch[idx].ans; }
-      if(ex === 'ex4') { correct = val === state.pool.fill[idx].ans; }
-      if(ex === 'ex6') { correct = val === state.pool.duties[idx].ans; }
-      if(ex === 'ex7') { correct = val === state.pool.mcq[idx].ans; }
-      if(ex === 'ex8') { correct = val === state.pool.tf[idx].ans; }
-      
-      evaluate(ex, val, correct);
-    });
-  });
+function card(color, idx, emoji, num, title, pts, body) {
+  const d = document.createElement('div');
+  d.className = `ex-card ${color}`;
+  d.style.setProperty('--i', idx);
+  d.innerHTML = `
+    <div class="ex-card-header">
+      <div class="ex-emoji">${emoji}</div>
+      <div class="ex-title-wrap">
+        <div class="ex-num">EJERCICIO ${num}</div>
+        <div class="ex-title">${title}</div>
+      </div>
+      <div class="ex-pts">${pts} pts</div>
+    </div>
+    <div class="ex-card-body">${body}</div>`;
+  return d;
 }
 
-function setupInputs() {
-  document.querySelectorAll('.scramble-input').forEach(inp => {
-    inp.addEventListener('change', (e) => {
-      const ex = e.target.getAttribute('data-ex');
-      const idx = parseInt(e.target.getAttribute('data-idx'));
-      const val = e.target.value.trim().toUpperCase();
-      state.answers[ex][idx] = val;
-      e.target.value = val;
-      
-      let correct = val === state.pool.scramble[idx].ans;
-      evaluate(ex, val, correct);
-    });
+// ─── EX 1: WORD SEARCH ───
+function renderWS(c) {
+  const p = ST.pool;
+  let inner = `<div class="ws-wrap"><div class="ws-grid" id="ws-grid">`;
+  p.grid.forEach((row,r) => row.forEach((ch,col) => {
+    inner += `<div class="ws-cell" data-r="${r}" data-c="${col}">${ch}</div>`;
+  }));
+  inner += `</div><div class="word-chips" id="ws-chips">`;
+  p.words.forEach(w => {
+    const found = ST.answers.ex1.includes(w.w);
+    inner += `<div class="word-chip${found?' found':''}" id="chip-${w.w}">${w.w}</div>`;
   });
+  inner += `</div></div>`;
+
+  const el = card(CARD_COLORS[0],0,'🔍','1','Word Search','8', inner);
+  c.appendChild(el);
+  setupWS();
 }
 
-// --- WORD SEARCH LOGIC ---
-function setupWordSearch() {
-  const grid = document.getElementById('ws-grid');
+function setupWS() {
+  const gridEl = document.getElementById('ws-grid');
+  if(!gridEl) return;
+  const p = ST.pool;
   let startCell = null;
-  
-  state.answers.ex1.forEach(wStr => {
-    const wObj = state.pool.words.find(w => w.w === wStr);
-    if(wObj) markCells(wObj.r1, wObj.c1, wObj.r2, wObj.c2);
+
+  // Restore found cells
+  ST.answers.ex1.forEach(wStr => {
+    const wObj = p.words.find(w=>w.w===wStr);
+    if(wObj) markFoundCells(wObj.r1,wObj.c1,wObj.r2,wObj.c2,false);
   });
 
-  function getCell(e) {
-    if(e.touches) {
-      const el = document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY);
-      return el?.classList.contains('grid-cell') ? el : null;
+  function cellAt(el) {
+    if(!el?.classList.contains('ws-cell')) return null;
+    return {r:+el.dataset.r, c:+el.dataset.c};
+  }
+  function cellFromPoint(x,y) {
+    const el = document.elementFromPoint(x,y);
+    return el?.classList.contains('ws-cell') ? el : null;
+  }
+
+  let trailCells = [];
+  function clearTrail() { trailCells.forEach(el=>el.classList.remove('trail')); trailCells=[]; }
+
+  function drawTrail(r1,c1,r2,c2) {
+    clearTrail();
+    let dr=Math.sign(r2-r1), dc=Math.sign(c2-c1);
+    let dist=Math.max(Math.abs(r2-r1),Math.abs(c2-c1));
+    for(let i=0;i<=dist;i++) {
+      const el=document.querySelector(`.ws-cell[data-r="${r1+dr*i}"][data-c="${c1+dc*i}"]`);
+      if(el && !el.classList.contains('found')) { el.classList.add('trail'); trailCells.push(el); }
     }
-    return e.target.classList.contains('grid-cell') ? e.target : null;
   }
 
   function onStart(e) {
-    if(e.target.tagName === 'SELECT' || e.target.tagName === 'INPUT' || e.target.classList.contains('draggable')) return;
-    const c = getCell(e);
-    if(!c) return;
     e.preventDefault();
-    startCell = {r: parseInt(c.dataset.r), c: parseInt(c.dataset.c)};
-    c.classList.add('selected');
+    const pt = e.touches?e.touches[0]:e;
+    const c = cellFromPoint(pt.clientX,pt.clientY);
+    if(!c) return;
+    startCell = {r:+c.dataset.r,col:+c.dataset.c};
+    c.classList.add('trail'); trailCells=[c];
+  }
+
+  function onMove(e) {
+    e.preventDefault();
+    if(!startCell) return;
+    const pt = e.touches?e.touches[0]:e;
+    const c = cellFromPoint(pt.clientX,pt.clientY);
+    if(!c) return;
+    drawTrail(startCell.r,startCell.col,+c.dataset.r,+c.dataset.c);
   }
 
   function onEnd(e) {
-    document.querySelectorAll('.grid-cell.selected').forEach(el => el.classList.remove('selected'));
     if(!startCell) return;
-    const c = getCell(e);
-    if(!c) { startCell = null; return; }
-    
-    let r1 = startCell.r, c1 = startCell.c;
-    let r2 = parseInt(c.dataset.r), c2 = parseInt(c.dataset.c);
-    startCell = null;
-
-    let foundW = state.pool.words.find(w => 
-      (w.r1===r1 && w.c1===c1 && w.r2===r2 && w.c2===c2) ||
-      (w.r1===r2 && w.c1===c2 && w.r2===r1 && w.c2===c1)
+    const pt=(e.changedTouches?e.changedTouches[0]:e)||{clientX:0,clientY:0};
+    const endEl=cellFromPoint(pt.clientX,pt.clientY);
+    const r1=startCell.r,c1=startCell.col;
+    startCell=null;
+    clearTrail();
+    if(!endEl) return;
+    const r2=+endEl.dataset.r,c2=+endEl.dataset.c;
+    const found=p.words.find(w=>
+      (w.r1===r1&&w.c1===c1&&w.r2===r2&&w.c2===c2)||
+      (w.r1===r2&&w.c1===c2&&w.r2===r1&&w.c2===c1)
     );
-
-    if(foundW && !state.answers.ex1.includes(foundW.w)) {
-      state.answers.ex1.push(foundW.w);
-      markCells(foundW.r1, foundW.c1, foundW.r2, foundW.c2);
-      document.getElementById(`word-${foundW.w}`).classList.add('found');
-      evaluate('ex1', foundW.w, true);
+    if(found && !ST.answers.ex1.includes(found.w)) {
+      ST.answers.ex1.push(found.w);
+      markFoundCells(found.r1,found.c1,found.r2,found.c2,true);
+      const chip=document.getElementById(`chip-${found.w}`);
+      if(chip) chip.classList.add('found');
+      onAnswer('ex1',true);
     }
   }
 
-  grid.addEventListener('mousedown', onStart);
-  grid.addEventListener('touchstart', onStart, {passive:false});
-  window.addEventListener('mouseup', onEnd);
-  window.addEventListener('touchend', onEnd);
+  gridEl.addEventListener('mousedown',onStart);
+  gridEl.addEventListener('touchstart',onStart,{passive:false});
+  window.addEventListener('mousemove',onMove);
+  window.addEventListener('touchmove',onMove,{passive:false});
+  window.addEventListener('mouseup',onEnd);
+  window.addEventListener('touchend',onEnd);
+}
 
-  function markCells(r1, c1, r2, c2) {
-    let dr = Math.sign(r2 - r1), dc = Math.sign(c2 - c1);
-    let dist = Math.max(Math.abs(r2-r1), Math.abs(c2-c1));
-    for(let i=0; i<=dist; i++) {
-      let r = r1 + dr*i, c = c1 + dc*i;
-      let cell = document.querySelector(`.grid-cell[data-r="${r}"][data-c="${c}"]`);
-      if(cell) cell.classList.add('found');
+function markFoundCells(r1,c1,r2,c2,animate) {
+  const dr=Math.sign(r2-r1),dc=Math.sign(c2-c1);
+  const dist=Math.max(Math.abs(r2-r1),Math.abs(c2-c1));
+  for(let i=0;i<=dist;i++){
+    const el=document.querySelector(`.ws-cell[data-r="${r1+dr*i}"][data-c="${c1+dc*i}"]`);
+    if(el){
+      if(animate){
+        el.classList.add('found-anim');
+        setTimeout(()=>{el.classList.remove('found-anim');el.classList.add('found');},450);
+      } else {
+        el.classList.add('found');
+      }
     }
   }
 }
 
-// --- DRAG & DROP LOGIC ---
-function setupDragAndDrop() {
-  let draggedEl = null;
-  let offsetX = 0, offsetY = 0;
-  let clone = null;
-  let isReorder = false;
+// ─── EX 2: EMOJI MATCH ───
+function renderEmoji(c) {
+  const p=ST.pool;
+  let body=`<ul class="ex-list">`;
+  p.emojiMatch.forEach((em,i)=>{
+    let sel=`<select data-ex="ex2" data-idx="${i}"><option value="">Selecciona...</option>`;
+    p.emojiOpts.forEach(o=>sel+=`<option value="${o}"${ST.answers.ex2[i]===o?' selected':''}>${o}</option>`);
+    sel+=`</select>`;
+    body+=`<li><span style="font-size:36px;">${em.em}</span><span style="flex:1;">→</span>${sel}</li>`;
+  });
+  body+=`</ul>`;
+  const el=card(CARD_COLORS[1],1,'🎭','2','Emoji Match','6',body);
+  c.appendChild(el);
+  el.querySelectorAll('select').forEach(attachSelect);
+}
+
+// ─── EX 3: DRAG & DROP ───
+function renderDnD(c) {
+  const p=ST.pool;
+  const placed=new Set(Object.values(ST.answers.ex3));
+
+  let bank=`<div class="drag-bank" id="dnd-bank">`;
+  // Shuffle verbs for display
+  [...p.verbs].sort(()=>Math.random()-0.5).forEach(v=>{
+    if(!placed.has(v.p)) bank+=`<div class="draggable" data-val="${v.p}">${v.p}</div>`;
+  });
+  bank+=`</div>`;
+
+  let grid=`<div class="dnd-grid">`;
+  p.verbs.forEach((v,i)=>{
+    const ans=ST.answers.ex3[i]||'';
+    const filled=ans?'filled':'';
+    grid+=`<div class="dnd-row">
+      <div class="dnd-label">${v.pst}</div>
+      <div class="dropzone ${filled}" data-idx="${i}" data-ans="${v.p}">
+        <span>${ans||'aquí'}</span>
+      </div>
+    </div>`;
+  });
+  grid+=`</div>`;
+
+  const el=card(CARD_COLORS[2],2,'🔀','3','Present → Past','9',bank+grid);
+  c.appendChild(el);
+  setupDnD('dnd');
+}
+
+// ─── EX 4: FILL ───
+function renderFill(c) {
+  const p=ST.pool;
+  let body=`<ul class="ex-list">`;
+  p.fill.forEach((f,i)=>{
+    let sel=`<select data-ex="ex4" data-idx="${i}"><option value="">...</option>`;
+    f.opts.forEach(o=>sel+=`<option value="${o}"${ST.answers.ex4[i]===o?' selected':''}>${o}</option>`);
+    sel+=`</select>`;
+    body+=`<li>${f.q.replace('___',sel)}</li>`;
+  });
+  body+=`</ul>`;
+  const el=card(CARD_COLORS[3],3,'✏️','4','Fill in the Blanks','5',body);
+  c.appendChild(el);
+  el.querySelectorAll('select').forEach(attachSelect);
+}
+
+// ─── EX 5: REORDER ───
+function renderReorder(c) {
+  const p=ST.pool;
+  let body='';
+  p.reorder.forEach((r,i)=>{
+    const placed=new Set(ST.answers.ex5[i]||[]);
+    const avail=[...r.w].sort(()=>Math.random()-0.5).filter(w=>!placed.has(w));
+    let srcHtml=avail.map(w=>`<div class="draggable reorder-drag" data-val="${w}">${w}</div>`).join('');
+    let zoneHtml=(ST.answers.ex5[i]||[]).map(w=>`<div class="draggable reorder-drag" data-val="${w}">${w}</div>`).join('');
+    body+=`<div class="reorder-block">
+      <div class="reorder-src" id="rsrc-${i}" data-idx="${i}">${srcHtml}</div>
+      <div class="reorder-zone" id="rzone-${i}" data-idx="${i}">${zoneHtml}</div>
+    </div>`;
+  });
+  const el=card(CARD_COLORS[4],4,'🔤','5','Reorder Sentences','4',body);
+  c.appendChild(el);
+  setupDnD('reorder');
+}
+
+// ─── EX 6: DUTIES ───
+function renderDuties(c) {
+  const p=ST.pool;
+  let body=`<ul class="ex-list">`;
+  p.duties.forEach((d,i)=>{
+    let sel=`<select data-ex="ex6" data-idx="${i}"><option value="">...</option>`;
+    d.opts.forEach(o=>sel+=`<option value="${o}"${ST.answers.ex6[i]===o?' selected':''}>${o}</option>`);
+    sel+=`</select>`;
+    body+=`<li>💼 The <strong>${d.occ}</strong> ${sel}</li>`;
+  });
+  body+=`</ul>`;
+  const el=card(CARD_COLORS[5],5,'💼','6','What did they do?','5',body);
+  c.appendChild(el);
+  el.querySelectorAll('select').forEach(attachSelect);
+}
+
+// ─── EX 7: MCQ ───
+function renderMCQ(c) {
+  const p=ST.pool;
+  let body=`<ul class="ex-list">`;
+  p.mcq.forEach((m,i)=>{
+    let sel=`<select data-ex="ex7" data-idx="${i}"><option value="">...</option>`;
+    m.opts.forEach(o=>sel+=`<option value="${o}"${ST.answers.ex7[i]===o?' selected':''}>${o}</option>`);
+    sel+=`</select>`;
+    body+=`<li>❓ ${m.q} → ${sel}</li>`;
+  });
+  body+=`</ul>`;
+  const el=card(CARD_COLORS[6],6,'🧩','7','Multiple Choice','5',body);
+  c.appendChild(el);
+  el.querySelectorAll('select').forEach(attachSelect);
+}
+
+// ─── EX 8: T/F ───
+function renderTF(c) {
+  const p=ST.pool;
+  let body=`<div class="reading-box">📖 "${p.readingText}"</div><ul class="ex-list">`;
+  p.tf.forEach((tf,i)=>{
+    let sel=`<select data-ex="ex8" data-idx="${i}"><option value="">...</option>
+      <option value="True"${ST.answers.ex8[i]==='True'?' selected':''}>✅ True</option>
+      <option value="False"${ST.answers.ex8[i]==='False'?' selected':''}>❌ False</option></select>`;
+    body+=`<li>${tf.q} → ${sel}</li>`;
+  });
+  body+=`</ul>`;
+  const el=card(CARD_COLORS[7],7,'📖','8','True or False','5',body);
+  c.appendChild(el);
+  el.querySelectorAll('select').forEach(attachSelect);
+}
+
+// ─── EX 9: SCRAMBLE ───
+function renderScramble(c) {
+  const p=ST.pool;
+  let body=`<ul class="ex-list">`;
+  p.scramble.forEach((sc,i)=>{
+    const val=ST.answers.ex9[i]||'';
+    body+=`<li>🔡 <span style="font-size:18px;font-weight:900;letter-spacing:3px;min-width:160px">${sc.j}</span> → 
+      <input type="text" class="scramble-input" data-ex="ex9" data-idx="${i}" value="${val}" autocomplete="off" spellcheck="false"></li>`;
+  });
+  body+=`</ul>`;
+  const el=card(CARD_COLORS[8],8,'🔡','9','Word Scramble','5',body);
+  c.appendChild(el);
+  el.querySelectorAll('.scramble-input').forEach(inp=>{
+    inp.addEventListener('change', e=>{
+      const idx=+e.target.dataset.idx;
+      const val=e.target.value.trim().toUpperCase();
+      e.target.value=val;
+      ST.answers.ex9[idx]=val;
+      onAnswer('ex9', val===ST.pool.scramble[idx].ans);
+    });
+  });
+}
+
+// ─── SELECT HELPER ───
+function attachSelect(s) {
+  s.addEventListener('change', e=>{
+    const ex=e.target.dataset.ex;
+    const idx=+e.target.dataset.idx;
+    const val=e.target.value;
+    ST.answers[ex][idx]=val;
+    let correct=false;
+    if(ex==='ex2') correct=val===ST.pool.emojiMatch[idx].ans;
+    if(ex==='ex4') correct=val===ST.pool.fill[idx].ans;
+    if(ex==='ex6') correct=val===ST.pool.duties[idx].ans;
+    if(ex==='ex7') correct=val===ST.pool.mcq[idx].ans;
+    if(ex==='ex8') correct=val===ST.pool.tf[idx].ans;
+    onAnswer(ex,correct);
+  });
+}
+
+// ─── DRAG & DROP ENGINE ───
+function setupDnD(mode) {
+  let dragEl=null,clone=null,offsetX=0,offsetY=0;
+  const isReorder=mode==='reorder';
 
   function onStart(e) {
-    if(!e.target.classList.contains('draggable')) return;
+    const t=e.target.closest('.draggable');
+    if(!t) return;
+    if(isReorder && !t.classList.contains('reorder-drag')) return;
+    if(!isReorder && t.classList.contains('reorder-drag')) return;
     e.preventDefault();
-    draggedEl = e.target;
-    isReorder = draggedEl.classList.contains('reorder-drag');
-    const rect = draggedEl.getBoundingClientRect();
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-    offsetX = clientX - rect.left;
-    offsetY = clientY - rect.top;
-
-    clone = draggedEl.cloneNode(true);
-    clone.style.position = 'fixed';
-    clone.style.left = rect.left + 'px';
-    clone.style.top = rect.top + 'px';
-    clone.style.pointerEvents = 'none';
-    clone.style.opacity = '0.9';
-    clone.style.transform = 'scale(1.1) rotate(-2deg)';
-    clone.style.zIndex = '99999';
+    dragEl=t;
+    const pt=e.touches?e.touches[0]:e;
+    const r=t.getBoundingClientRect();
+    offsetX=pt.clientX-r.left; offsetY=pt.clientY-r.top;
+    clone=t.cloneNode(true);
+    clone.style.cssText=`position:fixed;z-index:99999;pointer-events:none;opacity:0.9;
+      transform:rotate(-3deg) scale(1.1);transition:none;
+      left:${r.left}px;top:${r.top}px;width:${r.width}px;`;
     document.body.appendChild(clone);
-    draggedEl.style.opacity = '0';
+    t.style.opacity='0.3';
   }
 
   function onMove(e) {
     if(!clone) return;
     e.preventDefault();
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-    clone.style.left = (clientX - offsetX) + 'px';
-    clone.style.top = (clientY - offsetY) + 'px';
-
-    if(clientY < 90) window.scrollBy(0, -15);
-    else if(window.innerHeight - clientY < 90) window.scrollBy(0, 15);
+    const pt=e.touches?e.touches[0]:e;
+    clone.style.left=(pt.clientX-offsetX)+'px';
+    clone.style.top=(pt.clientY-offsetY)+'px';
+    // Auto-scroll
+    if(pt.clientY<90) window.scrollBy(0,-14);
+    else if(window.innerHeight-pt.clientY<90) window.scrollBy(0,14);
   }
 
   function onEnd(e) {
-    if(!clone) return;
-    const clientX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
-    const clientY = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
-    clone.remove();
-    clone = null;
-    draggedEl.style.opacity = '1';
+    if(!clone||!dragEl) return;
+    const pt=e.changedTouches?e.changedTouches[0]:e;
+    clone.remove(); clone=null;
+    dragEl.style.opacity='1';
 
-    draggedEl.style.display = 'none';
-    let dropTarget = document.elementFromPoint(clientX, clientY);
-    draggedEl.style.display = '';
+    dragEl.style.display='none';
+    let target=document.elementFromPoint(pt.clientX,pt.clientY);
+    dragEl.style.display='';
 
     if(isReorder) {
-      let zone = dropTarget?.closest('.reorder-zone');
-      let src = dropTarget?.closest('.reorder-src');
-      let idx = draggedEl.closest('[data-idx]').getAttribute('data-idx');
-      
-      if(zone && zone.getAttribute('data-idx') === idx) {
-        zone.appendChild(draggedEl);
-      } else if(src && src.getAttribute('data-idx') === idx) {
-        src.appendChild(draggedEl);
+      const srcIdx=dragEl.closest('[data-idx]')?.dataset.idx;
+      if(!srcIdx) { dragEl=null; return; }
+      const zone=target?.closest('.reorder-zone');
+      const src=target?.closest('.reorder-src');
+      if(zone && zone.dataset.idx===srcIdx) {
+        zone.appendChild(dragEl);
       } else {
-        document.querySelector(`.reorder-src[data-idx="${idx}"]`).appendChild(draggedEl);
+        document.getElementById(`rsrc-${srcIdx}`)?.appendChild(dragEl);
       }
-      
-      let currentWords = Array.from(document.querySelector(`.reorder-zone[data-idx="${idx}"]`).children).map(c => c.getAttribute('data-val'));
-      state.answers.ex5[idx] = currentWords;
-      let ansStr = currentWords.join(' ');
-      evaluate('ex5', ansStr, ansStr === state.pool.reorder[idx].ans);
-
+      const words=Array.from(document.getElementById(`rzone-${srcIdx}`)?.children||[]).map(c=>c.dataset.val);
+      ST.answers.ex5[srcIdx]=words;
+      onAnswer('ex5', words.join(' ')===ST.pool.reorder[+srcIdx].ans);
     } else {
-      let zone = dropTarget?.closest('.dropzone');
-      if(zone && !zone.classList.contains('filled')) {
-        let val = draggedEl.getAttribute('data-val');
-        let idx = zone.getAttribute('data-idx');
-        let correctAns = zone.getAttribute('data-ans');
-        
-        zone.innerHTML = `<span>${val}</span>`;
-        zone.classList.add('filled');
-        draggedEl.remove();
-        
-        state.answers.ex3[idx] = val;
-        evaluate('ex3', val, val === correctAns); 
+      const dropEl=target?.closest('.dropzone');
+      if(dropEl && !dropEl.classList.contains('filled')) {
+        const val=dragEl.dataset.val;
+        const idx=+dropEl.dataset.idx;
+        const correct=dropEl.dataset.ans;
+        dropEl.innerHTML=`<span>${val}</span>`;
+        dropEl.classList.add('filled');
+        dragEl.remove();
+        ST.answers.ex3[idx]=val;
+        onAnswer('ex3', val===correct);
       }
     }
-    draggedEl = null;
+    dragEl=null;
   }
 
-  document.addEventListener('mousedown', onStart);
-  document.addEventListener('mousemove', onMove);
-  document.addEventListener('mouseup', onEnd);
-  document.addEventListener('touchstart', onStart, {passive:false});
-  document.addEventListener('touchmove', onMove, {passive:false});
-  document.addEventListener('touchend', onEnd);
+  document.addEventListener('mousedown',onStart,{capture:false});
+  document.addEventListener('mousemove',onMove);
+  document.addEventListener('mouseup',onEnd);
+  document.addEventListener('touchstart',onStart,{passive:false,capture:false});
+  document.addEventListener('touchmove',onMove,{passive:false});
+  document.addEventListener('touchend',onEnd);
 }
 
-// --- XO GAME LOGIC ---
-function renderXO() {
-  const board = document.getElementById('xo-board');
-  board.innerHTML = '';
-  state.xo.forEach((c, i) => {
-    let cell = document.createElement('div');
-    cell.className = 'xo-cell';
-    cell.textContent = c;
-    if(c==='X') cell.style.color = 'var(--primary)';
-    if(c==='O') cell.style.color = 'var(--secondary)';
-    cell.addEventListener('click', () => playXO(i));
+// ─── XO GAME (AI minimax-lite) ───
+function renderXOCard(c) {
+  const body=`
+    <div class="xo-wrap">
+      <div class="xo-info">🤖 Juegas como X. ¡El CPU no es fácil de vencer!</div>
+      <div class="xo-board" id="xo-board"></div>
+      <div class="xo-result" id="xo-result"></div>
+      <button class="xo-reset" id="xo-reset">↺ Reiniciar partida</button>
+    </div>`;
+  const el=card('game-section',9,'🎮','BONUS','Tic Tac Toe XO','extra',body);
+  el.classList.add('game-section');
+  c.appendChild(el);
+  renderXOBoard();
+  document.getElementById('xo-reset').addEventListener('click',()=>{
+    if(ST.gameStatus!=='pending'){
+      ST.xo=['','','','','','','','',''];
+      ST.gameStatus='pending';
+      ST.gamePoints=0;
+      save();
+      renderXOBoard();
+      document.getElementById('xo-result').textContent='';
+      document.getElementById('xo-result').className='xo-result';
+    }
+  });
+}
+
+function renderXOBoard() {
+  const board=document.getElementById('xo-board');
+  if(!board) return;
+  board.innerHTML='';
+  const wins=getWinLines();
+  const winLine=wins.find(l=>ST.xo[l[0]]&&ST.xo[l[0]]===ST.xo[l[1]]&&ST.xo[l[0]]===ST.xo[l[2]])||null;
+  ST.xo.forEach((v,i)=>{
+    const cell=document.createElement('div');
+    cell.className='xo-cell'+(v?' taken':'')+(v==='X'?' x-mark':v==='O'?' o-mark':'');
+    if(winLine&&winLine.includes(i)) cell.classList.add('win-line');
+    cell.textContent=v;
+    cell.addEventListener('click',()=>xoPlay(i));
     board.appendChild(cell);
   });
   updateXOResult();
 }
 
-function playXO(idx) {
-  if(state.gameStatus !== 'pending' || state.xo[idx] !== '') return;
-  state.xo[idx] = 'X';
-  if(!checkXO()) setTimeout(botXO, 500);
-  renderXO();
-  saveState();
+function getWinLines() {
+  return[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
 }
 
-function botXO() {
-  let empty = state.xo.map((c,i)=>c===''?i:null).filter(i=>i!==null);
-  if(empty.length > 0) {
-    let pick = empty[Math.floor(Math.random()*empty.length)];
-    state.xo[pick] = 'O';
-    checkXO();
-    renderXO();
-    saveState();
+function checkWinner(board) {
+  for(const l of getWinLines()) {
+    if(board[l[0]]&&board[l[0]]===board[l[1]]&&board[l[0]]===board[l[2]]) return board[l[0]];
   }
+  return board.includes('')?null:'draw';
 }
 
-function checkXO() {
-  const lines = [ [0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6] ];
-  for(let l of lines) {
-    if(state.xo[l[0]] && state.xo[l[0]] === state.xo[l[1]] && state.xo[l[0]] === state.xo[l[2]]) {
-      if(state.xo[l[0]] === 'X') {
-        state.gameStatus = 'won'; state.gamePoints = 1;
-        window.rigo.setEmotion('excited'); window.rigo.say("Felicidades, eres bueno en este juego, ten 1 punto extra", 5000);
-      } else {
-        state.gameStatus = 'lost'; state.gamePoints = 0;
-        window.rigo.setEmotion('sad'); window.rigo.say("Oops, más suerte para la próxima.", 5000);
-      }
-      return true;
+// Minimax with depth limit so it's smart but not impossible
+function minimax(board, depth, isMax, alpha, beta) {
+  const w=checkWinner(board);
+  if(w==='O') return 10-depth;
+  if(w==='X') return depth-10;
+  if(w==='draw'||depth>6) return 0;
+  let best=isMax?-100:100;
+  for(let i=0;i<9;i++){
+    if(!board[i]){
+      board[i]=isMax?'O':'X';
+      const v=minimax(board,depth+1,!isMax,alpha,beta);
+      board[i]='';
+      if(isMax){ best=Math.max(best,v); alpha=Math.max(alpha,v); }
+      else      { best=Math.min(best,v); beta=Math.min(beta,v); }
+      if(beta<=alpha) break;
     }
   }
-  if(!state.xo.includes('')) {
-    state.gameStatus = 'draw'; state.gamePoints = 0.5;
-    window.rigo.setEmotion('neutral'); window.rigo.say("Estamos a mano, ten 0.5 extra para tu nota", 5000);
-    return true;
+  return best;
+}
+
+function bestMove(board) {
+  let best=-100, move=-1;
+  for(let i=0;i<9;i++){
+    if(!board[i]){
+      board[i]='O';
+      const v=minimax(board,0,false,-100,100);
+      board[i]='';
+      if(v>best){ best=v; move=i; }
+    }
   }
-  return false;
+  return move;
+}
+
+function xoPlay(idx) {
+  if(ST.gameStatus!=='pending'||ST.xo[idx]) return;
+  ST.xo[idx]='X';
+  const w=checkWinner(ST.xo);
+  if(w){ finishXO(w); renderXOBoard(); save(); return; }
+  renderXOBoard();
+  // CPU move after short delay
+  setTimeout(()=>{
+    const m=bestMove([...ST.xo]);
+    if(m!==-1) ST.xo[m]='O';
+    const w2=checkWinner(ST.xo);
+    if(w2) finishXO(w2);
+    renderXOBoard();
+    save();
+  }, 450);
+}
+
+function finishXO(w) {
+  if(w==='X'){
+    ST.gameStatus='won'; ST.gamePoints=1;
+    window.rigo?.setEmotion('excited');
+    window.rigo?.say('Felicidades, eres bueno en este juego, ten 1 punto extra',5000);
+  } else if(w==='O'){
+    ST.gameStatus='lost'; ST.gamePoints=0;
+    window.rigo?.setEmotion('sad');
+    window.rigo?.say('Oops, más suerte para la próxima.',5000);
+  } else {
+    ST.gameStatus='draw'; ST.gamePoints=0.5;
+    window.rigo?.setEmotion('neutral');
+    window.rigo?.say('Estamos a mano, ten 0.5 extra para tu nota',5000);
+  }
+  updateUI();
 }
 
 function updateXOResult() {
-  const res = document.getElementById('xo-result');
-  if(state.gameStatus === 'won') res.innerHTML = "¡Ganaste! +1 pt";
-  else if(state.gameStatus === 'lost') res.innerHTML = "Perdiste. 0 pts";
-  else if(state.gameStatus === 'draw') res.innerHTML = "Empate. +0.5 pts";
+  const el=document.getElementById('xo-result');
+  if(!el) return;
+  if(ST.gameStatus==='won')  { el.className='xo-result won';  el.textContent='🏆 ¡Ganaste! +1 pt'; }
+  else if(ST.gameStatus==='lost') { el.className='xo-result lost'; el.textContent='😢 Perdiste. 0 pts'; }
+  else if(ST.gameStatus==='draw') { el.className='xo-result draw'; el.textContent='🤝 Empate. +0.5 pts'; }
 }
 
-function updateTotal() {
-  calculateScores(); // Asegurarnos de tener los scores reales antes de sumar
-  const sum = Object.values(state.scores).reduce((a,b)=>a+b, 0);
-  document.getElementById('total-score').textContent = sum;
+// ─── SANITIZER ───
+function san(s) {
+  if(!s) return '';
+  s=s.replace(/<[^>]*>/g,'');
+  const m={'→':'->','←':'<-','↑':'^','↓':'v','"':'"','"':'"','\u2018':"'",'\u2019':"'",'–':'-','—':'-','…':'...'};
+  s=s.replace(/[→←↑↓""''–—…]/g,c=>m[c]||c);
+  return s.replace(/[^\x00-\xFF]/g,'');
 }
 
-// --- PDF GENERATION PREMIUM ---
-function sanitize(str) {
-  if(!str) return '';
-  str = str.replace(/<[^>]*>?/gm, '');
-  const map = { '→':'->', '←':'<-', '↑':'^', '↓':'v', '“':'"', '”':'"', '‘':"'", '’':"'", '–':'-', '—':'-', '…':'...' };
-  str = str.replace(/[→←↑↓“”‘’–—…]/g, m => map[m]);
-  return str.replace(/[^\x00-\xFF]/g, ''); 
-}
-
+// ─── PDF ───
 function generatePDF() {
-  calculateScores(); // Recalcular antes del PDF final
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
-  
-  // Encabezado Superior Elegante
-  doc.setFillColor(157, 78, 221); // Var(--purple)
-  doc.rect(0, 0, 210, 35, 'F');
-  doc.setTextColor(255, 255, 255);
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(22);
-  doc.text("English A1+ Worksheet Results", 105, 18, {align: "center"});
-  doc.setFontSize(14);
-  doc.setFont("helvetica", "normal");
-  doc.text("Occupations & Past Verbs", 105, 26, {align: "center"});
+  recalc();
+  const {jsPDF}=window.jspdf;
+  const doc=new jsPDF({orientation:'p',unit:'mm',format:'a4'});
+  const W=210,pgM=14;
 
-  // Datos del Estudiante
-  let y = 45;
-  doc.setTextColor(0, 0, 0);
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(11);
-  
-  doc.text(`Profesor:`, 20, y); doc.setFont("helvetica", "normal"); doc.text(`Jose Eliseo Martinez`, 45, y);
-  doc.setFont("helvetica", "bold"); doc.text(`Escuela:`, 110, y); doc.setFont("helvetica", "normal"); doc.text(`COEDUCA (Sección A)`, 130, y); y += 8;
-  
-  doc.setFont("helvetica", "bold"); doc.text(`Nivel:`, 20, y); doc.setFont("helvetica", "normal"); doc.text(`Inglés A1+`, 35, y);
-  doc.setFont("helvetica", "bold"); doc.text(`Grado:`, 110, y); doc.setFont("helvetica", "normal"); doc.text(`${sanitize(state.s1.grade)}`, 125, y); y += 8;
-  
-  doc.setFont("helvetica", "bold"); doc.text(`Estudiante:`, 20, y); doc.setFont("helvetica", "normal"); doc.text(`${sanitize(state.s1.name)} (NIE: ${state.s1.nie})`, 45, y); y += 8;
-  
-  if(state.s2) {
-    doc.setFont("helvetica", "bold"); doc.text(`Compañero:`, 20, y); doc.setFont("helvetica", "normal"); doc.text(`${sanitize(state.s2.name)} (NIE: ${state.s2.nie})`, 45, y); y += 8;
-  }
-  
-  doc.setFont("helvetica", "bold"); doc.text(`Fecha:`, 20, y); doc.setFont("helvetica", "normal"); doc.text(`${new Date().toLocaleDateString()}`, 35, y); y += 12;
+  // ── Header band
+  doc.setFillColor(26,26,26);
+  doc.rect(0,0,W,38,'F');
 
-  // Calculo de Notas
-  const correct = Object.values(state.scores).reduce((a,b)=>a+b, 0);
-  const note = ((correct / TOTAL_MAX_POINTS) * 10) + state.gamePoints;
+  // Halftone dots on header (decorative)
+  doc.setFillColor(255,214,10);
+  for(let x=8;x<W;x+=12) for(let y=4;y<38;y+=12)
+    doc.circle(x,y,1,'F');
 
-  // Cuadro de Calificación Destacado
-  doc.setDrawColor(255, 51, 102); // Var(--primary)
-  doc.setLineWidth(1);
-  doc.setFillColor(255, 240, 245);
-  doc.roundedRect(140, 42, 55, 30, 3, 3, 'FD');
-  doc.setTextColor(255, 51, 102);
-  doc.setFont("helvetica", "bold");
+  doc.setFillColor(26,26,26);
+  doc.rect(0,0,W,38,'F'); // solid again over dots for legibility — leave dots as side accents
+  doc.setFillColor(255,214,10);
+  for(let x=0;x<W;x+=12) { doc.circle(x,2,0.8,'F'); doc.circle(x,36,0.8,'F'); }
+
+  doc.setTextColor(255,214,10);
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(26);
+  doc.text('ENGLISH A1+',W/2,17,{align:'center'});
+  doc.setFontSize(13);
+  doc.setTextColor(0,198,207);
+  doc.text('Occupations & Past Verbs',W/2,26,{align:'center'});
   doc.setFontSize(10);
-  doc.text(`Aciertos: ${correct} / ${TOTAL_MAX_POINTS}`, 145, 50);
-  doc.text(`Bonus Game: +${state.gamePoints}`, 145, 58);
-  doc.setFontSize(14);
-  doc.text(`Nota: ${note.toFixed(2)}`, 145, 68);
-  
-  y += 5;
-  doc.setTextColor(0, 0, 0);
-  doc.setFontSize(14);
-  doc.text("Detalle de Puntuación:", 20, y); 
-  y += 6;
+  doc.setTextColor(200,200,200);
+  doc.text('COEDUCA - Seccion A',W/2,33,{align:'center'});
 
-  // Tabla usando autoTable
+  // ── Accent bar
+  doc.setFillColor(255,45,85);
+  doc.rect(0,38,W,3,'F');
+
+  // ── Student info box
+  let y=48;
+  doc.setDrawColor(200,200,200);
+  doc.setLineWidth(0.3);
+  doc.setFillColor(248,248,252);
+  doc.roundedRect(pgM,y,W-pgM*2,ST.s2?46:38,3,3,'FD');
+
+  const infoX=pgM+6, valX=pgM+48;
+  doc.setFont('helvetica','bold'); doc.setFontSize(9); doc.setTextColor(120,120,120);
+  doc.text('PROFESOR',infoX,y+8); doc.text('ESCUELA',infoX,y+15);
+  doc.text('ESTUDIANTE',infoX,y+22); doc.text('NIE',infoX,y+29);
+  if(ST.s2){ doc.text('COMPANERO',infoX,y+36); doc.text('NIE',infoX,y+43); }
+  doc.text('FECHA',W/2+6,y+8);
+  doc.text('GRADO',W/2+6,y+15);
+  doc.text('NIVEL',W/2+6,y+22);
+  doc.text('VERSION',W/2+6,y+29);
+
+  doc.setFont('helvetica','normal'); doc.setFontSize(10); doc.setTextColor(26,26,26);
+  doc.text('Jose Eliseo Martinez',valX,y+8);
+  doc.text('COEDUCA (Seccion A)',valX,y+15);
+  doc.text(san(ST.s1.name),valX,y+22);
+  doc.text(String(ST.s1.nie),valX,y+29);
+  if(ST.s2){ doc.text(san(ST.s2.name),valX,y+36); doc.text(String(ST.s2.nie),valX,y+43); }
+  doc.text(new Date().toLocaleDateString('es-SV'),W/2+42,y+8);
+  doc.text(san(ST.s1.grade),W/2+42,y+15);
+  doc.text('Ingles A1+',W/2+42,y+22);
+  doc.text('Pool '+ST.poolKey,W/2+42,y+29);
+
+  y+=ST.s2?54:46;
+
+  // ── Score box
+  const correct=Object.values(ST.scores).reduce((a,b)=>a+b,0);
+  const note=Math.min(10,((correct/52)*10)+ST.gamePoints);
+  const noteColor=note>=7?[39,210,83]:note>=5?[255,159,10]:[255,45,85];
+
+  doc.setFillColor(26,26,26);
+  doc.roundedRect(pgM,y,W-pgM*2,22,3,3,'F');
+
+  doc.setFillColor(...noteColor);
+  doc.roundedRect(W-pgM-38,y+3,36,16,3,3,'F');
+  doc.setFont('helvetica','bold'); doc.setFontSize(18); doc.setTextColor(26,26,26);
+  doc.text(note.toFixed(2),W-pgM-20,y+14,{align:'center'});
+
+  doc.setFont('helvetica','bold'); doc.setFontSize(10); doc.setTextColor(255,255,255);
+  doc.text(`Aciertos: ${correct} / 52   |   Bonus Juego: +${ST.gamePoints}   |   Nota Final:`,pgM+6,y+13);
+
+  y+=28;
+
+  // ── Scores table
   doc.autoTable({
     startY: y,
-    head: [['Ejercicio', 'Descripción', 'Puntaje']],
+    head: [['#','Ejercicio','Descripcion','Correcto','Total','%']],
     body: [
-      ['Exercise 1', 'Word Search', `${state.scores.ex1} / 8`],
-      ['Exercise 2', 'Emoji Match', `${state.scores.ex2} / 6`],
-      ['Exercise 3', 'Present to Past (Drag & Drop)', `${state.scores.ex3} / 9`],
-      ['Exercise 4', 'Fill in the blanks', `${state.scores.ex4} / 5`],
-      ['Exercise 5', 'Reorder Sentences', `${state.scores.ex5} / 4`],
-      ['Exercise 6', 'What did they do?', `${state.scores.ex6} / 5`],
-      ['Exercise 7', 'Multiple Choice', `${state.scores.ex7} / 5`],
-      ['Exercise 8', 'Reading (True or False)', `${state.scores.ex8} / 5`],
-      ['Exercise 9', 'Word Scramble', `${state.scores.ex9} / 5`]
+      ['1','Word Search','Encontrar ocupaciones en la sopa',ST.scores.ex1,'8',pct(ST.scores.ex1,8)],
+      ['2','Emoji Match','Relacionar emojis con ocupaciones',ST.scores.ex2,'6',pct(ST.scores.ex2,6)],
+      ['3','Present > Past','Arrastrar verbos a su pasado',ST.scores.ex3,'9',pct(ST.scores.ex3,9)],
+      ['4','Fill Blanks','Completar oraciones con verbos',ST.scores.ex4,'5',pct(ST.scores.ex4,5)],
+      ['5','Reorder','Ordenar oraciones en pasado',ST.scores.ex5,'4',pct(ST.scores.ex5,4)],
+      ['6','What did they do?','Relacionar oficio con accion',ST.scores.ex6,'5',pct(ST.scores.ex6,5)],
+      ['7','Multiple Choice','Seleccion multiple de verbos',ST.scores.ex7,'5',pct(ST.scores.ex7,5)],
+      ['8','True or False','Lectura y comprension',ST.scores.ex8,'5',pct(ST.scores.ex8,5)],
+      ['9','Word Scramble','Descifrar palabras desordenadas',ST.scores.ex9,'5',pct(ST.scores.ex9,5)],
     ],
+    foot: [['','','TOTAL',correct,'52',pct(correct,52)]],
     theme: 'grid',
-    headStyles: { fillColor: [78, 205, 196], textColor: [255, 255, 255], fontStyle: 'bold' },
-    alternateRowStyles: { fillColor: [244, 244, 240] },
-    margin: { left: 20, right: 20 }
+    headStyles: { fillColor:[26,26,26], textColor:[255,214,10], fontStyle:'bold', fontSize:9 },
+    bodyStyles: { fontSize:9, cellPadding:3 },
+    footStyles: { fillColor:noteColor, textColor:[26,26,26], fontStyle:'bold', fontSize:10 },
+    alternateRowStyles: { fillColor:[248,248,252] },
+    columnStyles: {
+      0:{cellWidth:8,halign:'center'},
+      3:{halign:'center'},4:{halign:'center'},5:{halign:'center'}
+    },
+    margin:{left:pgM,right:pgM},
+    didDrawCell: (data)=>{
+      if(data.section==='body'&&data.column.index===3){
+        const val=+data.cell.raw;
+        const max=+data.row.cells[4].raw;
+        if(val===max) {
+          doc.setFillColor(39,210,83);
+          doc.roundedRect(data.cell.x+1,data.cell.y+1,data.cell.width-2,data.cell.height-2,1,1,'F');
+          doc.setFont('helvetica','bold'); doc.setFontSize(9); doc.setTextColor(255,255,255);
+          doc.text(String(val),data.cell.x+data.cell.width/2,data.cell.y+data.cell.height/2+1.5,{align:'center'});
+        } else if(val===0) {
+          doc.setFillColor(255,45,85,0.15);
+        }
+      }
+    }
   });
 
-  // Descarga del PDF
-  const blob = doc.output('blob');
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `Worksheet_${state.s1.nie}.pdf`;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  setTimeout(() => URL.revokeObjectURL(url), 100);
+  // ── Footer
+  const finalY=doc.lastAutoTable.finalY+8;
+  doc.setFillColor(26,26,26);
+  doc.rect(0,finalY,W,14,'F');
+  doc.setFont('helvetica','italic'); doc.setFontSize(9); doc.setTextColor(150,150,150);
+  doc.text('Generado automaticamente por el Sistema COEDUCA | Profesor: Jose Eliseo Martinez',W/2,finalY+6,{align:'center'});
+  doc.setTextColor(0,198,207);
+  doc.text('english.coeduca.edu.sv',W/2,finalY+11,{align:'center'});
+
+  // ── Download fix for iOS
+  const blob=doc.output('blob');
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url; a.download=`Worksheet_${ST.s1.nie}_${ST.poolKey}.pdf`;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url),200);
 }
+
+function pct(v,m){ return Math.round(v/m*100)+'%'; }
 </script>
 </body>
 </html>
