@@ -26,7 +26,7 @@
     overflow-x: hidden;
   }
   
-  h1, h2, h3 { text-transform: uppercase; letter-spacing: 1px; text-shadow: 2px 2px 0 #fff, 3px 3px 0 var(--black); }
+  h1, h2, h3 { text-transform: uppercase; letter-spacing: 1px; text-shadow: 2px 2px 0 #fff, 3px 3px 0 var(--black); margin-top: 0; }
   
   .app-header {
     background: var(--purple); color: #fff; padding: 20px; text-align: center;
@@ -35,16 +35,16 @@
   .app-header h1 { margin: 0; font-size: 32px; text-shadow: 3px 3px 0 var(--black); }
   .app-header p { margin: 5px 0 0 0; font-weight: bold; font-size: 18px; }
 
-  .container { max-width: 900px; margin: 0 auto; padding: 20px; padding-bottom: 120px; display: none; }
+  .container { max-width: 1000px; margin: 0 auto; padding: 20px; padding-bottom: 120px; display: none; }
   
   .pop-box {
-    background: #fff; border: var(--border); box-shadow: var(--shadow);
-    padding: 25px; margin-bottom: 40px; border-radius: 12px; position: relative;
+    border: var(--border); box-shadow: var(--shadow);
+    padding: 30px 25px 25px 25px; margin-bottom: 45px; border-radius: 12px; position: relative;
   }
   .pop-box::before {
     content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-    background-image: radial-gradient(#ccc 15%, transparent 16%);
-    background-size: 8px 8px; opacity: 0.2; pointer-events: none; border-radius: 10px;
+    background-image: radial-gradient(#1a1a1a 10%, transparent 11%);
+    background-size: 10px 10px; opacity: 0.05; pointer-events: none; border-radius: 10px;
   }
   
   .badge {
@@ -62,7 +62,7 @@
   .login-card { background: #fff; border: var(--border); box-shadow: 8px 8px 0 var(--black); padding: 30px; width: 90%; max-width: 400px; text-align: center; border-radius: 15px; }
   input[type="text"] {
     width: 100%; padding: 12px; margin: 10px 0; border: var(--border);
-    font-size: 16px; font-weight: bold; border-radius: 8px; outline: none;
+    font-size: 16px; font-weight: bold; border-radius: 8px; outline: none; text-align: center;
   }
   
   .btn {
@@ -72,56 +72,60 @@
     width: 100%; margin-top: 10px; display: inline-block; text-align: center;
   }
   .btn:active { transform: translate(3px, 3px); box-shadow: none; }
-  .btn-alt { background: var(--secondary); }
+  .btn-alt { background: var(--secondary); color: var(--black); }
   
   /* Ex 1: Sopa Letras */
   .grid-wrapper { display: flex; flex-direction: column; align-items: center; }
   .grid-container {
-    display: grid; grid-template-columns: repeat(10, 35px); gap: 2px;
-    border: var(--border); padding: 8px; background: var(--black); border-radius: 8px; touch-action: none;
-    margin: 0 auto; width: max-content;
+    display: grid; grid-template-columns: repeat(10, 40px); gap: 2px;
+    border: var(--border); padding: 10px; background: var(--black); border-radius: 8px; touch-action: none;
+    margin: 0 auto; width: max-content; box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
   }
   .grid-cell {
-    width: 35px; height: 35px; background: #fff; display: flex; justify-content: center; align-items: center;
-    font-weight: bold; font-size: 18px; cursor: pointer; border-radius: 4px; user-select: none;
+    width: 40px; height: 40px; background: #fff; display: flex; justify-content: center; align-items: center;
+    font-weight: bold; font-size: 20px; cursor: pointer; border-radius: 4px; user-select: none;
   }
   .grid-cell.selected { background: var(--yellow); }
-  .grid-cell.found { background: var(--secondary); color: #fff; animation: pop 0.3s ease; }
+  .grid-cell.found { background: var(--secondary); color: #fff; animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
   .word-list { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; justify-content: center; }
-  .word-item { padding: 6px 12px; border: 2px solid var(--black); border-radius: 20px; background: #eee; font-weight: bold; font-size: 16px; }
-  .word-item.found { background: var(--primary); color: #fff; text-decoration: line-through; }
+  .word-item { padding: 8px 15px; border: 2px solid var(--black); border-radius: 20px; background: #fff; font-weight: bold; font-size: 16px; box-shadow: 2px 2px 0 rgba(0,0,0,0.2); }
+  .word-item.found { background: var(--primary); color: #fff; text-decoration: line-through; opacity: 0.8; }
 
   /* Ex Drag & Drop */
-  .drag-container { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; background: #fafafa; padding: 15px; border: 2px dashed var(--black); border-radius: 8px; }
+  .drag-container { display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 25px; background: rgba(255,255,255,0.5); padding: 20px; border: 2px dashed var(--black); border-radius: 8px; justify-content: center; }
   .draggable {
-    padding: 10px 15px; background: var(--purple); color: #fff; border: var(--border);
-    border-radius: 8px; font-weight: bold; cursor: grab; box-shadow: 2px 2px 0 var(--black); touch-action: none; z-index: 10; font-size: 16px;
+    padding: 12px 20px; background: var(--purple); color: #fff; border: var(--border);
+    border-radius: 8px; font-weight: bold; cursor: grab; box-shadow: 3px 3px 0 var(--black); touch-action: none; z-index: 10; font-size: 18px; text-transform: uppercase;
   }
-  .dropzone-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
-  .drop-row { display: flex; align-items: center; gap: 15px; background: #fff; padding: 10px; border: 2px solid var(--black); border-radius: 8px; }
+  .dropzone-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+  @media (max-width: 850px) { .dropzone-container { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .dropzone-container { grid-template-columns: 1fr; } }
+  
+  .drop-row { display: flex; align-items: center; gap: 10px; background: #fff; padding: 12px; border: 2px solid var(--black); border-radius: 8px; box-shadow: 2px 2px 0 rgba(0,0,0,0.1); }
   .dropzone {
-    flex-grow: 1; height: 45px; border: 2px dashed var(--black); border-radius: 8px;
-    background: #e9ecef; display: flex; justify-content: center; align-items: center; font-weight: bold;
+    flex-grow: 1; min-width: 100px; height: 50px; border: 2px dashed var(--black); border-radius: 8px;
+    background: #f0f0f0; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 16px; color: #666; transition: all 0.2s; pointer-events: auto;
   }
-  .dropzone.filled { border: var(--border); background: var(--yellow); }
+  .dropzone > * { pointer-events: none; }
+  .dropzone.filled { border: var(--border); background: var(--yellow); color: var(--black); text-transform: uppercase; box-shadow: inset 2px 2px 0 rgba(0,0,0,0.1); }
 
   /* Ex Select / Inputs / Lists */
   .ex-list { list-style: none; padding: 0; margin: 0; }
-  .ex-list li { margin-bottom: 15px; font-size: 18px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; background: #f9f9f9; padding: 10px 15px; border: 2px solid var(--black); border-radius: 8px; }
+  .ex-list li { margin-bottom: 15px; font-size: 18px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; background: rgba(255,255,255,0.7); padding: 12px 15px; border: 2px solid var(--black); border-radius: 8px; }
   select {
-    padding: 8px 12px; border: 2px solid var(--black); border-radius: 6px; font-size: 16px; font-weight: bold; background: #fff; cursor: pointer; outline: none;
+    padding: 8px 12px; border: 2px solid var(--black); border-radius: 6px; font-size: 16px; font-weight: bold; background: #fff; cursor: pointer; outline: none; box-shadow: 2px 2px 0 rgba(0,0,0,0.2);
   }
   
-  .reorder-zone { display: flex; gap: 8px; min-height: 55px; border: 2px dashed var(--black); padding: 10px; background: #fff; border-radius: 8px; flex-wrap: wrap; align-items: center; width: 100%; }
+  .reorder-zone { display: flex; gap: 10px; min-height: 65px; border: 2px dashed var(--black); padding: 15px; background: rgba(255,255,255,0.6); border-radius: 8px; flex-wrap: wrap; align-items: center; width: 100%; pointer-events: auto; }
   
   /* Tic Tac Toe */
-  .tictactoe { display: grid; grid-template-columns: repeat(3, 90px); gap: 6px; margin: 0 auto; width: max-content; background: var(--black); padding: 6px; border-radius: 8px; }
+  .tictactoe { display: grid; grid-template-columns: repeat(3, 90px); gap: 8px; margin: 0 auto; width: max-content; background: var(--black); padding: 8px; border-radius: 12px; box-shadow: var(--shadow); }
   .xo-cell {
-    width: 90px; height: 90px; background: #fff; display: flex;
-    justify-content: center; align-items: center; font-size: 48px; font-weight: bold; cursor: pointer;
+    width: 90px; height: 90px; background: #fff; display: flex; border-radius: 8px;
+    justify-content: center; align-items: center; font-size: 50px; font-weight: bold; cursor: pointer; box-shadow: inset 2px 2px 0 rgba(0,0,0,0.1);
   }
   
-  @keyframes pop { 50% { transform: scale(1.2); } }
+  @keyframes pop { 50% { transform: scale(1.15); } }
   .error-msg { color: var(--primary); font-weight: bold; margin-top: 10px; display: none; }
   .score-display {
     position: fixed; bottom: 20px; left: 20px; background: #fff; border: var(--border); box-shadow: 3px 3px 0 var(--black);
@@ -129,7 +133,7 @@
   }
   
   @media (max-width: 600px) {
-    .grid-cell { width: 30px; height: 30px; font-size: 14px; }
+    .grid-cell { width: 30px; height: 30px; font-size: 16px; }
     .grid-container { grid-template-columns: repeat(10, 30px); }
   }
 </style>
@@ -138,7 +142,7 @@
 
 <div id="login-modal">
   <div class="login-card">
-    <h2 style="color: var(--primary);">English A1+</h2>
+    <h2 style="color: var(--primary); margin-top: 0;">English A1+</h2>
     <p><strong>Topic:</strong> Occupations & Past Verbs</p>
     <input type="text" id="nie1" placeholder="Tu NIE" autocomplete="off">
     <input type="text" id="nie2" placeholder="NIE Compañero (Opcional)" autocomplete="off" style="display:none;">
@@ -156,18 +160,18 @@
 
   <div id="exercises-container"></div>
   
-  <div class="pop-box" id="game-section">
+  <div class="pop-box" id="game-section" style="background: #E0FFFF;">
     <div class="badge">BONUS GAME</div>
     <h2 style="text-align: center;">Play with Teacher XO</h2>
     <p style="text-align: center; font-weight: bold;">Gana para 1 pt extra. Empata para 0.5 pts.</p>
     <div class="tictactoe" id="xo-board"></div>
-    <div id="xo-result" style="text-align:center; font-weight:bold; margin-top:15px; font-size:24px;"></div>
+    <div id="xo-result" style="text-align:center; font-weight:bold; margin-top:20px; font-size:24px;"></div>
   </div>
 
-  <button class="btn btn-alt" id="btn-pdf" style="margin-bottom: 60px;">Descargar PDF para Classroom</button>
+  <button class="btn btn-alt" id="btn-pdf" style="margin-bottom: 60px; font-size: 20px; padding: 15px;">Descargar PDF para Classroom</button>
 </div>
 
-<div class="score-display">Puntos: <span id="total-score">0</span> / 41</div>
+<div class="score-display">Puntos: <span id="total-score">0</span> / 42</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="students.js"></script>
@@ -185,22 +189,22 @@ document.addEventListener('contextmenu', e => e.preventDefault());
 const POOLS = {
   A: {
     words: [
-      {w:'DOCTOR', r1:0, c1:2, r2:0, c2:7}, {w:'TEACHER', r1:0, c1:0, r2:6, c2:0},
-      {w:'PILOT', r1:3, c1:8, r2:7, c2:8}, {w:'NURSE', r1:2, c1:2, r2:2, c2:6},
-      {w:'CHEF', r1:5, c1:4, r2:5, c2:7}, {w:'POLICE', r1:9, c1:0, r2:9, c2:5},
-      {w:'FARMER', r1:0, c1:9, r2:5, c2:9}, {w:'DENTIST', r1:3, c1:0, r2:3, c2:6}
+      {w:'TEACHER', r1:0, c1:0, r2:0, c2:6}, {w:'DOCTOR', r1:2, c1:0, r2:2, c2:5},
+      {w:'PILOT', r1:4, c1:0, r2:4, c2:4}, {w:'NURSE', r1:6, c1:0, r2:6, c2:4},
+      {w:'CHEF', r1:8, c1:0, r2:8, c2:3}, {w:'POLICE', r1:0, c1:8, r2:5, c2:8},
+      {w:'FARMER', r1:0, c1:9, r2:5, c2:9}, {w:'DENTIST', r1:9, c1:0, r2:9, c2:6}
     ],
     grid: [
-      ['T','X','D','O','C','T','O','R','K','F'],
-      ['E','M','V','P','L','Q','W','Y','Z','A'],
-      ['A','B','N','U','R','S','E','J','K','R'],
-      ['D','E','N','T','I','S','T','H','P','M'],
-      ['H','G','O','F','V','L','N','X','I','E'],
-      ['E','T','I','Y','C','H','E','F','L','R'],
-      ['R','W','A','U','B','Z','M','D','O','C'],
-      ['S','P','Q','K','X','Y','A','B','T','V'],
-      ['J','L','N','M','E','R','G','H','I','U'],
-      ['P','O','L','I','C','E','T','W','X','Y']
+      ['T','E','A','C','H','E','R','X','P','F'],
+      ['M','V','L','Q','W','Y','Z','A','O','A'],
+      ['D','O','C','T','O','R','J','K','L','R'],
+      ['S','T','H','P','M','V','L','N','I','M'],
+      ['P','I','L','O','T','Y','E','F','C','E'],
+      ['W','A','U','B','Z','M','D','O','E','R'],
+      ['N','U','R','S','E','X','Y','A','B','T'],
+      ['L','N','M','E','R','G','H','I','U','V'],
+      ['C','H','E','F','E','T','W','X','Y','Z'],
+      ['D','E','N','T','I','S','T','I','O','U']
     ],
     emojiMatch: [
       {em: '👩‍🏫', ans: 'Teacher'}, {em: '👨‍🍳', ans: 'Chef'}, {em: '👮‍♂️', ans: 'Police'}, 
@@ -210,7 +214,7 @@ const POOLS = {
     verbs: [
       {p:'work', pst:'worked'}, {p:'teach', pst:'taught'}, {p:'cook', pst:'cooked'}, 
       {p:'drive', pst:'drove'}, {p:'help', pst:'helped'}, {p:'fix', pst:'fixed'}, 
-      {p:'paint', pst:'painted'}, {p:'fly', pst:'flew'}
+      {p:'paint', pst:'painted'}, {p:'fly', pst:'flew'}, {p:'wash', pst:'washed'}
     ],
     fill: [
       {q: "The teacher ___ the math class yesterday.", ans: "taught", opts: ["teach", "taught", "teached"]},
@@ -242,22 +246,22 @@ const POOLS = {
   },
   B: {
     words: [
-      {w:'ACTOR', r1:0, c1:0, r2:0, c2:4}, {w:'BAKER', r1:1, c1:0, r2:1, c2:4},
-      {w:'JUDGE', r1:3, c1:2, r2:3, c2:6}, {w:'SINGER', r1:0, c1:9, r2:5, c2:9},
-      {w:'ARTIST', r1:8, c1:0, r2:8, c2:5}, {w:'FIREMAN', r1:2, c1:0, r2:8, c2:0},
-      {w:'PLUMBER', r1:4, c1:2, r2:4, c2:8}, {w:'VET', r1:6, c1:5, r2:8, c2:5}
+      {w:'ACTOR', r1:0, c1:0, r2:0, c2:4}, {w:'BAKER', r1:2, c1:0, r2:2, c2:4},
+      {w:'JUDGE', r1:4, c1:0, r2:4, c2:4}, {w:'SINGER', r1:6, c1:0, r2:6, c2:5},
+      {w:'ARTIST', r1:8, c1:0, r2:8, c2:5}, {w:'FIREMAN', r1:0, c1:8, r2:6, c2:8},
+      {w:'PLUMBER', r1:0, c1:9, r2:6, c2:9}, {w:'VET', r1:9, c1:0, r2:9, c2:2}
     ],
     grid: [
-      ['A','C','T','O','R','M','L','P','Q','S'],
-      ['B','A','K','E','R','N','O','R','X','I'],
-      ['F','X','Y','Z','W','V','U','T','K','N'],
-      ['I','M','J','U','D','G','E','A','B','G'],
-      ['R','N','P','L','U','M','B','E','R','E'],
-      ['E','C','D','G','H','I','J','K','L','R'],
-      ['M','P','Q','R','S','V','T','U','A','B'],
-      ['A','W','X','Y','Z','E','C','D','F','G'],
-      ['N','R','T','I','S','T','H','J','K','L'],
-      ['Y','O','P','M','N','B','V','C','X','Z']
+      ['A','C','T','O','R','M','L','P','F','P'],
+      ['E','R','N','O','R','X','I','Z','I','L'],
+      ['B','A','K','E','R','V','U','T','R','U'],
+      ['I','M','A','B','G','Y','O','D','E','M'],
+      ['J','U','D','G','E','R','E','C','M','B'],
+      ['D','G','H','I','J','K','L','R','A','E'],
+      ['S','I','N','G','E','R','U','A','N','R'],
+      ['W','X','Y','Z','E','C','D','F','G','H'],
+      ['A','R','T','I','S','T','H','J','K','L'],
+      ['V','E','T','M','N','B','V','C','X','Z']
     ],
     emojiMatch: [
       {em: '👨‍🚒', ans: 'Fireman'}, {em: '👩‍⚖️', ans: 'Judge'}, {em: '👨‍🎨', ans: 'Artist'}, 
@@ -267,7 +271,7 @@ const POOLS = {
     verbs: [
       {p:'sing', pst:'sang'}, {p:'bake', pst:'baked'}, {p:'act', pst:'acted'}, 
       {p:'write', pst:'wrote'}, {p:'build', pst:'built'}, {p:'repair', pst:'repaired'}, 
-      {p:'design', pst:'designed'}, {p:'clean', pst:'cleaned'}
+      {p:'design', pst:'designed'}, {p:'clean', pst:'cleaned'}, {p:'play', pst:'played'}
     ],
     fill: [
       {q: "The singer ___ a beautiful song.", ans: "sang", opts: ["sing", "sang", "singed"]},
@@ -307,9 +311,11 @@ let state = {
   xo: ['','','','','','','','','']
 };
 
-function saveState() { localStorage.setItem('occ_ws_state_v2', JSON.stringify(state)); updateTotal(); }
+const bgColors = ['#FFD1DC', '#FFFACD', '#E6E6FA', '#F0FFF0', '#FFE4E1', '#E8F7FA', '#FFDEAD'];
+
+function saveState() { localStorage.setItem('occ_ws_state_v3', JSON.stringify(state)); updateTotal(); }
 function loadState() {
-  const s = localStorage.getItem('occ_ws_state_v2');
+  const s = localStorage.getItem('occ_ws_state_v3');
   if(s) { state = JSON.parse(s); return true; }
   return false;
 }
@@ -371,7 +377,7 @@ function renderExercises() {
   container.innerHTML = '';
   
   // Ex 1: Sopa Letras (8 pts)
-  let html = `<div class="pop-box"><div class="badge">EX 1 (8 pts)</div><h2>1. Word Search</h2><p>Find 8 occupations.</p>
+  let html = `<div class="pop-box" style="background: ${bgColors[0]};"><div class="badge">EX 1 (8 pts)</div><h2>1. Word Search</h2><p>Find 8 occupations. Swipe to select!</p>
     <div class="grid-wrapper"><div class="grid-container" id="ws-grid">`;
   for(let r=0; r<10; r++) {
     for(let c=0; c<10; c++) {
@@ -386,7 +392,7 @@ function renderExercises() {
   html += `</div></div>`;
 
   // Ex 2: Match Emoji (6 pts)
-  html += `<div class="pop-box"><div class="badge">EX 2 (6 pts)</div><h2>2. Emoji Match</h2><ul class="ex-list">`;
+  html += `<div class="pop-box" style="background: ${bgColors[1]};"><div class="badge">EX 2 (6 pts)</div><h2>2. Emoji Match</h2><ul class="ex-list">`;
   state.pool.emojiMatch.forEach((em, i) => {
     let sel = `<select data-ex="ex2" data-idx="${i}"><option value="">Select...</option>`;
     state.pool.emojiOpts.forEach(o => {
@@ -398,8 +404,8 @@ function renderExercises() {
   });
   html += `</ul></div>`;
 
-  // Ex 3: Drag & Drop (8 pts)
-  html += `<div class="pop-box"><div class="badge">EX 3 (8 pts)</div><h2>3. Present to Past Match</h2><p>Drag the present verb to its past form.</p>
+  // Ex 3: Drag & Drop (9 pts)
+  html += `<div class="pop-box" style="background: ${bgColors[2]};"><div class="badge">EX 3 (9 pts)</div><h2>3. Present to Past Match</h2><p>Drag the present verb and drop it into its correct past form box.</p>
     <div class="drag-container" id="dnd-src">`;
   let shuffledVerbs = [...state.pool.verbs].sort(()=>Math.random()-0.5);
   shuffledVerbs.forEach((v, i) => {
@@ -410,13 +416,13 @@ function renderExercises() {
   state.pool.verbs.forEach((v, i) => {
     let ans = state.answers.ex3[i] || '';
     let cls = ans ? 'filled' : '';
-    html += `<div class="drop-row"><span style="width:90px; font-weight:bold; font-size:18px; text-transform:uppercase; color:var(--primary);">${v.pst}</span> 
-             <span style="font-size:24px;">&larr;</span> <div class="dropzone ${cls}" data-idx="${i}" data-ans="${v.p}">${ans || 'Drop present here'}</div></div>`;
+    html += `<div class="drop-row"><span style="width:100px; font-weight:bold; font-size:18px; text-transform:uppercase; color:var(--primary);">${v.pst}</span> 
+             <span style="font-size:24px;">&larr;</span> <div class="dropzone ${cls}" data-idx="${i}" data-ans="${v.p}"><span>${ans || 'Drop here'}</span></div></div>`;
   });
   html += `</div></div>`;
 
   // Ex 4: Fill in blanks (5 pts)
-  html += `<div class="pop-box"><div class="badge">EX 4 (5 pts)</div><h2>4. Fill in the blanks</h2><ul class="ex-list">`;
+  html += `<div class="pop-box" style="background: ${bgColors[3]};"><div class="badge">EX 4 (5 pts)</div><h2>4. Fill in the blanks</h2><ul class="ex-list">`;
   state.pool.fill.forEach((f, i) => {
     let sel = `<select data-ex="ex4" data-idx="${i}"><option value="">...</option>`;
     f.opts.forEach(o => sel += `<option value="${o}" ${state.answers.ex4[i]===o?'selected':''}>${o}</option>`);
@@ -426,9 +432,9 @@ function renderExercises() {
   html += `</ul></div>`;
 
   // Ex 5: Reorder (4 pts)
-  html += `<div class="pop-box"><div class="badge">EX 5 (4 pts)</div><h2>5. Reorder the sentences</h2>`;
+  html += `<div class="pop-box" style="background: ${bgColors[4]};"><div class="badge">EX 5 (4 pts)</div><h2>5. Reorder the sentences</h2>`;
   state.pool.reorder.forEach((r, i) => {
-    html += `<div style="margin-bottom:25px; border:2px solid #ccc; padding:15px; border-radius:8px;">`;
+    html += `<div style="margin-bottom:25px; border:2px solid var(--black); padding:15px; border-radius:8px; background: rgba(255,255,255,0.5);">`;
     let words = [...r.w].sort(()=>Math.random()-0.5);
     html += `<div class="drag-container reorder-src" data-idx="${i}" style="border:none; background:transparent; padding:0; margin-bottom:10px;">`;
     words.forEach(w => {
@@ -444,7 +450,7 @@ function renderExercises() {
   html += `</div>`;
 
   // Ex 6: Match Duty (5 pts)
-  html += `<div class="pop-box"><div class="badge">EX 6 (5 pts)</div><h2>6. What did they do?</h2><ul class="ex-list">`;
+  html += `<div class="pop-box" style="background: ${bgColors[5]};"><div class="badge">EX 6 (5 pts)</div><h2>6. What did they do?</h2><ul class="ex-list">`;
   state.pool.duties.forEach((d, i) => {
     let sel = `<select data-ex="ex6" data-idx="${i}"><option value="">...</option>`;
     d.opts.forEach(o => sel += `<option value="${o}" ${state.answers.ex6[i]===o?'selected':''}>${o}</option>`);
@@ -454,7 +460,7 @@ function renderExercises() {
   html += `</ul></div>`;
 
   // Ex 7: MCQ (5 pts)
-  html += `<div class="pop-box"><div class="badge">EX 7 (5 pts)</div><h2>7. Multiple Choice</h2><ul class="ex-list">`;
+  html += `<div class="pop-box" style="background: ${bgColors[6]};"><div class="badge">EX 7 (5 pts)</div><h2>7. Multiple Choice</h2><ul class="ex-list">`;
   state.pool.mcq.forEach((m, i) => {
     let sel = `<select data-ex="ex7" data-idx="${i}"><option value="">...</option>`;
     m.opts.forEach(o => sel += `<option value="${o}" ${state.answers.ex7[i]===o?'selected':''}>${o}</option>`);
@@ -536,7 +542,7 @@ function setupWordSearch() {
       state.answers.ex1.push(foundW.w);
       markCells(foundW.r1, foundW.c1, foundW.r2, foundW.c2);
       document.getElementById(`word-${foundW.w}`).classList.add('found');
-      evaluate('ex1', foundW.w, 8, true); // Max 8 words
+      evaluate('ex1', foundW.w, 8, true);
     }
   }
 
@@ -581,7 +587,7 @@ function setupDragAndDrop() {
     clone.style.pointerEvents = 'none';
     clone.style.opacity = '0.9';
     clone.style.transform = 'scale(1.1) rotate(-2deg)';
-    clone.style.zIndex = '9999';
+    clone.style.zIndex = '99999';
     document.body.appendChild(clone);
     draggedEl.style.opacity = '0';
   }
@@ -594,8 +600,8 @@ function setupDragAndDrop() {
     clone.style.left = (clientX - offsetX) + 'px';
     clone.style.top = (clientY - offsetY) + 'px';
 
-    if(clientY < 80) window.scrollBy(0, -12);
-    else if(window.innerHeight - clientY < 80) window.scrollBy(0, 12);
+    if(clientY < 90) window.scrollBy(0, -15);
+    else if(window.innerHeight - clientY < 90) window.scrollBy(0, 15);
   }
 
   function onEnd(e) {
@@ -606,6 +612,7 @@ function setupDragAndDrop() {
     clone = null;
     draggedEl.style.opacity = '1';
 
+    // Temporarily hide the original element so it doesn't block point detection
     draggedEl.style.display = 'none';
     let dropTarget = document.elementFromPoint(clientX, clientY);
     draggedEl.style.display = '';
@@ -636,12 +643,12 @@ function setupDragAndDrop() {
         let idx = zone.getAttribute('data-idx');
         let correctAns = zone.getAttribute('data-ans');
         
-        zone.textContent = val;
+        zone.innerHTML = `<span>${val}</span>`;
         zone.classList.add('filled');
         draggedEl.remove();
         
         state.answers.ex3[idx] = val;
-        evaluate('ex3', val, 8, val === correctAns); // max 8 verbs
+        evaluate('ex3', val, 9, val === correctAns); // max 9 verbs
       }
     }
     draggedEl = null;
@@ -674,7 +681,7 @@ function renderXO() {
 function playXO(idx) {
   if(state.gameStatus !== 'pending' || state.xo[idx] !== '') return;
   state.xo[idx] = 'X';
-  if(!checkXO()) setTimeout(botXO, 400);
+  if(!checkXO()) setTimeout(botXO, 500);
   renderXO();
   saveState();
 }
@@ -757,7 +764,7 @@ function generatePDF() {
   
   header.forEach(line => { doc.text(line, 20, y); y += 6; });
   
-  const totalItems = 41; // 8+6+8+5+4+5+5
+  const totalItems = 42; // 8+6+9+5+4+5+5 = 42 pts
   const correct = Object.values(state.scores).reduce((a,b)=>a+b, 0);
   const note = ((correct / totalItems) * 10) + state.gamePoints;
   
@@ -773,7 +780,7 @@ function generatePDF() {
   const details = [
     `1. Word Search: ${state.scores.ex1}/8`,
     `2. Match Emoji: ${state.scores.ex2}/6`,
-    `3. Drag & Drop (Verbs): ${state.scores.ex3}/8`,
+    `3. Drag & Drop (Verbs): ${state.scores.ex3}/9`,
     `4. Fill in blanks: ${state.scores.ex4}/5`,
     `5. Reorder sentences: ${state.scores.ex5}/4`,
     `6. What did they do: ${state.scores.ex6}/5`,
